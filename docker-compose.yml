@@ -1,0 +1,37 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - .:/code
+    expose:
+      - 8000
+    ports:
+      - 8000:8000
+    environment:
+      DATABASE_URL: 'postgres://hello:django@data:5432/default'
+      CACHE_URL: 'postgres://hello:django@data:5432/default'
+    links:
+      - data:data
+      - cache:cache
+    command: [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]
+
+  data:
+    image: postgres:11.1-alpine
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: 'default'
+      POSTGRES_USER: 'hello'
+      POSTGRES_PASSWORD: 'django'
+    restart: always
+    volumes:
+      - ./db_initial.sql:/docker-entrypoint-initdb.d/db_initial.sql
+      - ./.tmp/data:/var/lib/postgresql/data
+  cache:
+    image: redis:5.0.3-alpine
+    ports:
+      - 6379:6379
+    restart: always

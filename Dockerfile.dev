@@ -1,0 +1,37 @@
+FROM python:3.7-alpine
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    INSIDE_DOCKER=1
+
+ADD requirements* /
+
+RUN set -ex \
+    && apk add -U --no-cache --virtual .build-deps \
+        g++ \
+        gcc \
+        make \
+        libc-dev \
+        musl-dev \
+        linux-headers \
+        pcre-dev \
+        postgresql-dev \
+    && pip install -U -r requirements.txt --no-cache-dir \
+    && pip install -U -r requirements-dev.txt --no-cache-dir \
+    && apk del .build-deps \
+    && apk add -U --no-cache \
+        postgresql-client \
+        redis
+
+ADD ./scripts/entrypoint.sh /
+RUN chmod +x /entrypoint.sh
+
+RUN mkdir -p /code
+WORKDIR /code
+
+# these flags are used in `runserver` command only
+ENV AUTO_MIGRATE=1 \
+    AUTO_SEED=1 \
+    AUTO_COLLECT_STATIC=0
+
+ENTRYPOINT [ "/entrypoint.sh" ]

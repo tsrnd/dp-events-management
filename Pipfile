@@ -1,0 +1,29 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pylint = "~=2.2.0"
+pep8 = "~=1.7.0"
+autopep8 = "~=1.4.0"
+ptvsd = "~=4.2.0"
+pytest-django = "~=3.4.4"
+locustio = "~=0.9.0"
+yapf = "*"
+pylint-django = "*"
+pytest-cov = "~=2.6.1"
+
+[packages]
+django = "~=2.1.4"
+dj-database-url = "~=0.5.0"
+psycopg2-binary = "~=2.7.6.1"
+python-dotenv = "~=0.10.1"
+django-redis = "~=4.10.0"
+djangorestframework = "~=3.9.0"
+pygments = "*"
+
+[requires]
+python_version = "3.7"
+
+[scripts]

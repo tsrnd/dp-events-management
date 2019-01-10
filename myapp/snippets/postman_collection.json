@@ -1,0 +1,287 @@
+{
+	"info": {
+		"_postman_id": "c7d4db20-3b8e-49a1-b5f6-d905aed7d155",
+		"name": "PythonRest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getAllSnipplets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/snippet/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"snippet",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addSnipplets",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Record\",\n    \"code\": \"print\",\n    \"linenos\": false,\n    \"language\": \"python\",\n    \"style\": \"friendly\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/snippet/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"snippet",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getSnipplet",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "code",
+							"value": "print 123456",
+							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "1",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/snippet/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"snippet",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delSnipplet",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/snippet/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"snippet",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateSnipplet",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Update title",
+							"type": "text"
+						},
+						{
+							"key": "code",
+							"value": "update code.",
+							"type": "text"
+						},
+						{
+							"key": "linenos",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "language",
+							"value": "cobol",
+							"type": "text"
+						},
+						{
+							"key": "style",
+							"value": "friendly",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/snippet/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"snippet",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "customeQuery",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/snippet/test",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"snippet",
+						"test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "joinQuery",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/snippet/join",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"snippet",
+						"join"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fkPostTbl",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/snippet/post",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"snippet",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FindByFK",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/snippet/post/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"snippet",
+						"post",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
