@@ -1,0 +1,20 @@
+dist: xenial
+language: python
+python:
+  - '3.7.1'
+services:
+  - docker
+cache:
+  directories:
+    - $HOME/.docker/images/
+    - $HOME/.cache/pip/
+before_install:
+  - bash ./scripts/load-images.sh || true
+install:
+  - cp .env.example .env
+script:
+  - docker-compose build app
+  - sh ./scripts/lint-review.sh
+  - docker-compose run app pytest
+before_cache:
+  - bash ./scripts/save-images.sh

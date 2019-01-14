@@ -1,0 +1,17 @@
+.docker-compose.yml
+.dockerfile
+.gitignore
+.pyc
+.python-version
+.tmp/
+.travis.yml
+.venv/
+.vscode/
+__pycache__/
+docs/
+static/
+tests/
+Makefile
+Pipfile
+Pipfile.lock
+README.md
