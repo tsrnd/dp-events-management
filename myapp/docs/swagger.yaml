@@ -145,3 +145,93 @@ paths:
           description: Internal server error response
           schema:
             $ref: '#/definitions/ErrorDetails'
+  /api/event/{id_event}:
+    get:
+      security:
+       - Bearer: []
+      summary: Return detail a event.
+      tags:
+       - Events
+      description: returns detail of a event.
+      parameters:
+        - name: id_event
+          in: path
+          description: id of event
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            title: Successful response
+            type: object
+            properties:
+              title:
+                type: string
+                description: title of event(except for "#")
+                example: abc
+              start_datetime:
+                type: string
+                description: start time event
+                example: "2006-10-25 00:00:00+00"
+              end_datetime:
+                type: string
+                description: end time event
+                example: "2006-10-29 00:00:00+00"
+              location:
+                type: string
+                description: Event location
+                example: "10 Bạch Đằng, Đà Nẵng"
+              time_notication:
+                type: string
+                description: Time notication
+                example: "2006-10-26 00:00:00+00"
+              owner:
+                type: integer
+                description: User create event
+                example: 1
+              event_content:
+                type: string
+                description: Event Content
+                example: "meeting team"
+              file_attack:
+                type: string
+                description: File attack
+                example: "abc.pdf"
+              guest_can_invite:
+                type: boolean
+                description: Guest can invite
+                example: true
+              view_all_guest:
+                type: boolean
+                description: View all guest
+                example: false
+              item_preparing:
+                type: string
+                description: Item preparing
+                example: "money"
+              status:
+                type: integer
+                description: status event
+                example: 1
+              time_create:
+                type: string
+                description: Time create
+                example: "2006-10-29 00:00:00+00"
+              last_edit:
+                type: string
+                description: Time create
+                example: "00:00:00+00"
+              user_edit:
+                type: integer
+                description: user edit event
+                example: 1
+                      
+        '400':
+          description: Bad request error response
+          schema:
+            $ref: '#/definitions/ErrorDetails'
+        '500':
+          description: Internal server error response
+          schema:
+            $ref: '#/definitions/ErrorDetails'
