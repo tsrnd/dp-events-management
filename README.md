@@ -20,6 +20,12 @@ export PIPENV_VENV_IN_PROJECT=1
 export PYTHONDONTWRITEBYTECODE=1
 ```
 
+- Create environtment variable
+
+```bash
+cp .env.example .env
+```
+
 - Install project dependencies (includes dev)
 
 ```bash
