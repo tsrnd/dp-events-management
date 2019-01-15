@@ -235,3 +235,83 @@ paths:
           description: Internal server error response
           schema:
             $ref: '#/definitions/ErrorDetails'
+  /api/event:
+    post:
+      security:
+       - Bearer: []
+      summary: create event
+      tags:
+       - Events
+      description: Create event
+      parameters:
+        - name: title
+          in: formData
+          required: true
+          type: string
+        - name: start_datetime
+          in: formData
+          required: true
+          type: string
+        - name: end_datetime
+          in: formData
+          required: true
+          type: string
+        - name: location
+          in: formData
+          required: true
+          type: string
+        - name: time_notication
+          in: formData
+          required: true
+          type: string
+        - name: owner
+          in: formData
+          required: true
+          type: integer
+        - name: event_content
+          in: formData
+          required: true
+          type: string
+        - name: file_attack
+          in: formData
+          required: false
+          type: string
+        - name: guest_can_invite
+          in: formData
+          required: true
+          type: boolean
+        - name: view_all_guest
+          in: formData
+          required: true
+          type: boolean
+        - name: item_preparing
+          in: formData
+          required: false
+          type: string
+        - name: time_create
+          in: formData
+          required: true
+          type: string
+        - name: last_edit
+          in: formData
+          required: false
+          type: string
+        - name: user_edit
+          in: formData
+          required: false
+          type: integer
+        - name: status
+          in: formData
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Bad request error response
+          schema:
+            $ref: '#/definitions/ErrorDetails'
+        '500':
+          description: Internal server error response
+          schema:
+            $ref: '#/definitions/ErrorDetails'
