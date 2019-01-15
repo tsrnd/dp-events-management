@@ -27,7 +27,7 @@ paths:
     get:
       summary: Return list events.
       tags:
-       - Event
+       - Events
       description: returns list of information about "event".
       parameters:
         - name: result_limit
@@ -131,7 +131,7 @@ paths:
     put:
       summary: update event detail information
       tags:
-        - Event
+        - Events
       description: >
         "First": send to server event id and event detail information to be updated
         "Second": update information of event.
@@ -234,7 +234,7 @@ paths:
     get:
       summary: filter by conditions in DB
       tags:
-       - Event
+       - Events
       description: |
         "First": Get key_word value from parameters and separate to several words by space
         "Second": Get events list in by keyword
