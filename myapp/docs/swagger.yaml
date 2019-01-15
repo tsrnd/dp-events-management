@@ -34,6 +34,82 @@ definitions:
           items:
             description: error detail
             type: string
+parameters:
+  Title:
+    name: title
+    in: formData
+    type: string
+    required: true
+  Start_datetime:
+    name: start_datetime
+    in: formData
+    required: true
+    type: string
+  End_datetime:
+    name: end_datetime
+    in: formData
+    required: true
+    type: string
+  Location:
+    name: location
+    in: formData
+    required: true
+    type: string
+  Time_notication:
+    name: time_notication
+    in: formData
+    required: true
+    type: string
+  Owner:
+    name: owner
+    in: formData
+    required: true
+    type: integer
+  Event_content:
+    name: event_content
+    in: formData
+    required: true
+    type: string
+  File_attack:
+    name: file_attack
+    in: formData
+    required: false
+    type: string
+  Guest_can_invite:
+    name: guest_can_invite
+    in: formData
+    required: true
+    type: boolean
+  View_all_guest:
+    name: view_all_guest
+    in: formData
+    required: true
+    type: boolean
+  Item_preparing:
+    name: item_preparing
+    in: formData
+    required: false
+    type: string
+  Time_create:
+    name: time_create
+    in: formData
+    required: true
+    type: string
+  Last_edit:
+    name: last_edit
+    in: formData
+    required: false
+    type: string
+  User_edit:
+    name: user_edit
+    in: formData
+    required: false
+    type: integer
+  Status:
+    name: status
+    in: formData
+    required: true
+    type: integer
 paths:
   /api/events:
     get:
@@ -235,6 +311,55 @@ paths:
           description: Internal server error response
           schema:
             $ref: '#/definitions/ErrorDetails'
+    put:
+      summary: Edit event
+      tags:
+       - Events
+      description: |
+        "First": 
+          * if owner = "self" go to “Finally”
+          * if owner != "self" return 403 error
+          
+        "Finally": return result 
+      parameters:
+        - name: id_event
+          in: path
+          required: true
+          type: integer
+        - $ref: '#/parameters/Title'
+        - $ref: '#/parameters/Start_datetime'
+        - $ref: '#/parameters/End_datetime'
+        - $ref: '#/parameters/Location'
+        - $ref: '#/parameters/Time_notication'
+        - $ref: '#/parameters/Owner'
+        - $ref: '#/parameters/Event_content'
+        - $ref: '#/parameters/File_attack'
+        - $ref: '#/parameters/Guest_can_invite'
+        - $ref: '#/parameters/View_all_guest'
+        - $ref: '#/parameters/Item_preparing'
+        - $ref: '#/parameters/Time_create'
+        - $ref: '#/parameters/Last_edit'
+        - $ref: '#/parameters/User_edit'
+        - $ref: '#/parameters/Status'
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Bad request error response
+          schema:
+            $ref: '#/definitions/ErrorDetails'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorDetails'
+        '403':
+          description: Forbiden
+          schema:
+            $ref: '#/definitions/ErrorDetails'
+        '500':
+          description: Internal server error response
+          schema:
+            $ref: '#/definitions/ErrorDetails'
   /api/event:
     post:
       security:
@@ -244,66 +369,21 @@ paths:
        - Events
       description: Create event
       parameters:
-        - name: title
-          in: formData
-          required: true
-          type: string
-        - name: start_datetime
-          in: formData
-          required: true
-          type: string
-        - name: end_datetime
-          in: formData
-          required: true
-          type: string
-        - name: location
-          in: formData
-          required: true
-          type: string
-        - name: time_notication
-          in: formData
-          required: true
-          type: string
-        - name: owner
-          in: formData
-          required: true
-          type: integer
-        - name: event_content
-          in: formData
-          required: true
-          type: string
-        - name: file_attack
-          in: formData
-          required: false
-          type: string
-        - name: guest_can_invite
-          in: formData
-          required: true
-          type: boolean
-        - name: view_all_guest
-          in: formData
-          required: true
-          type: boolean
-        - name: item_preparing
-          in: formData
-          required: false
-          type: string
-        - name: time_create
-          in: formData
-          required: true
-          type: string
-        - name: last_edit
-          in: formData
-          required: false
-          type: string
-        - name: user_edit
-          in: formData
-          required: false
-          type: integer
-        - name: status
-          in: formData
-          required: true
-          type: integer
+        - $ref: '#/parameters/Title'
+        - $ref: '#/parameters/Start_datetime'
+        - $ref: '#/parameters/End_datetime'
+        - $ref: '#/parameters/Location'
+        - $ref: '#/parameters/Time_notication'
+        - $ref: '#/parameters/Owner'
+        - $ref: '#/parameters/Event_content'
+        - $ref: '#/parameters/File_attack'
+        - $ref: '#/parameters/Guest_can_invite'
+        - $ref: '#/parameters/View_all_guest'
+        - $ref: '#/parameters/Item_preparing'
+        - $ref: '#/parameters/Time_create'
+        - $ref: '#/parameters/Last_edit'
+        - $ref: '#/parameters/User_edit'
+        - $ref: '#/parameters/Status'
       responses:
         '200':
           description: Successful response
@@ -315,3 +395,4 @@ paths:
           description: Internal server error response
           schema:
             $ref: '#/definitions/ErrorDetails'
+    
