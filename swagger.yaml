@@ -230,7 +230,7 @@ paths:
           description: Internal server error response
           schema:
             $ref: '#/definitions/ErrorDetails'
-  /api/event/filter/search:
+  /api/events/{key_word}:
     get:
       summary: filter by conditions in DB
       tags:
