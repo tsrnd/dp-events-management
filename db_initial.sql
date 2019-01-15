@@ -73,17 +73,18 @@ CREATE TABLE tbl_events (
     location text,
     is_notification boolean DEFAULT false,
     time_notification character varying(20),
-    owner integer NOT NULL,
+    owner integer NOT NULL REFERENCES auth_user(id),
     event_content text,
     file_attack text,
     guest_can_invite boolean NOT NULL DEFAULT true,
     view_all_guest boolean NOT NULL DEFAULT true,
     item_preparing text,
+    is_public boolean,
     is_cancel boolean NOT NULL DEFAULT false,
     is_delete boolean NOT NULL DEFAULT false,
     time_create timestamp with time zone NOT NULL,
     last_edit timestamp with time zone NOT NULL,
-    user_edit integer NOT NULL,
+    user_edit integer NOT NULL REFERENCES auth_user(id),
     status smallint
 );
 COMMENT ON COLUMN tbl_events.title IS 'Tiêu đề giới thiệu cho sự kiện sắp diễn ra.';
@@ -102,6 +103,7 @@ COMMENT ON COLUMN tbl_events.file_attack IS 'Danh sách địa chỉ đầy đ�
 COMMENT ON COLUMN tbl_events.guest_can_invite IS 'Cho phép những người trong ban tổ chức được phép mời người khác.';
 COMMENT ON COLUMN tbl_events.view_all_guest IS 'Cho phép những người trong ban tổ chức có thể xem tất cả những người còn lại. (Không có chức năng xem tất cả các member joined)';
 COMMENT ON COLUMN tbl_events.item_preparing IS 'Những trang bị cần chuẩn bị trước. Bố trí theo dạng Checkbox để kiểm tra.';
+COMMENT ON COLUMN tbl_events.is_public IS 'Xác nhận loại sự kiện này là dành cho mọi người hay là cá nhân.';
 COMMENT ON COLUMN tbl_events.is_cancel IS 'Sự kiện bị huỷ vì lý do nào đó.';
 COMMENT ON COLUMN tbl_events.is_delete IS 'Thiết lập cờ cho trường hợp xoá mềm.';
 COMMENT ON COLUMN tbl_events.last_edit IS 'Thời điểm chỉnh sửa gần nhất.';
@@ -123,17 +125,18 @@ CREATE TABLE tbl_events_history (
     location text,
     is_notification boolean DEFAULT false,
     time_notification character varying(20),
-    owner integer NOT NULL,
+    owner integer NOT NULL REFERENCES auth_user(id),
     event_content text,
     file_attack text,
     guest_can_invite boolean NOT NULL DEFAULT true,
     view_all_guest boolean NOT NULL DEFAULT true,
     item_preparing text,
+    is_public boolean,
     is_cancel boolean NOT NULL DEFAULT false,
     is_delete boolean NOT NULL DEFAULT false,
     time_create timestamp with time zone NOT NULL,
     last_edit timestamp with time zone NOT NULL,
-    user_edit integer NOT NULL,
+    user_edit integer NOT NULL REFERENCES auth_user(id),
     event_id integer NOT NULL REFERENCES tbl_events(id)
 );
 -- Indices -------------------------------------------------------
