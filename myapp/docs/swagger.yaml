@@ -37,76 +37,91 @@ definitions:
 parameters:
   Title:
     name: title
+    description: title event
     in: formData
     type: string
     required: true
   Start_datetime:
     name: start_datetime
+    description: start time event
     in: formData
     required: true
     type: string
   End_datetime:
     name: end_datetime
+    description: end time event
     in: formData
     required: true
     type: string
   Location:
     name: location
+    description: Event location
     in: formData
     required: true
     type: string
   Time_notication:
     name: time_notication
+    description: Time notication
     in: formData
     required: true
     type: string
   Owner:
     name: owner
+    description: User create event
     in: formData
     required: true
     type: integer
   Event_content:
     name: event_content
+    description: Event Content
     in: formData
     required: true
     type: string
   File_attack:
     name: file_attack
+    description: File attack
     in: formData
     required: false
     type: string
   Guest_can_invite:
     name: guest_can_invite
+    description: Guest can invite
     in: formData
     required: true
     type: boolean
   View_all_guest:
     name: view_all_guest
+    description: View all guest
     in: formData
     required: true
     type: boolean
   Item_preparing:
     name: item_preparing
+    description: Item preparing
     in: formData
     required: false
     type: string
   Time_create:
     name: time_create
+    description: Time create
     in: formData
     required: true
     type: string
   Last_edit:
     name: last_edit
+    description: Time last edit
     in: formData
     required: false
     type: string
   User_edit:
     name: user_edit
+    description: user edit
     in: formData
     required: false
     type: integer
   Status:
     name: status
+    description: status event
     in: formData
     required: true
     type: integer
@@ -312,7 +327,7 @@ paths:
           schema:
             $ref: '#/definitions/ErrorDetails'
     put:
-      summary: Edit event
+      summary: update event detail information
       tags:
        - Events
       description: |
@@ -323,6 +338,7 @@ paths:
         "Finally": return result 
       parameters:
         - name: id_event
+          description: id of event
           in: path
           required: true
           type: integer
@@ -341,6 +357,40 @@ paths:
         - $ref: '#/parameters/Last_edit'
         - $ref: '#/parameters/User_edit'
         - $ref: '#/parameters/Status'
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Bad request error response
+          schema:
+            $ref: '#/definitions/ErrorDetails'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorDetails'
+        '403':
+          description: Forbiden
+          schema:
+            $ref: '#/definitions/ErrorDetails'
+        '500':
+          description: Internal server error response
+          schema:
+            $ref: '#/definitions/ErrorDetails'
+    delete:
+      summary: Delete event
+      tags:
+        - Events
+      description: |
+        "First": 
+          * if owner = "self" go to “Finally”
+          * if owner != "self" return 403 error
+          
+        "Finally": return result 
+      parameters:
+        - name: id_event
+          in: path
+          required: true
+          type: integer
       responses:
         '200':
           description: Successful response
@@ -395,4 +445,4 @@ paths:
           description: Internal server error response
           schema:
             $ref: '#/definitions/ErrorDetails'
-    
+  
