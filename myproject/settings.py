@@ -142,6 +142,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATIC_DIR  = 'myui/static'
+
+STATICFILES_DIRS = [
+    STATIC_DIR,
+]
+
+
 #REST_FRAMEWORK = {
 #    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
 #    'PAGE_SIZE': 10
