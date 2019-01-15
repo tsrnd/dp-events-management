@@ -73,7 +73,7 @@ CREATE TABLE tbl_events (
     location text,
     is_notification boolean DEFAULT false,
     time_notification character varying(20),
-    owner integer NOT NULL,
+    owner integer NOT NULL REFERENCES auth_user(id),
     event_content text,
     file_attack text,
     guest_can_invite boolean NOT NULL DEFAULT true,
@@ -84,7 +84,7 @@ CREATE TABLE tbl_events (
     is_delete boolean NOT NULL DEFAULT false,
     time_create timestamp with time zone NOT NULL,
     last_edit timestamp with time zone NOT NULL,
-    user_edit integer NOT NULL,
+    user_edit integer NOT NULL REFERENCES auth_user(id),
     status smallint
 );
 COMMENT ON COLUMN tbl_events.title IS 'Tiêu đề giới thiệu cho sự kiện sắp diễn ra.';
@@ -125,17 +125,18 @@ CREATE TABLE tbl_events_history (
     location text,
     is_notification boolean DEFAULT false,
     time_notification character varying(20),
-    owner integer NOT NULL,
+    owner integer NOT NULL REFERENCES auth_user(id),
     event_content text,
     file_attack text,
     guest_can_invite boolean NOT NULL DEFAULT true,
     view_all_guest boolean NOT NULL DEFAULT true,
     item_preparing text,
+    is_public boolean,
     is_cancel boolean NOT NULL DEFAULT false,
     is_delete boolean NOT NULL DEFAULT false,
     time_create timestamp with time zone NOT NULL,
     last_edit timestamp with time zone NOT NULL,
-    user_edit integer NOT NULL,
+    user_edit integer NOT NULL REFERENCES auth_user(id),
     event_id integer NOT NULL REFERENCES tbl_events(id)
 );
 -- Indices -------------------------------------------------------
