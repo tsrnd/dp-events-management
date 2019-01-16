@@ -34,22 +34,121 @@ definitions:
           items:
             description: error detail
             type: string
+  Page:
+    type: integer
+    description:
+      from request parameter
+    example: 2
+  NextPageFlg:
+    type: boolean
+    description:
+      result about whether next page exists."True" means next page exists,"False" means next page not existx
+  Event:
+    type: object
+    properties:
+      title:
+        type: string
+        description: title of event(except for "#")
+        example: abc
+      start_date:
+        type: string
+        description: event start date
+        example: "2006-10-25"
+      end_date:
+        type: string
+        description: event end date
+        example: "2006-10-25"
+      start_time:
+        type: string
+        description: event start time
+        example: "6:00:00+00"
+      end_time:
+        type: string
+        description: event end time
+        example: "10:00:00+00"
+      location:
+        type: string
+        description: Event location
+        example: "10 Bạch Đằng, Đà Nẵng"
+      time_notication:
+        type: string
+        description: Time notication
+        example: "2006-10-26 00:00:00+00"
+      owner:
+        type: integer
+        description: User create event
+        example: 1
+      event_content:
+        type: string
+        description: Event Content
+        example: "meeting team"
+      file_attack:
+        type: string
+        description: File attack
+        example: "abc.pdf"
+      guest_can_invite:
+        type: boolean
+        description: Guest can invite
+        example: true
+      view_all_guest:
+        type: boolean
+        description: View all guest
+        example: false
+      item_preparing:
+        type: string
+        description: Item preparing
+        example: "money"
+      status:
+        type: integer
+        description: status event
+        example: 1
+      time_create:
+        type: string
+        description: Time create
+        example: "2006-10-29 00:00:00+00"
+      last_edit:
+        type: string
+        description: Time create
+        example: "00:00:00+00"
+      user_edit:
+        type: integer
+        description: user edit event
+        example: 1
+
 parameters:
+  Id_event:
+    name: id_event
+    in: path
+    description: id of event
+    required: true
+    type: integer
   Title:
     name: title
     description: title event
     in: formData
     type: string
     required: true
-  Start_datetime:
-    name: start_datetime
-    description: start time event
+  Start_date:
+    name: start_date
+    description: event start date
     in: formData
     required: true
     type: string
-  End_datetime:
-    name: end_datetime
-    description: end time event
+  End_date:
+    name: end_date
+    description: event end date
+    in: formData
+    required: true
+    type: string
+  Start_time:
+    name: start_time
+    description: event start time
+    in: formData
+    required: true
+    type: string
+  End_time:
+    name: end_time
+    description: event end time
     in: formData
     required: true
     type: string
@@ -125,32 +224,30 @@ parameters:
     in: formData
     required: true
     type: integer
+  Page:
+    name: page
+    in: query
+    description:  |  
+     specify the number of page.  
+     if not seted,the number of page is 1.
+    required: false
+    type: integer
+  ResultLimit:
+    name: result_limit
+    in: query
+    required: false
+    type: integer
 paths:
   /api/events:
     get:
-      security:
-       - Bearer: []
       summary: Return list events.
       tags:
-       - Event
+        - Events
       description: |  
            returns list of information about "event".
       parameters:
-        - name: result_limit
-          in: query
-          description:  |  
-           Limit count of response record of searching.  
-           if not setted,response record limit is 10.  
-           minimun value =1,maximun value =100
-          required: false
-          type: integer
-        - name: page
-          in: query
-          description:  |
-           specify the number of page.
-           if not seted,the number of page is 1.
-          required: false
-          type: integer
+        - $ref: '#/parameters/ResultLimit'
+        - $ref: '#/parameters/Page'
         - name: is_public
           in: query
           description: is event public
@@ -176,7 +273,6 @@ paths:
           description: end date event
           required: false
           type: string
-        
       responses:
         '200':
           description: Successful response
@@ -185,75 +281,17 @@ paths:
             type: object
             properties:
               result_count:
-               type: integer
-               description:
-                Count of result in this response
+                type: integer
+                description: 'Count of result in this response'
+              page:
+                $ref: '#/definitions/Page'
+              next_page_flg:
+                $ref: '#/definitions/NextPageFlg'
               event_list:
                 type: array
                 description: events sorted by DESC
                 items:
-                    type: object
-                    properties:
-                      title:
-                        type: string
-                        description: title of event(except for "#")
-                        example: abc
-                      start_datetime:
-                        type: string
-                        description: start time event
-                        example: "2006-10-25 00:00:00+00"
-                      end_datetime:
-                        type: string
-                        description: end time event
-                        example: "2006-10-29 00:00:00+00"
-                      location:
-                        type: string
-                        description: Event location
-                        example: "10 Bạch Đằng, Đà Nẵng"
-                      time_notication:
-                        type: string
-                        description: Time notication
-                        example: "2006-10-26 00:00:00+00"
-                      owner:
-                        type: integer
-                        description: User create event
-                        example: 1
-                      event_content:
-                        type: string
-                        description: Event Content
-                        example: "meeting team"
-                      file_attack:
-                        type: string
-                        description: File attack
-                        example: "abc.pdf"
-                      guest_can_invite:
-                        type: boolean
-                        description: Guest can invite
-                        example: true
-                      view_all_guest:
-                        type: boolean
-                        description: View all guest
-                        example: false
-                      item_preparing:
-                        type: string
-                        description: Item preparing
-                        example: "money"
-                      status:
-                        type: integer
-                        description: status event
-                        example: 1
-                      time_create:
-                        type: string
-                        description: Time create
-                        example: "2006-10-29 00:00:00+00"
-                      last_edit:
-                        type: string
-                        description: Time create
-                        example: "00:00:00+00"
-                      user_edit:
-                        type: integer
-                        description: user edit event
-                        example: 1
+                  $ref: '#/definitions/Event'
         '400':
           description: Bad request error response
           schema:
@@ -264,86 +302,18 @@ paths:
             $ref: '#/definitions/ErrorDetails'
   /api/event/{id_event}:
     get:
-      security:
-       - Bearer: []
       summary: Return detail a event.
       tags:
-       - Event
+        - Event
       description: returns detail of a event.
       parameters:
-        - name: id_event
-          in: path
-          description: id of event
-          required: true
-          type: integer
+        - $ref: '#/parameters/Id_event'
       responses:
         '200':
           description: Successful response
           schema:
-            title: Successful response
-            type: object
-            properties:
-              title:
-                type: string
-                description: title of event(except for "#")
-                example: abc
-              start_datetime:
-                type: string
-                description: start time event
-                example: "2006-10-25 00:00:00+00"
-              end_datetime:
-                type: string
-                description: end time event
-                example: "2006-10-29 00:00:00+00"
-              location:
-                type: string
-                description: Event location
-                example: "10 Bạch Đằng, Đà Nẵng"
-              time_notication:
-                type: string
-                description: Time notication
-                example: "2006-10-26 00:00:00+00"
-              owner:
-                type: integer
-                description: User create event
-                example: 1
-              event_content:
-                type: string
-                description: Event Content
-                example: "meeting team"
-              file_attack:
-                type: string
-                description: File attack
-                example: "abc.pdf"
-              guest_can_invite:
-                type: boolean
-                description: Guest can invite
-                example: true
-              view_all_guest:
-                type: boolean
-                description: View all guest
-                example: false
-              item_preparing:
-                type: string
-                description: Item preparing
-                example: "money"
-              status:
-                type: integer
-                description: status event
-                example: 1
-              time_create:
-                type: string
-                description: Time create
-                example: "2006-10-29 00:00:00+00"
-              last_edit:
-                type: string
-                description: Time create
-                example: "00:00:00+00"
-              user_edit:
-                type: integer
-                description: user edit event
-                example: 1
-                      
+            title: Successful response 
+            $ref: '#/definitions/Event'          
         '400':
           description: Bad request error response
           schema:
@@ -363,14 +333,12 @@ paths:
           
         "Finally": return result 
       parameters:
-        - name: id_event
-          description: id of event
-          in: path
-          required: true
-          type: integer
+        - $ref: '#/parameters/Id_event'
         - $ref: '#/parameters/Title'
-        - $ref: '#/parameters/Start_datetime'
-        - $ref: '#/parameters/End_datetime'
+        - $ref: '#/parameters/Start_date'
+        - $ref: '#/parameters/End_date'
+        - $ref: '#/parameters/Start_time'
+        - $ref: '#/parameters/End_time'
         - $ref: '#/parameters/Location'
         - $ref: '#/parameters/Time_notication'
         - $ref: '#/parameters/Owner'
@@ -413,10 +381,7 @@ paths:
           
         "Finally": return result 
       parameters:
-        - name: id_event
-          in: path
-          required: true
-          type: integer
+        - $ref: '#/parameters/Id_event'
       responses:
         '200':
           description: Successful response
@@ -438,16 +403,16 @@ paths:
             $ref: '#/definitions/ErrorDetails'
   /api/event:
     post:
-      security:
-       - Bearer: []
       summary: create event
       tags:
-       - Events
+       - Event
       description: Create event
       parameters:
         - $ref: '#/parameters/Title'
-        - $ref: '#/parameters/Start_datetime'
-        - $ref: '#/parameters/End_datetime'
+        - $ref: '#/parameters/Start_date'
+        - $ref: '#/parameters/End_date'
+        - $ref: '#/parameters/Start_time'
+        - $ref: '#/parameters/End_time'
         - $ref: '#/parameters/Location'
         - $ref: '#/parameters/Time_notication'
         - $ref: '#/parameters/Owner'
@@ -475,19 +440,11 @@ paths:
     get:
       summary: Return list users.
       tags:
-       - User
+        - User
       description: returns list of information about "users". filtering if parameter setted
       parameters:
-        - name: result_limit
-          in: query
-          description:  Limit count of response record of searching. if not setted,response record limit is 10. minimun value =1,maximun value =100
-          required: false
-          type: integer
-        - name: key_word
-          in: query
-          description: parameter key word to search user
-          required: false
-          type: string
+        - $ref: '#/parameters/ResultLimit'
+        - $ref: '#/parameters/Page'
       responses:
         '200':
           description: Successful response
@@ -537,14 +494,10 @@ paths:
     post:
       summary: create invitation to join event
       tags:
-       - Invitation
+        - Invitation
       description: Create invite event
       parameters:
-        - name: id_event
-          description: id of event
-          in: path
-          required: true
-          type: integer
+        - $ref: '#/parameters/Id_event'
         - name: user_id
           description: id of user
           in: formData
@@ -571,11 +524,7 @@ paths:
        - Invitation
       description: Delete invited user to the event
       parameters:
-        - name: id_event
-          description: id of event
-          in: path
-          required: true
-          type: integer
+        - $ref: '#/parameters/Id_event'
         - name: user_id
           description: id of user
           in: formData
