@@ -69,7 +69,7 @@ parameters:
     name: owner
     description: User create event
     in: formData
-    required: true
+    required: True
     type: integer
   Event_content:
     name: event_content
@@ -132,7 +132,7 @@ paths:
        - Bearer: []
       summary: Return list events.
       tags:
-       - Events
+       - Event
       description: |  
            returns list of information about "event".
       parameters:
@@ -151,6 +151,32 @@ paths:
            if not seted,the number of page is 1.
           required: false
           type: integer
+        - name: is_public
+          in: query
+          description: is event public
+          required: false
+          type: boolean
+        - name: owner
+          in: query
+          description: is owner
+          required: false
+          type: integer
+        - name: status
+          in: query
+          description: status event
+          required: false
+          type: integer
+        - name: start_date
+          in: query
+          description: start date event
+          required: false
+          type: string
+        - name: end_date
+          in: query
+          description: end date event
+          required: false
+          type: string
+        
       responses:
         '200':
           description: Successful response
@@ -242,7 +268,7 @@ paths:
        - Bearer: []
       summary: Return detail a event.
       tags:
-       - Events
+       - Event
       description: returns detail of a event.
       parameters:
         - name: id_event
@@ -329,7 +355,7 @@ paths:
     put:
       summary: update event detail information
       tags:
-       - Events
+       - Event
       description: |
         "First": 
           * if owner = "self" go to “Finally”
@@ -379,7 +405,7 @@ paths:
     delete:
       summary: Delete event
       tags:
-        - Events
+        - Event
       description: |
         "First": 
           * if owner = "self" go to “Finally”
@@ -445,4 +471,129 @@ paths:
           description: Internal server error response
           schema:
             $ref: '#/definitions/ErrorDetails'
+  /api/users/:
+    get:
+      summary: Return list users.
+      tags:
+       - User
+      description: returns list of information about "users". filtering if parameter setted
+      parameters:
+        - name: result_limit
+          in: query
+          description:  Limit count of response record of searching. if not setted,response record limit is 10. minimun value =1,maximun value =100
+          required: false
+          type: integer
+        - name: key_word
+          in: query
+          description: parameter key word to search user
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            title: Successful response
+            type: object
+            properties:
+              result_count:
+               type: integer
+               description:
+                Count of result in this response
+              user_list:
+                type: array
+                description: users sorted by DESC
+                items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        description: id of user
+                        example: 1
+                      username:
+                        type: string
+                        description: username of user
+                        example: "user1"
+                      first_name:
+                        type: string
+                        description: first name of user
+                        example: "Nghia"
+                      last_name:
+                        type: string
+                        description: last name of user
+                        example: "Vo"
+                      email:
+                        type: string
+                        description: email of user
+                        example: "nghia.vo@asiantech.vn"
+        '400':
+          description: Bad request error response
+          schema:
+            $ref: '#/definitions/ErrorDetails'
+        '500':
+          description: Internal server error response
+          schema:
+            $ref: '#/definitions/ErrorDetails'
+  /api/invite/event/{id_event}:
+    post:
+      summary: create invitation to join event
+      tags:
+       - Invitation
+      description: Create invite event
+      parameters:
+        - name: id_event
+          description: id of event
+          in: path
+          required: true
+          type: integer
+        - name: user_id
+          description: id of user
+          in: formData
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Bad request error response
+          schema:
+            $ref: '#/definitions/ErrorDetails'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorDetails'
+        '500':
+          description: Internal server error response
+          schema:
+            $ref: '#/definitions/ErrorDetails' 
+    delete:
+      summary: Delete invited user to the event
+      tags:
+       - Invitation
+      description: Delete invited user to the event
+      parameters:
+        - name: id_event
+          description: id of event
+          in: path
+          required: true
+          type: integer
+        - name: user_id
+          description: id of user
+          in: formData
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Bad request error response
+          schema:
+            $ref: '#/definitions/ErrorDetails'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorDetails'
+        '500':
+          description: Internal server error response
+          schema:
+            $ref: '#/definitions/ErrorDetails' 
   
