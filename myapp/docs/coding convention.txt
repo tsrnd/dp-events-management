@@ -1,0 +1,8 @@
+1. Code Standards in PEP8:
+https://www.datacamp.com/community/tutorials/pep8-tutorial-python-code
+
+2. Coding style:
+https://docs.python-guide.org/writing/style/
+
+3. Coding convention:
+https://developer.rhino3d.com/guides/rhinopython/python-code-conventions/
