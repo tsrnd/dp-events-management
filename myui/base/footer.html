@@ -1,124 +1,214 @@
-<!-- Call to action -->
+{% load staticfiles %}
+<div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div id="footer-widget">
+            <div class="container">
+                <div class="row">
 
-<div class="cta">
-    <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="/static/images/cta_1.jpg"  data-speed="0.8"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="cta_content text-center">
-                    <div class="cta_title">Get your tickets now!</div>
-                    <div class="button cta_button"><a href="#">Find out more</a></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="footer-col">
 
-<!-- Footer -->
-
-<footer class="footer">
-    <div class="footer_content">
-        <div class="container">
-            <div class="row">
-                
-                <!-- Footer Column -->
-                <div class="col-lg-4 footer_col">
-                    <div class="footer_about">
-                        <div>
-                            <a href="#">
-                                <div class="logo_container d-flex flex-row align-items-start justify-content-start">
-                                    <div class="logo_image"><div><img src="/static/images/logo.png" alt=""></div></div>
-                                    <div class="logo_content">
-                                        <div id="logo_text" class="logo_text logo_text_not_ie">The Conference</div>
-                                        <div class="logo_sub">August 25, 2018 - Miami Marina Bay</div>
+                            <section id="text-2" class="widget widget_text">
+                                <div class="widget-inner">
+                                    <h3 class="widget-title">About Us</h3>
+                                    <div class="textwidget">
+                                        <p>European minnow priapumfish mosshead warbonnet shrimpfish bigscale. Cutlassfish
+                                            Efficiently unleash cross-media information without cross-media value. </p>
+                                        <p>Here's the story of a man named Brady who Efficiently unleash cross-media information
+                                            I'm gonna build me an airport, put my name on it. Neutra flexitarian farm-to-table.</p>
+                                        <p>European minnow priapumfish mosshead warbonnet shrimpfish bigscale.</p>
+                                        <p>Office :<br> Jl. Piit No.1.<br> Kec. Coblong. Bandung.<br> Indonesia 40131.</p>
                                     </div>
                                 </div>
-                            </a>	
-                        </div>
-                        <div class="footer_about_text">
-                            <p>Donec quis metus ac arcu luctus accumsan. Nunc in justo tincidunt, sodales nunc id, finibus nibh. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+                            </section>
                         </div>
                     </div>
-                </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="footer-col">
 
-                <!-- Footer Column -->
-                <div class="col-lg-3 footer_col">
-                    <div class="footer_links">
-                        <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Services</a></li>
-                            <li><a href="#">Speakers</a></li>
-                            <li><a href="#">Event Dates</a></li>
-                            <li><a href="#">Information</a></li>
-                            <li><a href="#">Calendar</a></li>
-                        </ul>
+                            <section id="tokopress-upcoming-events-2" class="widget widget_upcoming_events">
+                                <div class="widget-inner">
+                                    <h3 class="widget-title">Upcoming Events</h3>
+                                    <ul>
+                                        <li>
+                                            <a href="#/event/localmeetup-paris/" title="">
+                                                <img width="150" height="150" src="{% static 'images/eventica-dummy-image-33-150x150.jpg' %}" class="attachment-thumbnail size-thumbnail wp-post-image"
+                                                    alt=""> </a>
+                                            <a class="tp-entry-title" href="#/event/localmeetup-paris/">LocalMeetup
+                                                Paris
+                                            </a>
+                                            <span class="tp-entry-date"><span class="tribe-event-date-start">January 14 @
+                                                    8:00 am</span> - <span class="tribe-event-date-end">January 15 @ 5:00
+                                                    pm</span></span>
+                                        </li>
+                                        <li>
+                                            <a href="#" title="">
+                                                <img width="150" height="150" src="{% static 'images/eventica-dummy-image-21-150x150.jpg' %}" class="attachment-thumbnail size-thumbnail wp-post-image"
+                                                    alt=""> </a>
+                                            <a class="tp-entry-title" href="#/event/localmeetup-san-antonio/">LocalMeetup
+                                                San Antonio</a>
+                                            <span class="tp-entry-date"><span class="tribe-event-date-start">January 29 @
+                                                    8:00 am</span> - <span class="tribe-event-time">5:00 pm</span></span>
+                                        </li>
+                                        <li>
+                                            <a href="#" title="">
+                                                <img width="150" height="150" src="{% static 'images/eventica-dummy-image-13-150x150.jpg' %}" class="attachment-thumbnail size-thumbnail wp-post-image"
+                                                    alt=""> </a>
+                                            <a class="tp-entry-title" href="#/event/localmeetup-prague/">LocalMeetup
+                                                Prague
+                                            </a>
+                                            <span class="tp-entry-date"><span class="tribe-event-date-start">February 13
+                                                    @ 8:00 am</span> - <span class="tribe-event-date-end">February 14 @ 5:00
+                                                    pm</span></span>
+                                        </li>
+                                        <li>
+                                            <a href="#" title="">
+                                                <img width="150" height="150" src="{% static 'images/eventica-dummy-image-14-150x150.jpg' %}" class="attachment-thumbnail size-thumbnail wp-post-image"
+                                                    alt=""> </a>
+                                            <a class="tp-entry-title" href="#">LocalMeetup
+                                                Lancaster
+                                            </a>
+                                            <span class="tp-entry-date"><span class="tribe-event-date-start">February 28
+                                                    @ 8:00 am</span> - <span class="tribe-event-time">5:00 pm</span></span>
+                                        </li>
+                                        <li>
+                                            <a href="#" title="">
+                                                <img width="150" height="150" src="{% static 'images/eventica-dummy-image-20-150x150.jpg' %}" class="attachment-thumbnail size-thumbnail wp-post-image"
+                                                    alt=""> </a>
+                                            <a class="tp-entry-title" href="#">LocalMeetup
+                                                Seattle
+                                            </a>
+                                            <span class="tp-entry-date"><span class="tribe-event-date-start">March 15 @ 8:00
+                                                    am</span> - <span class="tribe-event-date-end">March 16 @ 5:00 pm</span></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </section>
+                        </div>
                     </div>
-                </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="footer-col">
 
-                <!-- Footer Column -->
-                <div class="col-lg-3 footer_col">
-                    <div class="footer_links">
-                        <ul>
-                            <li><a href="#">Logistics</a></li>
-                            <li><a href="#">Our Partners</a></li>
-                            <li><a href="#">Testimonials</a></li>
-                            <li><a href="#">Price Plans</a></li>
-                            <li><a href="#">News</a></li>
-                            <li><a href="#">Contact</a></li>
-                        </ul>
+                            <section id="tokopress-past-events-2" class="widget widget_past_events">
+                                <div class="widget-inner">
+                                    <h3 class="widget-title">Past Events</h3>
+                                    <ul>
+                                        <li>
+                                            <a href="#/event/localmeetup-bratislava/" title="">
+                                                <img width="150" height="150" src="{% static 'images/eventica-dummy-image-23-150x150.jpg' %}" class="attachment-thumbnail size-thumbnail wp-post-image"
+                                                    alt=""> </a>
+                                            <a class="tp-entry-title" href="#/event/localmeetup-bratislava/">LocalMeetup
+                                                Bratislava
+                                            </a>
+                                            <span class="tp-entry-date"><span class="tribe-event-date-start">December 30,
+                                                    2018 @ 8:00 am</span>
+                                                - <span class="tribe-event-time">5:00 pm</span></span>
+                                        </li>
+                                        <li>
+                                            <a href="#/event/localmeetup-vienna/" title="">
+                                                <img width="150" height="150" src="{% static 'images/eventica-dummy-image-17-150x150.jpg' %}" class="attachment-thumbnail size-thumbnail wp-post-image"
+                                                    alt=""> </a>
+                                            <a class="tp-entry-title" href="#/event/localmeetup-vienna/">LocalMeetup
+                                                Vienna
+                                            </a>
+                                            <span class="tp-entry-date"><span class="tribe-event-date-start">December 15,
+                                                    2018 @ 8:00 am</span>
+                                                - <span class="tribe-event-date-end">December 16, 2018 @ 5:00 pm</span></span>
+                                        </li>
+                                        <li>
+                                            <a href="#/event/localmeetup-dayton/" title="">
+                                                <img width="150" height="150" src="{% static 'images/eventica-dummy-image-19-150x150.jpg' %}" class="attachment-thumbnail size-thumbnail wp-post-image"
+                                                    alt=""> </a>
+                                            <a class="tp-entry-title" href="#/event/localmeetup-dayton/">LocalMeetup
+                                                Dayton
+                                            </a>
+                                            <span class="tp-entry-date"><span class="tribe-event-date-start">November 30,
+                                                    2018 @ 8:00 am</span>
+                                                - <span class="tribe-event-time">5:00 pm</span></span>
+                                        </li>
+                                        <li>
+                                            <a href="#/event/localmeetup-london/" title="">
+                                                <img width="150" height="150" src="{% static 'images/eventica-dummy-image-15-150x150.jpg' %}" class="attachment-thumbnail size-thumbnail wp-post-image"
+                                                    alt=""> </a>
+                                            <a class="tp-entry-title" href="#/event/localmeetup-london/">LocalMeetup
+                                                London
+                                            </a>
+                                            <span class="tp-entry-date"><span class="tribe-event-date-start">November 15,
+                                                    2018 @ 8:00 am</span>
+                                                - <span class="tribe-event-date-end">November 16, 2018 @ 5:00 pm</span></span>
+                                        </li>
+                                        <li>
+                                            <a href="#/event/localmeetup-st-louis/" title="">
+                                                <img width="150" height="150" src="{% static 'images/eventica-dummy-image-18-150x150.jpg' %}" class="attachment-thumbnail size-thumbnail wp-post-image"
+                                                    alt=""> </a>
+                                            <a class="tp-entry-title" href="#/event/localmeetup-st-louis/">LocalMeetup
+                                                St. Louis</a>
+                                            <span class="tp-entry-date"><span class="tribe-event-date-start">October 31,
+                                                    2018 @ 8:00 am</span>
+                                                - <span class="tribe-event-time">5:00 pm</span></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </section>
+                        </div>
                     </div>
-                </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="footer-col">
 
-                <!-- Footer Column -->
-                <div class="col-lg-2 footer_col">
-                    <div class="footer_links">
-                        <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Services</a></li>
-                            <li><a href="#">Speakers</a></li>
-                            <li><a href="#">Event Dates</a></li>
-                            <li><a href="#">Information</a></li>
-                            <li><a href="#">Calendar</a></li>
-                        </ul>
+                            <section id="tokopress-recent-posts-2" class="widget widget_recent_posts">
+                                <div class="widget-inner">
+                                    <h3 class="widget-title">Recent Posts</h3>
+                                    <ul>
+                                        <li>
+                                            <a href="#/how-to-live-life-free-of-stress-an-interview-with-joe-dimaggio/" title="">
+                                                <img width="150" height="150" src="{% static 'images/eventica-dummy-image-33-150x150.jpg' %}" class="attachment-thumbnail size-thumbnail wp-post-image"
+                                                    alt=""> </a>
+                                            <a class="tp-entry-title" href="#/how-to-live-life-free-of-stress-an-interview-with-joe-dimaggio/">How
+                                                To Live Life Free Of Stress An Interview With Joe Dimaggio</a>
+                                            <span class="tp-entry-date">January 11, 2013</span>
+                                        </li>
+                                        <li>
+                                            <a href="#/exciting-multi-activity-corporate-events-in-oxfordshire/" title="">
+                                                <img width="150" height="150" src="{% static 'images/eventica-dummy-image-32-150x150.jpg' %}" class="attachment-thumbnail size-thumbnail wp-post-image"
+                                                    alt=""> </a>
+                                            <a class="tp-entry-title" href="#/exciting-multi-activity-corporate-events-in-oxfordshire/">Exciting
+                                                Multi Activity Corporate Events In Oxfordshire</a>
+                                            <span class="tp-entry-date">January 10, 2013</span>
+                                        </li>
+                                        <li>
+                                            <a href="#/arizona-the-host-of-great-events/" title="">
+                                                <img width="150" height="150" src="{% static 'images/eventica-dummy-image-31-150x150.jpg' %}" class="attachment-thumbnail size-thumbnail wp-post-image"
+                                                    alt=""> </a>
+                                            <a class="tp-entry-title" href="#/arizona-the-host-of-great-events/">Arizona
+                                                The Host Of Great Events</a>
+                                            <span class="tp-entry-date">January 9, 2013</span>
+                                        </li>
+                                        <li>
+                                            <a href="#/great-british-sporting-events/" title="">
+                                                <img width="150" height="150" src="{% static 'images/eventica-dummy-image-30-150x150.jpg' %}" class="attachment-thumbnail size-thumbnail wp-post-image"
+                                                    alt=""> </a>
+                                            <a class="tp-entry-title" href="#/great-british-sporting-events/">Great
+                                                British Sporting Events</a>
+                                            <span class="tp-entry-date">January 5, 2013</span>
+                                        </li>
+                                        <li>
+                                            <a href="#/special-relativity-lite-simplified-version/" title="">
+                                                <img width="150" height="150" src="{% static 'images/eventica-dummy-image-12-150x150.jpg' %}" class="attachment-thumbnail size-thumbnail wp-post-image"
+                                                    alt=""> </a>
+                                            <a class="tp-entry-title" href="#/special-relativity-lite-simplified-version/">Special
+                                                Relativity Lite Simplified Version</a>
+                                            <span class="tp-entry-date">January 5, 2013</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </section>
+                        </div>
                     </div>
-                </div>
 
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="footer_extra">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="footer_extra_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-start justify-content-center">
-                        <div class="footer_social">
-                            <div class="footer_social_title">Follow us on Social Media</div>
-                            <ul class="footer_social_list">
-                                <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="footer_extra_right ml-lg-auto text-lg-right">
-                            <div class="footer_extra_links">
-                                <ul>
-                                    <li><a href="contact.html">Contact us</a></li>
-                                    <li><a href="#">Sitemap</a></li>
-                                    <li><a href="#">Privacy</a></li>
-                                </ul>
-                            </div>
-                            <div class="copyright"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-    
+        </div><!-- ./footer widget -->
+    </footer>
+
 </div>

@@ -1,80 +1,169 @@
-{% extends 'base/base.html' %}
-{% block title_header %}Home poll{% endblock %}
-{% block content %}
-<!-- <div class="jumbotron">
-  test
-</div> -->
-<!-- Events -->
+{% extends 'base/base.html' %} {% block title_header %}Home poll{% endblock %} {% block content %}
 
-<div class="events">
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        
-        <!-- Event -->
-        <div class="event">
-          <div class="row row-lg-eq-height">
-            <div class="col-lg-6 event_col">
-              <div class="event_image_container">
-                <div class="background_image" style="background-image:url(/static/images/event_9.jpg)"></div>
-                <div class="date_container">
-                  <a href="#">
-                    <span class="date_content d-flex flex-column align-items-center justify-content-center">
-                      <div class="date_day">15</div>
-                      <div class="date_month">May</div>
-                    </span>
-                  </a>	
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6 event_col">
-              <div class="event_content">
-                <div class="event_title">Marketing Sollutions in 2018</div>
-                <div class="event_location">@ Miami Auditorium</div>
-                <div class="event_text">
-                  <p>Donec quis metus ac arcu luctus accumsan. Nunc in justo tincidunt, sodales nunc id, finibus nibh. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce nec ante vitae lacus aliquet vulputate. Donec scelerisque accu msan molestie. Vestibulum ante ipsum primis in faucibus orci luctus.</p>
-                </div>
-                <div class="event_speakers">
-                  <!-- Event Speaker -->
-                  <div class="event_speaker d-flex flex-row align-items-center justify-content-start">
-                    <div><div class="event_speaker_image"><img src="/static/images/event_speaker_1.jpg" alt=""></div></div>
-                    <div class="event_speaker_content">
-                      <div class="event_speaker_name">Michael Smith</div>
-                      <div class="event_speaker_title">Marketing Specialist</div>
-                    </div>
-                  </div>
-                  <!-- Event Speaker -->
-                  <div class="event_speaker d-flex flex-row align-items-center justify-content-start">
-                    <div><div class="event_speaker_image"><img src="/static/images/event_speaker_2.jpg" alt=""></div></div>
-                    <div class="event_speaker_content">
-                      <div class="event_speaker_name">Jessica Williams</div>
-                      <div class="event_speaker_title">Marketing Specialist</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="event_buttons">
-                  <div class="button event_button event_button_1"><a href="#">Buy Tickets Now!</a></div>
-                  <div class="button_2 event_button event_button_2"><a href="#">Read more</a></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+<style type="text/css">
+  img.wp-smiley,
+  img.emoji {
+    display: inline !important;
+    border: none !important;
+    box-shadow: none !important;
+    height: 1em !important;
+    width: 1em !important;
+    margin: 0 .07em !important;
+    vertical-align: -0.1em !important;
+    background: none !important;
+    padding: 0 !important;
+  }
+</style>
 
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <div class="pagination">
-          <ul>
-            <li class="active"><a href="#">01.</a></li>
-            <li><a href="#">02.</a></li>
-            <li><a href="#">03.</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+
+<style id="woocommerce-inline-inline-css" type="text/css">
+  .woocommerce form .form-row .required {
+    visibility: visible;
+  }
+</style>
+
+
+<style id="style-theme-inline-css" type="text/css">
+  .woocommerce h1.page-title {
+    display: none;
+  }
+</style>
+
+<noscript>
+  <style>
+    .woocommerce-product-gallery {
+      opacity: 1 !important;
+    }
+  </style></noscript>
+
+
+<noscript>
+  <style type="text/css">
+    .wpb_animate_when_almost_visible {
+      opacity: 1;
+    }
+  </style></noscript><!-- Facebook Pixel Code -->
+
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments) };
+  gtag('js', new Date());
+
+  gtag('config', 'UA-78978222-2');
+</script>
+
+
+<!-- <body class="home page-template page-template-page_home_event page-template-page_home_event-php page page-id-1881 woocommerce-js tribe-js ltr sticky-header-no wpb-js-composer js-comp-ver-4.12 vc_responsive"> -->
+
+<div id="back-top" style="display: none;"><i class="fa fa-angle-up"></i></div>
+<div class="sb-slidebar sb-left sb-style-push" style="margin-left: -288px;">
+  <ul id="header-menu" class="menu-slidebar">
+    <li id="menu-item-1703" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-1703"><a
+        href="#/">Home</a></li>
+    <li id="menu-item-1836" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1836"><a
+        href="#/events/">Events</a>
+      <ul class="sub-menu">
+        <li id="menu-item-1840" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1840"><a href="#/events/list/">List
+            View
+          </a></li>
+        <li id="menu-item-1839" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1839"><a href="#/events/month/">Month
+            View (Calendar)</a></li>
+        <li id="menu-item-1953" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1953"><a href="#/events/2015-02-07/">Day
+            View
+          </a></li>
+        <li id="menu-item-1952" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1952"><a href="#/events/list/?action=tribe_list&amp;tribe_paged=1&amp;tribe_event_display=past">Past
+            Events
+          </a></li>
+        <li id="menu-item-1880" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1880"><a href="#/event/localmeetup-seattle/">Single
+            event
+          </a></li>
+      </ul>
+    </li>
+    <li id="menu-item-1702" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1702"><a
+        href="#/shop/">Shop</a>
+      <ul class="sub-menu">
+        <li id="menu-item-1838" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1838"><a href="#/product/deepon-led-office-reading/">Single
+            Product
+          </a></li>
+        <li id="menu-item-1847" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1847"><a href="#/product/mizuno-prospect-youth-fastpitch-softball-glove/">Product
+            Variations
+          </a></li>
+        <li id="menu-item-1948" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1948"><a href="#/my-account/">My
+            Account
+          </a></li>
+        <li id="menu-item-1949" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1949"><a href="#/checkout/">Checkout</a></li>
+        <li id="menu-item-1950" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1950"><a href="#/cart/">Cart</a></li>
+      </ul>
+    </li>
+    <li id="menu-item-1837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1837"><a
+        href="#/blog/">Blog</a>
+      <ul class="sub-menu">
+        <li id="menu-item-2077" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-2077"><a href="#/enjoy-a-unique-holiday-in-munich-and-bavaria/">Single
+            Post
+          </a></li>
+        <li id="menu-item-2078" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2078"><a href="#/category/vacations/">Category</a></li>
+      </ul>
+    </li>
+    <li id="menu-item-1885" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1885"><a href="#/contact/">Contact</a></li>
+    <li class="menu-item menu-item-mininav"><a href="javascript:void(0)" class="sb-toggle-left"><i class="fa fa-navicon"></i><span
+          class="mininav">Menu</span></a></li>
+    <li class="menu-item menu-item-minicart"><a href="#/cart/"><i class="fa fa-shopping-cart"></i><span class="minicart"><span
+            class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>&nbsp;0.00</span></span></a></li>
+  </ul>
 </div>
+<script>
+  (function (body) {
+    'use strict';
+    body.className = body.className.replace(/\btribe-no-js\b/, 'tribe-js');
+  })(document.body);
+</script>
+<script> /* <![CDATA[ */var tribe_l10n_datatables = { "aria": { "sort_ascending": ": activate to sort column ascending", "sort_descending": ": activate to sort column descending" }, "length_menu": "Show _MENU_ entries", "empty_table": "No data available in table", "info": "Showing _START_ to _END_ of _TOTAL_ entries", "info_empty": "Showing 0 to 0 of 0 entries", "info_filtered": "(filtered from _MAX_ total entries)", "zero_records": "No matching records found", "search": "Search:", "all_selected_text": "All items on this page were selected. ", "select_all_link": "Select all pages", "clear_selection": "Clear Selection.", "pagination": { "all": "All", "next": "Next", "previous": "Previous" }, "select": { "rows": { "0": "", "_": ": Selected %d rows", "1": ": Selected 1 row" } }, "datepicker": { "dayNames": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "dayNamesShort": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], "dayNamesMin": ["S", "M", "T", "W", "T", "F", "S"], "monthNames": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], "monthNamesShort": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], "monthNamesMin": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], "nextText": "Next", "prevText": "Prev", "currentText": "Today", "closeText": "Done", "today": "Today", "clear": "Clear" } }; var tribe_system_info = { "sysinfo_optin_nonce": "314a04d2f7", "clipboard_btn_text": "Copy to clipboard", "clipboard_copied_text": "System info copied", "clipboard_fail_text": "Press \"Cmd + C\" to copy" };/* ]]> */ </script>
+<script>(function () {
+    function addEventListener(element, event, handler) {
+      if (element.addEventListener) {
+        element.addEventListener(event, handler, false);
+      } else if (element.attachEvent) {
+        element.attachEvent('on' + event, handler);
+      }
+    } function maybePrefixUrlField() {
+      if (this.value.trim() !== '' && this.value.indexOf('http') !== 0) {
+        this.value = "http://" + this.value;
+      }
+    }
 
-{% endblock %}
+    var urlFields = document.querySelectorAll('.mc4wp-form input[type="url"]');
+    if (urlFields && urlFields.length > 0) {
+      for (var j = 0; j < urlFields.length; j++) {
+        addEventListener(urlFields[j], 'blur', maybePrefixUrlField);
+      }
+    }/* test if browser supports date fields */
+    var testInput = document.createElement('input');
+    testInput.setAttribute('type', 'date');
+    if (testInput.type !== 'date') {
+
+      /* add placeholder & pattern to all date fields */
+      var dateFields = document.querySelectorAll('.mc4wp-form input[type="date"]');
+      for (var i = 0; i < dateFields.length; i++) {
+        if (!dateFields[i].placeholder) {
+          dateFields[i].placeholder = 'YYYY-MM-DD';
+        }
+        if (!dateFields[i].pattern) {
+          dateFields[i].pattern = '[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])';
+        }
+      }
+    }
+
+  })();</script>
+<script type="text/javascript">
+  var c = document.body.className;
+  c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
+  document.body.className = c;
+</script>
+
+
+<script type="text/javascript">
+  /* <![CDATA[ */
+  var mc4wp_forms_config = [];
+/* ]]> */
+</script> {% endblock %}

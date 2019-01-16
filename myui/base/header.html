@@ -1,144 +1,1025 @@
-<div class="super_container">
-	{% load staticfiles %}
-	<!-- Menu -->
-
-	<div class="menu trans_500">
-		<div class="menu_content d-flex flex-column align-items-center justify-content-center text-center">
-			<div class="menu_close_container"><div class="menu_close"></div></div>
-			<div class="logo menu_logo">
-				<a href="#">
-					<div class="logo_container d-flex flex-row align-items-start justify-content-start">
-						<div class="logo_image"><div><img src="{% static 'images/logo.png' %}" alt=""></div></div>
-						<div class="logo_content">
-							<div class="logo_text logo_text_not_ie">The Conference</div>
-							<div class="logo_sub">August 25, 2018 - Miami Marina Bay</div>
-						</div>
+{% load staticfiles %}
+<div id="site-container" class="site-container sb-site-container">
+	<div id="header-block" class="site-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-md-5 col-lg-4 site-branding-wrap">
+					<div class="site-branding">
+						<a href="#">
+							<div class="site-icon">
+								<i class="fa fa-calendar"></i>
+							</div>
+							<div class="site-logo">
+								<h2>Eventica</h2>
+								<p>Event Calendar &amp; eCommerce</p>
+							</div>
+						</a>
 					</div>
-				</a>
+				</div>
+				<div class="col-sm-6 col-md-7 col-lg-8 site-navigation">
+					<div id="primary-menu" class="primary-menu">
+						<ul id="header-menu" class="header-menu sf-menu sf-js-enabled sf-arrows">
+							<li id="menu-item-1703" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-1703"><a
+								 href="#">Home</a></li>
+							<li id="menu-item-1836" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1836"><a
+								 href="#/events/" class="sf-with-ul">Events</a>
+								<ul class="sub-menu" style="display: none;">
+									<li id="menu-item-1840" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1840"><a href="#/events/list/">List
+											View
+										</a></li>
+									<li id="menu-item-1839" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1839"><a href="#/events/month/">Month
+											View (Calendar)</a></li>
+									<li id="menu-item-1953" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1953"><a href="#/events/2015-02-07/">Day
+											View
+										</a></li>
+									<li id="menu-item-1952" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1952"><a href="#/events/list/?action=tribe_list&amp;tribe_paged=1&amp;tribe_event_display=past">Past
+											Events
+										</a></li>
+									<li id="menu-item-1880" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1880"><a href="#/event/localmeetup-seattle/">Single
+											event
+										</a></li>
+								</ul>
+							</li>
+							<li id="menu-item-1702" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1702"><a
+								 href="#/shop/" class="sf-with-ul">Shop</a>
+								<ul class="sub-menu" style="display: none;">
+									<li id="menu-item-1838" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1838"><a href="#/product/deepon-led-office-reading/">Single
+											Product
+										</a></li>
+									<li id="menu-item-1847" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1847"><a href="#/product/mizuno-prospect-youth-fastpitch-softball-glove/">Product
+											Variations
+										</a></li>
+									<li id="menu-item-1948" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1948"><a href="#/my-account/">My
+											Account
+										</a></li>
+									<li id="menu-item-1949" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1949"><a href="#/checkout/">Checkout</a></li>
+									<li id="menu-item-1950" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1950"><a href="#/cart/">Cart</a></li>
+								</ul>
+							</li>
+							<li id="menu-item-1837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1837"><a
+								 href="#/blog/" class="sf-with-ul">Blog</a>
+								<ul class="sub-menu" style="display: none;">
+									<li id="menu-item-2077" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-2077"><a href="#/enjoy-a-unique-holiday-in-munich-and-bavaria/">Single
+											Post
+										</a></li>
+									<li id="menu-item-2078" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2078"><a href="#/category/vacations/">Category</a></li>
+								</ul>
+							</li>
+							<li id="menu-item-1885" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1885"><a href="#/contact/">Contact</a></li>
+							<li class="menu-item menu-item-mininav"><a href="javascript:void(0)" class="sb-toggle-left"><i class="fa fa-navicon"></i><span
+									 class="mininav">Menu</span></a></li>
+							<li class="menu-item menu-item-minicart"><a href="#/cart/"><i class="fa fa-shopping-cart"></i><span class="minicart"><span
+										 class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>&nbsp;0.00</span></span></a></li>
+						</ul>
+					</div>
+				</div>
+
 			</div>
-			<ul>
-				<li class="menu_item"><a href="index.html">Home</a></li>
-				<li class="menu_item"><a href="#">About us</a></li>
-				<li class="menu_item"><a href="#">Speakers</a></li>
-				<li class="menu_item"><a href="#">Tickets</a></li>
-				<li class="menu_item"><a href="news.html">News</a></li>
-				<li class="menu_item"><a href="contact.html">Contact</a></li>
-			</ul>
-		</div>
-		<div class="menu_social">
-			<div class="menu_social_title">Follow uf on Social Media</div>
-			<ul>
-				<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-				<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-				<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-				<li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
-				<li><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
-				<li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-			</ul>
 		</div>
 	</div>
-	
-	<!-- Home -->
 
-	<div class="home">
-		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="/static/images/events.jpg" data-speed="0.8"></div>
 
-		<!-- Header -->
+	<div class="home-slider-events clearfix home-slider-events-active owl-carousel owl-theme owl-loaded">
 
-		<header class="header" id="header">
-			<div>
-				<div class="header_top">
-					<div class="container">
-						<div class="row">
-							<div class="col">
-								<div class="header_top_content d-flex flex-row align-items-center justify-content-start">
-									<div>
-										<a href="#">
-											<div class="logo_container d-flex flex-row align-items-start justify-content-start">
-												<div class="logo_image"><div><img src="/static/images/logo.png" alt=""></div></div>
-												<div class="logo_content">
-													<div id="logo_text" class="logo_text logo_text_not_ie">The Conference</div>
-													<div class="logo_sub">August 25, 2018 - Miami Marina Bay</div>
-												</div>
+
+
+		<div class="owl-stage-outer">
+			<div class="owl-stage" style="transform: translate3d(-5760px, 0px, 0px); transition: all 0s ease 0s; width: 10080px;">
+				<div class="owl-item cloned" style="width: 1440px; margin-right: 0px;">
+					<div class="slide-event item" style="background-image:url(/static/images/eventica-dummy-image-01.jpg)">
+						<div class="container">
+							<div class="row">
+								<div class="col-sm-6 col-md-5 col-lg-4">
+									<div class="slide-event-detail">
+										<h2 class="slide-event-title">
+											<a class="url" href="#/event/localmeetup-maui/" title="LocalMeetup Maui" rel="bookmark">
+												LocalMeetup Maui </a>
+										</h2>
+										<div class="slide-event-cta">
+											<div class="slide-event-cta-date">
+												<span class="mm">October</span>
+												<span class="dd">03</span>
+												<span class="yy">2018</span>
 											</div>
-										</a>	
+											<a class="btn" href="#/event/localmeetup-maui/">
+												Detail </a>
+										</div>
+										<div class="slide-event-venue">
+											<div class="slide-event-venue-name">
+												Maui </div>
+											<div class="slide-event-venue-address">
+												<span class="tribe-address">
+
+
+													<span class="tribe-locality">Maui</span><span class="tribe-delimiter">,</span>
+
+													<abbr class="tribe-region tribe-events-abbr" title="Hawaii">HI</abbr>
+
+
+													<span class="tribe-country-name">United States</span>
+
+												</span>
+											</div>
+										</div>
+										<div class="slide-event-datetime">
+											<div class="slide-event-datetime-details">
+												8:00 am - 5:00 pm </div>
+										</div>
 									</div>
-									<div class="header_social ml-auto">
-										<ul>
-											<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
-											<li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-										</ul>
-									</div>
-									<div class="hamburger ml-auto"><i class="fa fa-bars" aria-hidden="true"></i></div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="header_nav" id="header_nav_pin">
-					<div class="header_nav_inner">
-						<div class="header_nav_container">
-							<div class="container">
-								<div class="row">
-									<div class="col">
-										<div class="header_nav_content d-flex flex-row align-items-center justify-content-start">
-											<nav class="main_nav">
-												<ul>
-													<li class="active"><a href="index.html">Home</a></li>
-													<li><a href="#">About Us</a></li>
-													<li><a href="speakers.html">Speakers</a></li>
-													<li><a href="#">Events</a></li>
-													<li><a href="news.html">News</a></li>
-													<li><a href="contact.html">Contact</a></li>
-												</ul>
-											</nav>
-											<div class="header_extra ml-auto">
-												<div class="header_search"><i class="fa fa-search" aria-hidden="true"></i></div>
-												<div class="button header_button"><a href="#">Buy Tickets Now!</a></div>
+				<div class="owl-item cloned" style="width: 1440px; margin-right: 0px;">
+					<div class="slide-event item" style="background-image:url(/static/images/eventica-dummy-image-14.jpg)">
+						<div class="container">
+							<div class="row">
+								<div class="col-sm-6 col-md-5 col-lg-4">
+									<div class="slide-event-detail">
+										<h2 class="slide-event-title">
+											<a class="url" href="#/event/localmeetup-lancaster/" title="LocalMeetup Lancaster" rel="bookmark">
+												LocalMeetup Lancaster </a>
+										</h2>
+										<div class="slide-event-cta">
+											<div class="slide-event-cta-date">
+												<span class="mm">March</span>
+												<span class="dd">02</span>
+												<span class="yy">2019</span>
+											</div>
+											<a class="btn" href="#/event/localmeetup-lancaster/">
+												Detail </a>
+										</div>
+										<div class="slide-event-venue">
+											<div class="slide-event-venue-name">
+												Lancaster </div>
+											<div class="slide-event-venue-address">
+												<span class="tribe-address">
+
+
+													<span class="tribe-locality">Lancaster</span><span class="tribe-delimiter">,</span>
+
+													<abbr class="tribe-region tribe-events-abbr" title="Pennsylvania">PA</abbr>
+
+
+													<span class="tribe-country-name">United States</span>
+
+												</span>
 											</div>
 										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="search_container">
-							<div class="container">
-								<div class="row">
-									<div class="col">
-										<div class="search_content d-flex flex-row align-items-center justify-content-end">
-											<form action="#" id="search_container_form" class="search_container_form">
-												<input type="text" class="search_container_input" placeholder="Search" required="required">
-												<button class="search_container_button"><i class="fa fa-search" aria-hidden="true"></i></button>
-											</form>
+										<div class="slide-event-datetime">
+											<div class="slide-event-datetime-details">
+												8:00 am - 5:00 pm </div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>	
-			</div>
-		</header>
+				</div>
+				<div class="owl-item" style="width: 1440px; margin-right: 0px;">
+					<div class="slide-event item" style="background-image:url(/static/images/eventica-dummy-image-20.jpg)">
+						<div class="container">
+							<div class="row">
+								<div class="col-sm-6 col-md-5 col-lg-4">
+									<div class="slide-event-detail">
+										<h2 class="slide-event-title">
+											<a class="url" href="#/event/localmeetup-seattle/" title="LocalMeetup Seattle" rel="bookmark">
+												LocalMeetup Seattle </a>
+										</h2>
+										<div class="slide-event-cta">
+											<div class="slide-event-cta-date">
+												<span class="mm">March</span>
+												<span class="dd">17</span>
+												<span class="yy">2019</span>
+											</div>
+											<a class="btn" href="#/event/localmeetup-seattle/">
+												Detail </a>
+										</div>
+										<div class="slide-event-venue">
+											<div class="slide-event-venue-name">
+												Seattle </div>
+											<div class="slide-event-venue-address">
+												<span class="tribe-address">
 
-		<div class="home_content_container">
+
+													<span class="tribe-locality">Seattle</span><span class="tribe-delimiter">,</span>
+
+													<abbr class="tribe-region tribe-events-abbr" title="Washington">WA</abbr>
+
+
+													<span class="tribe-country-name">United States</span>
+
+												</span>
+											</div>
+										</div>
+										<div class="slide-event-datetime">
+											<div class="slide-event-datetime-details">
+												March 17 - March 18 </div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="owl-item" style="width: 1440px; margin-right: 0px;">
+					<div class="slide-event item" style="background-image:url(/static/images/eventica-dummy-image-01.jpg)">
+						<div class="container">
+							<div class="row">
+								<div class="col-sm-6 col-md-5 col-lg-4">
+									<div class="slide-event-detail">
+										<h2 class="slide-event-title">
+											<a class="url" href="#/event/localmeetup-maui/" title="LocalMeetup Maui" rel="bookmark">
+												LocalMeetup Maui </a>
+										</h2>
+										<div class="slide-event-cta">
+											<div class="slide-event-cta-date">
+												<span class="mm">October</span>
+												<span class="dd">03</span>
+												<span class="yy">2018</span>
+											</div>
+											<a class="btn" href="#/event/localmeetup-maui/">
+												Detail </a>
+										</div>
+										<div class="slide-event-venue">
+											<div class="slide-event-venue-name">
+												Maui </div>
+											<div class="slide-event-venue-address">
+												<span class="tribe-address">
+
+
+													<span class="tribe-locality">Maui</span><span class="tribe-delimiter">,</span>
+
+													<abbr class="tribe-region tribe-events-abbr" title="Hawaii">HI</abbr>
+
+
+													<span class="tribe-country-name">United States</span>
+
+												</span>
+											</div>
+										</div>
+										<div class="slide-event-datetime">
+											<div class="slide-event-datetime-details">
+												8:00 am - 5:00 pm </div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="owl-item active" style="width: 1440px; margin-right: 0px;">
+					<div class="slide-event item" style="background-image:url(/static/images/eventica-dummy-image-14.jpg)">
+						<div class="container">
+							<div class="row">
+								<div class="col-sm-6 col-md-5 col-lg-4">
+									<div class="slide-event-detail">
+										<h2 class="slide-event-title">
+											<a class="url" href="#event/localmeetup-lancaster/" title="LocalMeetup Lancaster"
+											 rel="bookmark">
+												LocalMeetup Lancaster </a>
+										</h2>
+										<div class="slide-event-cta">
+											<div class="slide-event-cta-date">
+												<span class="mm">March</span>
+												<span class="dd">02</span>
+												<span class="yy">2019</span>
+											</div>
+											<a class="btn" href="#event/localmeetup-lancaster/">
+												Detail </a>
+										</div>
+										<div class="slide-event-venue">
+											<div class="slide-event-venue-name">
+												Lancaster </div>
+											<div class="slide-event-venue-address">
+												<span class="tribe-address">
+
+
+													<span class="tribe-locality">Lancaster</span><span class="tribe-delimiter">,</span>
+
+													<abbr class="tribe-region tribe-events-abbr" title="Pennsylvania">PA</abbr>
+
+
+													<span class="tribe-country-name">United States</span>
+
+												</span>
+											</div>
+										</div>
+										<div class="slide-event-datetime">
+											<div class="slide-event-datetime-details">
+												8:00 am - 5:00 pm </div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="owl-item cloned" style="width: 1440px; margin-right: 0px;">
+					<div class="slide-event item" style="background-image:url(/static/images/eventica-dummy-image-20.jpg)">
+						<div class="container">
+							<div class="row">
+								<div class="col-sm-6 col-md-5 col-lg-4">
+									<div class="slide-event-detail">
+										<h2 class="slide-event-title">
+											<a class="url" href="#event/localmeetup-seattle/" title="LocalMeetup Seattle" rel="bookmark">
+												LocalMeetup Seattle </a>
+										</h2>
+										<div class="slide-event-cta">
+											<div class="slide-event-cta-date">
+												<span class="mm">March</span>
+												<span class="dd">17</span>
+												<span class="yy">2019</span>
+											</div>
+											<a class="btn" href="#event/localmeetup-seattle/">
+												Detail </a>
+										</div>
+										<div class="slide-event-venue">
+											<div class="slide-event-venue-name">
+												Seattle </div>
+											<div class="slide-event-venue-address">
+												<span class="tribe-address">
+
+
+													<span class="tribe-locality">Seattle</span><span class="tribe-delimiter">,</span>
+
+													<abbr class="tribe-region tribe-events-abbr" title="Washington">WA</abbr>
+
+
+													<span class="tribe-country-name">United States</span>
+
+												</span>
+											</div>
+										</div>
+										<div class="slide-event-datetime">
+											<div class="slide-event-datetime-details">
+												March 17 - March 18 </div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="owl-item cloned" style="width: 1440px; margin-right: 0px;">
+					<div class="slide-event item" style="background-image:url(/static/images/eventica-dummy-image-01.jpg)">
+						<div class="container">
+							<div class="row">
+								<div class="col-sm-6 col-md-5 col-lg-4">
+									<div class="slide-event-detail">
+										<h2 class="slide-event-title">
+											<a class="url" href="#event/localmeetup-maui/" title="LocalMeetup Maui" rel="bookmark">
+												LocalMeetup Maui </a>
+										</h2>
+										<div class="slide-event-cta">
+											<div class="slide-event-cta-date">
+												<span class="mm">October</span>
+												<span class="dd">03</span>
+												<span class="yy">2018</span>
+											</div>
+											<a class="btn" href="#event/localmeetup-maui/">
+												Detail </a>
+										</div>
+										<div class="slide-event-venue">
+											<div class="slide-event-venue-name">
+												Maui </div>
+											<div class="slide-event-venue-address">
+												<span class="tribe-address">
+
+
+													<span class="tribe-locality">Maui</span><span class="tribe-delimiter">,</span>
+
+													<abbr class="tribe-region tribe-events-abbr" title="Hawaii">HI</abbr>
+
+
+													<span class="tribe-country-name">United States</span>
+
+												</span>
+											</div>
+										</div>
+										<div class="slide-event-datetime">
+											<div class="slide-event-datetime-details">
+												8:00 am - 5:00 pm </div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="owl-controls">
+			<div class="owl-nav">
+				<div class="owl-prev" style=""><span class="slide-prev-nav"><i class="fa fa-angle-left"></i></span></div>
+				<div class="owl-next" style=""><span class="slide-next-nav"><i class="fa fa-angle-right"></i></span></div>
+			</div>
+			<div class="owl-dots" style="display: none;"></div>
+		</div>
+	</div>
+
+	<div id="main-content" class="home-plus-events">
+
+
+		<div class="home-search-box">
 			<div class="container">
 				<div class="row">
-					<div class="col">
-						<div class="home_content d-flex flex-row align-items-end justify-content-start">
-							<div class="current_page">Home</div>
-							<!-- <div class="breadcrumbs ml-auto">
-								<ul>
-									<li><a href="index.html">Home</a></li>
-									<li>Events</li>
-								</ul>
-							</div> -->
-						</div>
+					<div class="col-md-12">
+
+						<form role="search" class="search-form" name="tribe-bar-form" method="get" action="#events/">
+							<input type="hidden" name="tribe_paged" value="1">
+							<input type="hidden" name="tribe_event_display" value="list">
+							<label>
+								<span class="screen-reader-text">Search for:</span>
+								<input type="search" class="search-field" placeholder="Search Event …" value="" name="tribe-bar-search" title="Search for:">
+							</label>
+							<button type="submit" class="search-submit">
+								<i class="fa fa-search"></i>
+							</button>
+						</form>
+
 					</div>
 				</div>
 			</div>
 		</div>
+
+
+
+		<div class="home-upcoming-events clearfix">
+			<div class="container">
+
+				<a class="upcoming-event-nav" href="#events/">
+					All Events
+					<i class="fa fa-chevron-right"></i>
+				</a>
+
+				<h2 class="upcoming-event-title">
+					Upcoming Events </h2>
+
+				<div class="row">
+
+					<div class="upcoming-event-wrap tribe-events-list">
+
+						<div class="events-loop">
+
+							<div id="post-2073" class="type-tribe_events post-2073 tribe-clearfix tribe-events-category-localmeetup tribe-events-venue-2074 col-sm-6 col-md-4">
+
+								<div class="even-list-wrapper">
+									<div class="event-list-wrapper-top">
+										<div class="tribe-events-event-image">
+											<a href="#event/localmeetup-paris/" title="LocalMeetup Paris">
+												<img width="400" height="200" src="{% static 'images/eventica-dummy-image-33-400x200.jpg' %}" class="attachment-blog-thumbnail size-blog-thumbnail wp-post-image"
+												 alt=""> </a>
+										</div>
+
+										<div class="tribe-events-event-date">
+											<span class="dd">16</span>
+											<span class="mm">January</span>
+											<span class="yy">2019</span>
+										</div>
+									</div>
+
+									<div class="event-list-wrapper-bottom">
+										<div class="wraper-bottom-left">
+											<!-- Event Title -->
+											<h2 class="tribe-events-list-event-title entry-title summary">
+												<a class="url" href="#event/localmeetup-paris/" title="LocalMeetup Paris" rel="bookmark">
+													LocalMeetup Paris </a>
+											</h2>
+
+											<!-- Event Meta -->
+											<div class="tribe-events-event-meta vcard">
+												<div class="author  location">
+
+													<div class="tribe-events-venue-details">
+														Paris </div>
+
+													<div class="time-details">
+														January 16 - January 17 </div>
+
+												</div>
+											</div><!-- .tribe-events-event-meta -->
+										</div>
+										<div class="wraper-bottom-right valign-wrapper">
+											<a href="#event/localmeetup-paris/" class="more-link valign">
+												<i class="fa fa-ticket"></i>
+												<br><span class="cost">$47</span> </a>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+							<div id="post-2071" class="type-tribe_events post-2071 tribe-clearfix tribe-events-category-localmeetup tribe-events-venue-2072 col-sm-6 col-md-4">
+
+								<div class="even-list-wrapper">
+									<div class="event-list-wrapper-top">
+										<div class="tribe-events-event-image">
+											<a href="#event/localmeetup-san-antonio/" title="LocalMeetup San Antonio">
+												<img width="400" height="200" src="{% static 'images/eventica-dummy-image-21-400x200.jpg' %}" class="attachment-blog-thumbnail size-blog-thumbnail wp-post-image"
+												 alt=""> </a>
+										</div>
+
+										<div class="tribe-events-event-date">
+											<span class="dd">31</span>
+											<span class="mm">January</span>
+											<span class="yy">2019</span>
+										</div>
+									</div>
+
+									<div class="event-list-wrapper-bottom">
+										<div class="wraper-bottom-left">
+											<!-- Event Title -->
+											<h2 class="tribe-events-list-event-title entry-title summary">
+												<a class="url" href="#event/localmeetup-san-antonio/" title="LocalMeetup San Antonio"
+												 rel="bookmark">
+													LocalMeetup San Antonio </a>
+											</h2>
+
+											<!-- Event Meta -->
+											<div class="tribe-events-event-meta vcard">
+												<div class="author  location">
+
+													<div class="tribe-events-venue-details">
+														San Antonio </div>
+
+													<div class="time-details">
+														8:00 am - 5:00 pm </div>
+
+												</div>
+											</div><!-- .tribe-events-event-meta -->
+										</div>
+										<div class="wraper-bottom-right valign-wrapper">
+											<a href="#event/localmeetup-san-antonio/" class="more-link valign">
+												<i class="fa fa-ticket"></i>
+												<br><span class="cost">$47</span> </a>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+							<div id="post-2035" class="type-tribe_events post-2035 tribe-clearfix tribe-events-category-localmeetup tribe-events-venue-2036 col-sm-6 col-md-4">
+
+								<div class="even-list-wrapper">
+									<div class="event-list-wrapper-top">
+										<div class="tribe-events-event-image">
+											<a href="#event/localmeetup-prague/" title="LocalMeetup Prague">
+												<img width="400" height="200" src="{% static 'images/eventica-dummy-image-13-400x200.jpg' %}" class="attachment-blog-thumbnail size-blog-thumbnail wp-post-image"
+												 alt=""> </a>
+										</div>
+
+										<div class="tribe-events-event-date">
+											<span class="dd">15</span>
+											<span class="mm">February</span>
+											<span class="yy">2019</span>
+										</div>
+									</div>
+
+									<div class="event-list-wrapper-bottom">
+										<div class="wraper-bottom-left">
+											<!-- Event Title -->
+											<h2 class="tribe-events-list-event-title entry-title summary">
+												<a class="url" href="#event/localmeetup-prague/" title="LocalMeetup Prague" rel="bookmark">
+													LocalMeetup Prague </a>
+											</h2>
+
+											<!-- Event Meta -->
+											<div class="tribe-events-event-meta vcard">
+												<div class="author  location">
+
+													<div class="tribe-events-venue-details">
+														Prague </div>
+
+													<div class="time-details">
+														February 15 - February 16 </div>
+
+												</div>
+											</div><!-- .tribe-events-event-meta -->
+										</div>
+										<div class="wraper-bottom-right valign-wrapper">
+											<a href="#event/localmeetup-prague/" class="more-link valign">
+												<i class="fa fa-ticket"></i>
+												<br><span class="cost">$47</span> </a>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+		<div class="home-group-box">
+			<div class="container">
+				<div class="row">
+
+					<div class="col-md-8 col-md-push-4">
+
+
+						<div class="home-featured-event">
+
+
+							<div class="featured-event-wrap ">
+								<div class="featured-event-title">
+									<h2>Featured Event</h2>
+								</div>
+
+								<div id="tribe-events">
+									<div id="tribe-events-content" class="tribe-events-single clearfix">
+
+
+
+										<div class="events-single-right col-sm-6 col-sm-push-6">
+
+											<div id="post-2059" class="post-2059 tribe_events type-tribe_events status-publish has-post-thumbnail hentry tag-wordpress tribe_events_cat-localmeetup cat_localmeetup">
+												<h2 class="entry-title">
+													<a class="url" href="#event/localmeetup-lyon/" title="LocalMeetup Lyon" rel="bookmark">
+														LocalMeetup Lyon </a>
+												</h2>
+												<div class="tribe-events-event-image">
+													<img width="929" height="646" src="{% static 'images/eventica-dummy-image-28.jpg' %}" class="attachment-large size-large wp-post-image"
+													 alt="" srcset="{% static 'images/eventica-dummy-image-28.jpg' %} 929w, {% static 'images/eventica-dummy-image-28-300x209.jpg' %} 300w, {% static 'images/eventica-dummy-image-28-768x534.jpg' %} 768w"
+													 sizes="(max-width: 929px) 100vw, 929px"> </div>
+												<!-- Event content -->
+												<div class="tribe-events-single-event-description tribe-events-content entry-content description">
+													<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind
+														texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A
+														small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+													<p>It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful
+														Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line
+														of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
+													<p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and
+														devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into
+														the belt and made herself on the way.</p>
+												</div>
+												<!-- .tribe-events-single-event-description -->
+												<div class="tribe-events-cal-links">
+													<a title="Add to Google Calendar">+ Google Calendar</a>
+													<a class="tribe-events-ical tribe-events-button" href="#event/localmeetup-lyon/?ical=1" title="Download .ics file">+ iCal Export</a>
+												</div><!-- .tribe-events-cal-links -->
+											</div>
+
+										</div>
+
+										<div class="events-single-left col-sm-6 col-sm-pull-6">
+
+											<div class="tribe-events-cta clearfix">
+												<div class="tribe-events-cta-date">
+													<span class="mm">May</span>
+													<span class="dd">16</span>
+													<span class="yy">2019</span>
+												</div>
+												<div class="tribe-events-cta-btn">
+													<a class="btn" href="#" target="_blank"> Buy Ticket </a>
+												</div>
+											</div>
+
+
+											<div class="tribe-events-meta-group tribe-events-meta-group-details clearfix">
+												<h3 class="tribe-events-single-section-title"> Details </h3>
+												<table>
+													<tbody>
+														<tr>
+															<th> Start: </th>
+															<td>
+																<abbr class="tribe-events-abbr updated published dtstart" title="2019-05-16">May 16 @ 8:00 am
+																</abbr> </td>
+														</tr>
+														<tr>
+															<th> End: </th>
+															<td>
+																<abbr class="tribe-events-abbr dtend" title="2019-05-17">May 17 @ 5:00 pm</abbr> </td>
+														</tr>
+														<tr>
+															<th> Cost: </th>
+															<td class="tribe-events-event-cost"> $30 – $47 </td>
+														</tr>
+														<tr>
+															<th>Event Categories:</th>
+															<td class="tribe-events-event-categories"><a href="#events/category/localmeetup/"
+																 rel="tag">LocalMeetup</a></td>
+														</tr>
+														<tr>
+															<th>Event Tags:</th>
+															<td class="tribe-event-tags"><a href="#tag/wordpress/" rel="tag">wordpress</a></td>
+														</tr>
+														<tr>
+															<th> Website: </th>
+															<td class="tribe-events-event-url">
+																<a href="#">
+																	Visit Event Website </a>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+
+											<div class="tribe-events-meta-group tribe-events-meta-group-venue clearfix">
+												<h3 class="tribe-events-single-section-title"> Venue </h3>
+												<div class="meta-inner">
+													<p class="author fn org">
+														Lyon
+													</p>
+													<address class="tribe-events-address">
+														<span class="tribe-address">
+															<span class="tribe-locality">Lyon</span><span class="tribe-delimiter">,</span>
+															<span class="tribe-country-name">France</span>
+														</span>
+
+														<p class="location">
+															<a class="tribe-events-gmap" href="#"
+															 title="Click to view a Google Map" target="_blank">+ Google Map
+															</a> </p>
+													</address>
+												</div>
+											</div>
+
+											<div class="tribe-events-meta-group tribe-events-meta-group-schedule clearfix">
+												<h3 class="tribe-events-single-section-title">
+													Schedule </h3>
+												<ul>
+													<li class="item">08:00 - 09:00 Opening
+													</li>
+													<li class="item">09:00 - 12:00 Session 1
+													</li>
+													<li class="item">12:00 - 13:00 Break
+													</li>
+													<li class="item">13:00 - 17:00 Session 2</li>
+													<li class="timeline">&nbsp;</li>
+												</ul>
+											</div>
+
+
+										</div>
+
+										<div class="clearfix"></div>
+
+
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+						<div class="home-subscribe-form clearfix">
+							<div class="row">
+								<div class="col-md-7">
+									<h2>
+										Subscribe to our newsletter </h2>
+									<p>
+										never miss our latest news and events updates </p>
+								</div>
+								<div class="col-md-5">
+									<script>(function () {
+											if (!window.mc4wp) {
+												window.mc4wp = {
+													listeners: [],
+													forms: {
+														on: function (event, callback) {
+															window.mc4wp.listeners.push({
+																event: event,
+																callback: callback
+															});
+														}
+													}
+												}
+											}
+										})();
+									</script><!-- MailChimp for WordPress v4.3.3 - https://wordpress.org/plugins/mailchimp-for-wp/ -->
+									<form id="mc4wp-form-1" class="mc4wp-form mc4wp-form-2231 mc4wp-form-basic" method="post" data-id="2231" data-name="Default sign-up form">
+										<div class="mc4wp-form-fields">
+											<p>
+												<label>Email Address:</label>
+												<input type="email" name="EMAIL" placeholder="Your email address" required="required">
+											</p>
+											<input type="submit" value="Subscribe">
+											<p></p>
+										</div><label style="display: none !important;">Leave this field empty if you're human: <input type="text" name="_mc4wp_honeypot"
+											 value="" tabindex="-1" autocomplete="off"></label><input type="hidden" name="_mc4wp_timestamp" value="1547628582"><input
+										 type="hidden" name="_mc4wp_form_id" value="2231"><input type="hidden" name="_mc4wp_form_element_id" value="mc4wp-form-1"><div
+										 class="mc4wp-response"></div>
+									</form><!-- / MailChimp for WordPress Plugin -->
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-4 col-md-pull-8">
+						<div class="home-recent-posts">
+							<div class="recent-post-wrap">
+								<a class="recent-post-nav" href="#blog/">
+									All Posts
+									<i class="fa fa-chevron-right"></i>
+								</a>
+								<h2 class="recent-post-title">
+									Recent Updates </h2>
+
+								<div class="row">
+
+
+									<article id="post-1178" class="blog-list col-sm-6 col-md-12 post-1178 post type-post status-publish format-standard has-post-thumbnail hentry category-stress-management">
+
+										<div class="inner-loop">
+											<div class="post-thumbnail">
+												<a href="#how-to-live-life-free-of-stress-an-interview-with-joe-dimaggio/" title="How To Live Life Free Of Stress An Interview With Joe Dimaggio">
+													<img width="400" height="200" src="{% static 'images/eventica-dummy-image-33-400x200.jpg' %}" class="attachment-blog-thumbnail size-blog-thumbnail wp-post-image"
+													 alt=""> </a>
+											</div>
+
+											<div class="post-inner">
+												<a href="#how-to-live-life-free-of-stress-an-interview-with-joe-dimaggio/" title="How To Live Life Free Of Stress An Interview With Joe Dimaggio"
+												 class="post-title entry-title"><h2>How To Live Life Free Of Stress An Interview With Joe Dimaggio</h2></a>
+												<div class="post-meta"><time class="post-time updated published" datetime="2013-01-11T20:22:19+00:00">January
+														11, 2013</time> </div>
+
+												<div class="post-summary entry-summary">
+													<p>Stress! Everyone can relate to that overwhelming feeling. It creeps up on you at work, at home, sometimes
+														even on your vacation. How can one impact this? How can one end the vicious cycle of stress? As a Senior Program
+														Leader for Landmark Education, an international training and development company, I lead courses for hundreds
+														[…]
+													</p>
+												</div>
+											</div>
+										</div>
+
+									</article>
+
+
+									<article id="post-1177" class="blog-list col-sm-6 col-md-12 post-1177 post type-post status-publish format-standard has-post-thumbnail hentry category-recreration-sports">
+
+										<div class="inner-loop">
+											<div class="post-thumbnail">
+												<a href="#exciting-multi-activity-corporate-events-in-oxfordshire/" title="Exciting Multi Activity Corporate Events In Oxfordshire">
+													<img width="400" height="200" src="{% static 'images/eventica-dummy-image-32-400x200.jpg' %}" class="attachment-blog-thumbnail size-blog-thumbnail wp-post-image"
+													 alt=""> </a>
+											</div>
+
+											<div class="post-inner">
+												<a href="#exciting-multi-activity-corporate-events-in-oxfordshire/" title="Exciting Multi Activity Corporate Events In Oxfordshire"
+												 class="post-title entry-title"><h2>Exciting Multi Activity Corporate Events In Oxfordshire</h2></a>
+												<div class="post-meta"><time class="post-time updated published" datetime="2013-01-10T20:15:40+00:00">January
+														10, 2013</time> </div>
+
+												<div class="post-summary entry-summary">
+													<p>Oxfordshire has recently transformed itself into a wonderful location for corporate events. Hitherto corporate
+														houses are always in search of event management companies who are offering exciting corporate events. So, if
+														you are looking for such corporate events, which will effectively boost the efficiency and team-building attitude
+														of the corporate people, then go for exciting […]
+													</p>
+												</div>
+											</div>
+										</div>
+
+									</article>
+
+
+									<article id="post-1176" class="blog-list col-sm-6 col-md-12 post-1176 post type-post status-publish format-standard has-post-thumbnail hentry category-vacations">
+
+										<div class="inner-loop">
+											<div class="post-thumbnail">
+												<a href="#arizona-the-host-of-great-events/" title="Arizona The Host Of Great Events">
+													<img width="400" height="200" src="{% static 'images/eventica-dummy-image-31-400x200.jpg' %}" class="attachment-blog-thumbnail size-blog-thumbnail wp-post-image"
+													 alt=""> </a>
+											</div>
+
+											<div class="post-inner">
+												<a href="#arizona-the-host-of-great-events/" title="Arizona The Host Of Great Events"
+												 class="post-title entry-title"><h2>Arizona The Host Of Great Events</h2></a>
+												<div class="post-meta"><time class="post-time updated published" datetime="2013-01-09T09:00:39+00:00">January
+														9, 2013</time> </div>
+
+												<div class="post-summary entry-summary">
+													<p>When it comes to rental searches and home rentals in general, the Internet is the first place you should
+														think to look. You have various properties advertised including townhouses, apartments, homes and condos. The
+														World Wide Web can also provide you with property listings for duplexes, lofts and even vacation rentals. If
+														you want to […]</p>
+												</div>
+											</div>
+										</div>
+
+									</article>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+
+		<div class="home-testimonials">
+			<div class="container">
+				<div class="testimonial-wrap">
+					<div class="testimonial-title">
+						<h2>Testimonials</h2>
+					</div>
+					<div class="testimonial-loop owl-carousel owl-theme owl-responsive--1 owl-loaded">
+						<div class="owl-stage-outer">
+							<div class="owl-stage" style="transform: translate3d(-3180px, 0px, 0px); transition: all 2s ease 0s; width: 6360px;">
+								<div class="owl-item cloned" style="width: 1060px; margin-right: 0px;">
+									<div class="testimonial-field">
+										<div class="testimonial-content">
+											<p>Fusce semper condimentum purus id placerat. Integer elementum in nisl in pretium. Mauris semper, ligula eget
+												tempor egestas, quam diam vestibulum mi, sit amet tincidunt leo metus accumsan nisl. Phasellus dapibus, ligula
+												et pulvinar mattis, elit lacus fringilla velit, sit amet placerat urna felis ut lectus. In hac habitasse platea
+												dictumst. Phasellus lacus est, efficitur et dui et, suscipit mattis massa. Integer id pellentesque nisi. Aenean
+												sed sagittis nulla.</p>
+										</div>
+										<div class="testimonial-name">
+											Jhonatan ru </div>
+									</div>
+								</div>
+								<div class="owl-item cloned" style="width: 1060px; margin-right: 0px;">
+									<div class="testimonial-field">
+										<div class="testimonial-content">
+											<p>Maecenas venenatis tristique elit, vel pulvinar mi mollis ac. Praesent sit amet ultricies ex, sed consequat
+												turpis. Nam ut est semper, malesuada justo id, vulputate orci. Praesent pretium, neque sit amet blandit eleifend,
+												mi elit porttitor leo, sit amet dapibus libero risus et augue. Donec sed lectus turpis. Morbi ullamcorper, arcu
+												euismod imperdiet iaculis, ligula ligula semper augue, ac vehicula nibh ipsum in diam. Sed lobortis lacinia tellus
+												vitae vestibulum.</p>
+										</div>
+										<div class="testimonial-name">
+											Jhon Doe </div>
+									</div>
+								</div>
+								<div class="owl-item" style="width: 1060px; margin-right: 0px;">
+									<div class="testimonial-field">
+										<div class="testimonial-content">
+											<p>Fusce semper condimentum purus id placerat. Integer elementum in nisl in pretium. Mauris semper, ligula eget
+												tempor egestas, quam diam vestibulum mi, sit amet tincidunt leo metus accumsan nisl. Phasellus dapibus, ligula
+												et pulvinar mattis, elit lacus fringilla velit, sit amet placerat urna felis ut lectus. In hac habitasse platea
+												dictumst. Phasellus lacus est, efficitur et dui et, suscipit mattis massa. Integer id pellentesque nisi. Aenean
+												sed sagittis nulla.</p>
+										</div>
+										<div class="testimonial-name">
+											Jhonatan ru </div>
+									</div>
+								</div>
+								<div class="owl-item active" style="width: 1060px; margin-right: 0px;">
+									<div class="testimonial-field">
+										<div class="testimonial-content">
+											<p>Maecenas venenatis tristique elit, vel pulvinar mi mollis ac. Praesent sit amet ultricies ex, sed consequat
+												turpis. Nam ut est semper, malesuada justo id, vulputate orci. Praesent pretium, neque sit amet blandit eleifend,
+												mi elit porttitor leo, sit amet dapibus libero risus et augue. Donec sed lectus turpis. Morbi ullamcorper, arcu
+												euismod imperdiet iaculis, ligula ligula semper augue, ac vehicula nibh ipsum in diam. Sed lobortis lacinia tellus
+												vitae vestibulum.</p>
+										</div>
+										<div class="testimonial-name">
+											Jhon Doe </div>
+									</div>
+								</div>
+								<div class="owl-item cloned" style="width: 1060px; margin-right: 0px;">
+									<div class="testimonial-field">
+										<div class="testimonial-content">
+											<p>Fusce semper condimentum purus id placerat. Integer elementum in nisl in pretium. Mauris semper, ligula eget
+												tempor egestas, quam diam vestibulum mi, sit amet tincidunt leo metus accumsan nisl. Phasellus dapibus, ligula
+												et pulvinar mattis, elit lacus fringilla velit, sit amet placerat urna felis ut lectus. In hac habitasse platea
+												dictumst. Phasellus lacus est, efficitur et dui et, suscipit mattis massa. Integer id pellentesque nisi. Aenean
+												sed sagittis nulla.</p>
+										</div>
+										<div class="testimonial-name">
+											Jhonatan ru </div>
+									</div>
+								</div>
+								<div class="owl-item cloned" style="width: 1060px; margin-right: 0px;">
+									<div class="testimonial-field">
+										<div class="testimonial-content">
+											<p>Maecenas venenatis tristique elit, vel pulvinar mi mollis ac. Praesent sit amet ultricies ex, sed consequat
+												turpis. Nam ut est semper, malesuada justo id, vulputate orci. Praesent pretium, neque sit amet blandit eleifend,
+												mi elit porttitor leo, sit amet dapibus libero risus et augue. Donec sed lectus turpis. Morbi ullamcorper, arcu
+												euismod imperdiet iaculis, ligula ligula semper augue, ac vehicula nibh ipsum in diam. Sed lobortis lacinia tellus
+												vitae vestibulum.</p>
+										</div>
+										<div class="testimonial-name">
+											Jhon Doe </div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="owl-controls">
+							<div class="owl-nav">
+								<div class="owl-prev" style=""><span class="testi-prev-nav"><i class="fa fa-angle-left"></i></span></div>
+								<div class="owl-next" style=""><span class="testi-next-nav"><i class="fa fa-angle-right"></i></span></div>
+							</div>
+							<div class="owl-dots" style="">
+								<div class="owl-dot"><span></span></div>
+								<div class="owl-dot active"><span></span></div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
 	</div>
+</div>
