@@ -170,6 +170,24 @@ LOGGING = {
     }
 }
 
-# Add media folder.
+
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+# Add media folder. - Upload file
+#MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+# Add media folder. - Minio Storage.
+MEDIA_ROOT = './media/'
+
+DEFAULT_FILE_STORAGE = "minio_storage.storage.MinioMediaStorage"
+STATICFILES_STORAGE = "minio_storage.storage.MinioStaticStorage"
+MINIO_STORAGE_ENDPOINT = '127.0.0.1:9000'
+MINIO_STORAGE_ACCESS_KEY = 'ABCDEFG'
+MINIO_STORAGE_SECRET_KEY = 'HIJKLMNOPQRSTUVWXYZ'
+MINIO_STORAGE_USE_HTTPS = False
+MINIO_STORAGE_MEDIA_BUCKET_NAME = 'media'
+MINIO_STORAGE_AUTO_CREATE_MEDIA_BUCKET = True
+MINIO_STORAGE_STATIC_BUCKET_NAME = 'static'
+MINIO_STORAGE_AUTO_CREATE_STATIC_BUCKET = True
+MINIO_STORAGE_STATIC_USE_PRESIGNED = True
+MINIO_STORAGE_MEDIA_USE_PRESIGNED = True
