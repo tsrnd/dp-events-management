@@ -12,9 +12,9 @@ class Event(models.Model):
     is_all_day = models.BooleanField(default=False)
     location = models.TextField(null=True)
     is_notification = models.BooleanField(default=False)
-    time_notification = models.CharField(max_length=20)
+    time_notification = models.CharField(max_length=20, null=True)
     owner = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='fk_owner_event', to_field='id')
+        User, on_delete=models.CASCADE, related_name='fk_owner_event', db_column='owner')
     event_content = models.TextField()
     file_attack = models.TextField()
     guest_can_invite = models.BooleanField(default=True)
@@ -26,7 +26,7 @@ class Event(models.Model):
     time_create = models.DateTimeField()
     last_edit = models.DateTimeField()
     user_edit = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='fk_user_edit_event', to_field='id')
+        User, on_delete=models.CASCADE, related_name='fk_user_edit_event', db_column='user_edit')
     status = models.IntegerField()
 
     class Meta:
@@ -43,9 +43,9 @@ class EventHistory(models.Model):
     is_all_day = models.BooleanField(default=False)
     location = models.TextField(null=True)
     is_notification = models.BooleanField(default=False)
-    time_notification = models.CharField(max_length=20)
+    time_notification = models.CharField(max_length=20, null=True)
     owner = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='fk_owner_event_history', to_field='id')
+        User, on_delete=models.CASCADE, related_name='fk_owner_event_history', db_column='owner')
     event_content = models.TextField()
     file_attack = models.TextField()
     guest_can_invite = models.BooleanField(default=True)
@@ -57,7 +57,7 @@ class EventHistory(models.Model):
     time_create = models.DateTimeField()
     last_edit = models.DateTimeField()
     user_edit = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='fk_user_edit_event_history', to_field='id')
+        User, on_delete=models.CASCADE, related_name='fk_user_edit_event_history', db_column='user_edit')
     eventId = models.ForeignKey(Event, on_delete=models.CASCADE)
 
     class Meta:
