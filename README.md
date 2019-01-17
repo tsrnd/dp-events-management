@@ -1,6 +1,6 @@
-# Hello Django
+# Demo Project - Events Management
 
-[![Build Status](https://travis-ci.com/tsrnd/hello-django.svg?branch=master)](https://travis-ci.com/tsrnd/hello-django)
+[![Build Status](https://travis-ci.com/tsrnd/dp-events-management.svg?branch=master)](https://travis-ci.com/tsrnd/dp-events-management)
 
 ## Development
 
