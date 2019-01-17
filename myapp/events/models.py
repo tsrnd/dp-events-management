@@ -15,11 +15,11 @@ class Event(models.Model):
     time_notification = models.CharField(max_length=20, null=True)
     owner = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='fk_owner_event', db_column='owner')
-    event_content = models.TextField()
-    file_attack = models.TextField()
+    event_content = models.TextField(null=True)
+    file_attack = models.TextField(null=True)
     guest_can_invite = models.BooleanField(default=True)
     view_all_guest = models.BooleanField(default=True)
-    item_preparing = models.TextField()
+    item_preparing = models.TextField(null=True)
     is_public = models.BooleanField(default=True)
     is_cancel = models.BooleanField(default=False)
     is_delete = models.BooleanField(default=False)
@@ -27,7 +27,7 @@ class Event(models.Model):
     last_edit = models.DateTimeField()
     user_edit = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='fk_user_edit_event', db_column='user_edit')
-    status = models.IntegerField()
+    status = models.IntegerField(null=True)
 
     class Meta:
         db_table = 'tbl_events'
@@ -46,11 +46,11 @@ class EventHistory(models.Model):
     time_notification = models.CharField(max_length=20, null=True)
     owner = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='fk_owner_event_history', db_column='owner')
-    event_content = models.TextField()
-    file_attack = models.TextField()
+    event_content = models.TextField(null=True)
+    file_attack = models.TextField(null=True)
     guest_can_invite = models.BooleanField(default=True)
     view_all_guest = models.BooleanField(default=True)
-    item_preparing = models.TextField()
+    item_preparing = models.TextField(null=True)
     is_public = models.BooleanField(default=True)
     is_cancel = models.BooleanField(default=False)
     is_delete = models.BooleanField(default=False)
