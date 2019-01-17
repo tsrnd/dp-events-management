@@ -7,8 +7,9 @@ from django.http import Http404
 from django.db import connection
 import sys
 from .models import Snippet, Post
-from .serializers import SnippetSerializer, CustomeSerializer, JoinColumnSerializer, PostSerializer
+from .serializers import SnippetSerializer, CustomeSerializer, JoinColumnSerializer, PostSerializer, FileSerializer
 
+from rest_framework.parsers import MultiPartParser, FormParser
 
 class SnippetList(mixins.ListModelMixin, mixins.CreateModelMixin,
                   generics.GenericAPIView):
@@ -93,3 +94,14 @@ class FilterPostBySnippet(ListAPIView):
     """ Set Filter by column. """
     def get_queryset(self):
         return Post.objects.filter(snipid=self.kwargs.get('pk', ''))
+
+# For upload file.
+class FileView(APIView):
+  parser_classes = (MultiPartParser, FormParser)
+  def post(self, request, *args, **kwargs):
+    file_serializer = FileSerializer(data=request.data)
+    if file_serializer.is_valid():
+      file_serializer.save()
+      return Response(file_serializer.data, status=status.HTTP_201_CREATED)
+    else:
+      return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
