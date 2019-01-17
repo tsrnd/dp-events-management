@@ -1,7 +1,17 @@
 {% extends 'base/base.html' %}
+{% load staticfiles %}
 {% block title_header %}Home poll{% endblock %}
 {% block content %}
 <div class="jumbotron">
-  test
+        {% url 'comment_index' %}
 </div>
 {% endblock %}
+{% block script %}
+<script src="{% static 'js/modules/comment.js' %}"></script>
+<script>
+    $(document).ready(function(){
+        moduleComment.listComment("{% url 'comment_index' %}");
+    })
+</script>
+{% endblock %}
+
