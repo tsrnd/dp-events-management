@@ -13,7 +13,8 @@ class Event(models.Model):
     location = models.TextField(null=True)
     is_notification = models.BooleanField(default=False)
     time_notification = models.CharField(max_length=20)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='fk_owner_event', to_field='id')
     event_content = models.TextField()
     file_attack = models.TextField()
     guest_can_invite = models.BooleanField(default=True)
@@ -24,7 +25,8 @@ class Event(models.Model):
     is_delete = models.BooleanField(default=False)
     time_create = models.DateTimeField()
     last_edit = models.DateTimeField()
-    user_edit = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_edit = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='fk_user_edit_event', to_field='id')
     status = models.IntegerField()
 
     class Meta:
@@ -42,7 +44,8 @@ class EventHistory(models.Model):
     location = models.TextField(null=True)
     is_notification = models.BooleanField(default=False)
     time_notification = models.CharField(max_length=20)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='fk_owner_event_history', to_field='id')
     event_content = models.TextField()
     file_attack = models.TextField()
     guest_can_invite = models.BooleanField(default=True)
@@ -53,7 +56,8 @@ class EventHistory(models.Model):
     is_delete = models.BooleanField(default=False)
     time_create = models.DateTimeField()
     last_edit = models.DateTimeField()
-    user_edit = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_edit = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='fk_user_edit_event_history', to_field='id')
     eventId = models.ForeignKey(Event, on_delete=models.CASCADE)
 
     class Meta:
