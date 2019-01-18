@@ -6,7 +6,7 @@ from rest_framework import status, mixins, generics
 from django.http import Http404
 from django.db import connection
 import sys
-from .models import Snippet, Post
+from .models import Snippet, Post, File
 from .serializers import SnippetSerializer, CustomeSerializer, JoinColumnSerializer, PostSerializer, FileSerializer
 
 from rest_framework.parsers import MultiPartParser, FormParser
@@ -31,10 +31,6 @@ class SnippetDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
     serializer_class = SnippetSerializer
 
     def get(self, request, *args, **kwargs):
-        """ Default statement for get Snippet detail.
-        sys.stdout.write('SnippetDetail get\n')
-        return self.retrieve(request, *args, **kwargs)
-        """
         """ Custom SQL statement. """
         sys.stdout.write('Request :\n' + str(request))
         sys.stdout.write('args :\n' + str(args))
@@ -98,6 +94,7 @@ class FilterPostBySnippet(ListAPIView):
 # For upload file.
 class FileView(APIView):
   parser_classes = (MultiPartParser, FormParser)
+
   def post(self, request, *args, **kwargs):
     file_serializer = FileSerializer(data=request.data)
     if file_serializer.is_valid():
@@ -105,3 +102,10 @@ class FileView(APIView):
       return Response(file_serializer.data, status=status.HTTP_201_CREATED)
     else:
       return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class FileDetail(mixins.RetrieveModelMixin, generics.GenericAPIView):
+    queryset = File.objects.all()
+    serializer_class = FileSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)

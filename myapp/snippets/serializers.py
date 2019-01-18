@@ -73,6 +73,8 @@ class PostSerializer(serializers.Serializer):
         fields = ('id', 'title', 'content', 'snipid')
 
 # For upload file.
+
+
 class FileSerializer(serializers.ModelSerializer):
     class Meta():
         model = File

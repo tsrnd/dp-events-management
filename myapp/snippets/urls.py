@@ -16,6 +16,7 @@ urlpatterns = [
     path('', views.SnippetList.as_view(), name='index'),
 
     path('upload', views.FileView.as_view(), name='file-upload'),
+    path('file/<int:pk>', views.FileDetail.as_view(), name='file-view'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
