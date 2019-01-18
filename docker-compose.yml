@@ -16,6 +16,7 @@ services:
     links:
       - data:data
       - cache:cache
+      - minio:minio
     command: [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]
 
   data:
@@ -35,3 +36,11 @@ services:
     ports:
       - 6379:6379
     restart: always
+  minio:
+    image: "minio/minio"
+    command: server /export
+    environment:
+      MINIO_ACCESS_KEY: KBP6WXGPS387090EZMG8
+      MINIO_SECRET_KEY: DRjFXylyfMqn2zilAr33xORhaYz5r9e8r37XPz3A
+    ports:
+      - "9000:9000"
