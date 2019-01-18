@@ -14,6 +14,8 @@ urlpatterns = [
     path('<int:pk>', views.SnippetDetail.as_view(), name='detail'),
     # View all snippets.
     path('', views.SnippetList.as_view(), name='index'),
+
+    path('upload', views.FileView.as_view(), name='file-upload'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

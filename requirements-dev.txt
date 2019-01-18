@@ -30,7 +30,7 @@ pylint-plugin-utils==0.4
 pylint==2.2.2
 pytest-cov==2.6.1
 pytest-django==3.4.5
-pytest==4.1.0
+pytest==4.1.1
 pyzmq==17.1.2
 requests==2.21.0
 six==1.12.0

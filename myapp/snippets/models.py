@@ -31,3 +31,12 @@ class Post(models.Model):
 
     class Meta:
         db_table = 'tbl_post'
+
+# For upload file.
+class File(models.Model):
+    file = models.FileField(blank=False, null=False)
+    remark = models.CharField(max_length=20)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'tbl_file'
