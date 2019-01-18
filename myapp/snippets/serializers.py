@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Snippet, LANGUAGE_CHOICES, STYLE_CHOICES, Post
+from .models import Snippet, LANGUAGE_CHOICES, STYLE_CHOICES, Post, File
 
 
 class SnippetSerializer(serializers.Serializer):
@@ -71,3 +71,9 @@ class PostSerializer(serializers.Serializer):
     class Meta:
         model = Post
         fields = ('id', 'title', 'content', 'snipid')
+
+# For upload file.
+class FileSerializer(serializers.ModelSerializer):
+    class Meta():
+        model = File
+        fields = ('file', 'remark', 'timestamp')
