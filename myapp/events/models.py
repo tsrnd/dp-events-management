@@ -1,9 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 
 class Event(models.Model):
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200,unique=True)
     start_date = models.DateField()
     start_time = models.TimeField(null=True)
     end_date = models.DateField()
@@ -23,8 +24,8 @@ class Event(models.Model):
     is_public = models.BooleanField(default=True)
     is_cancel = models.BooleanField(default=False)
     is_delete = models.BooleanField(default=False)
-    time_create = models.DateTimeField()
-    last_edit = models.DateTimeField()
+    time_create = models.DateTimeField(auto_now_add=True)
+    last_edit = models.DateTimeField(auto_now=True)
     user_edit = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='fk_user_edit_event', db_column='user_edit')
     status = models.IntegerField(null=True)
