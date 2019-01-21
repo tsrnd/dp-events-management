@@ -39,4 +39,3 @@ class EventSerializer(serializers.ModelSerializer):
             'user_edit',
             'status',
         )
-        read_only_fields = ('owner','user_edit',)
