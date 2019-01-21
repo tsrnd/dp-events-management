@@ -13,15 +13,25 @@ def index(request):
 @csrf_exempt
 def event_detail(request, pk):
     """
-    Get detail event by id 
+    Get detail event by id
     """
     try:
         event = Event.objects.get(pk=pk)
     except:
-        return HttpResponse(status=404)
+        return JsonResponse({
+            "message": "Id does not exist",
+            "errors": [
+                "string"
+            ]
+        }, status=500)
 
     if request.method == 'GET':
         serializer = EventSerializers(event)
-        return JsonResponse(serializer.data)
+        return JsonResponse(serializer.data, status=200)
     else:
-        return HttpResponse(status=404)
+        return JsonResponse({
+            "message": "Request Forbiden",
+            "errors": [
+                "string"
+            ]
+        }, status=403)
