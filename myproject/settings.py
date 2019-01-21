@@ -35,8 +35,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin', 'django.contrib.auth',
     'django.contrib.contenttypes', 'django.contrib.sessions',
-    'django.contrib.messages', 'django.contrib.staticfiles', 
-    'myapp', 'myui', 'minio_storage'
+    'django.contrib.messages', 'django.contrib.staticfiles',
+    'myapp', 'myui', 'minio_storage', 'rest_framework', 'myapp.events'
 ]
 
 MIDDLEWARE = [
@@ -52,20 +52,20 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'myproject.urls'
 
 TEMPLATES = [
-{
-    'BACKEND': 'django.template.backends.django.DjangoTemplates',
-    'DIRS': ['templates'],
-    'APP_DIRS': True,
-    'OPTIONS': {
-        'context_processors': [
-            'django.template.context_processors.debug',
-            'django.template.context_processors.request',
-            'django.contrib.auth.context_processors.auth',
-            'django.contrib.messages.context_processors.messages',
-            "django.core.context_processors.media",
-        ],
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': ['templates'],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+                "django.template.context_processors.media",
+            ],
+        },
     },
-},
 ]
 
 WSGI_APPLICATION = 'myproject.wsgi.application'
@@ -148,10 +148,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-#REST_FRAMEWORK = {
+# REST_FRAMEWORK = {
 #    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
 #    'PAGE_SIZE': 10
-#}
+# }
 
 LOGGING = {
     'version': 1,
