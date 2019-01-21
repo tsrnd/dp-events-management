@@ -3,6 +3,11 @@ from django.http import HttpResponse
 
 
 # Create your views here.
+def comments(request):
+    context = {}
+    return render(request, 'comments/index.html', context)
+
+
 def home(request):
     context = {}
     return render(request, 'events/index.html', context)
