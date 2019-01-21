@@ -238,13 +238,13 @@ parameters:
     required: false
     type: integer
 paths:
-  /api/events:
+  /api/events/:
     get:
       summary: Return list events.
       tags:
         - Events
       description: |  
-           returns list of information about "event".
+           returns list of information about "events".
       parameters:
         - $ref: '#/parameters/ResultLimit'
         - $ref: '#/parameters/Page'
@@ -300,11 +300,45 @@ paths:
           description: Internal server error response
           schema:
             $ref: '#/definitions/ErrorDetails'
-  /api/event/{id_event}:
-    get:
-      summary: Return detail a event.
+    post:
+      summary: create the event
       tags:
-        - Event
+       - Events
+      description: Create the event
+      parameters:
+        - $ref: '#/parameters/Title'
+        - $ref: '#/parameters/Start_date'
+        - $ref: '#/parameters/End_date'
+        - $ref: '#/parameters/Start_time'
+        - $ref: '#/parameters/End_time'
+        - $ref: '#/parameters/Location'
+        - $ref: '#/parameters/Time_notication'
+        - $ref: '#/parameters/Owner'
+        - $ref: '#/parameters/Event_content'
+        - $ref: '#/parameters/File_attack'
+        - $ref: '#/parameters/Guest_can_invite'
+        - $ref: '#/parameters/View_all_guest'
+        - $ref: '#/parameters/Item_preparing'
+        - $ref: '#/parameters/Time_create'
+        - $ref: '#/parameters/Last_edit'
+        - $ref: '#/parameters/User_edit'
+        - $ref: '#/parameters/Status'
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Bad request error response
+          schema:
+            $ref: '#/definitions/ErrorDetails'
+        '500':
+          description: Internal server error response
+          schema:
+            $ref: '#/definitions/ErrorDetails'
+  /api/events/{id_event}/:
+    get:
+      summary: Return the detail event.
+      tags:
+        - Events
       description: returns detail of a event.
       parameters:
         - $ref: '#/parameters/Id_event'
@@ -323,14 +357,14 @@ paths:
           schema:
             $ref: '#/definitions/ErrorDetails'
     put:
-      summary: update event detail information
+      summary: update the detail event information
       tags:
-       - Event
+       - Events
       description: |
         "First": 
-          * if owner = "self" go to “Finally”
-          * if owner != "self" return 403 error
-          
+          Check owner of event with id_user login
+          - if True -> delete
+          - if false -> return 403 error
         "Finally": return result 
       parameters:
         - $ref: '#/parameters/Id_event'
@@ -371,14 +405,14 @@ paths:
           schema:
             $ref: '#/definitions/ErrorDetails'
     delete:
-      summary: Delete event
+      summary: Delete the event
       tags:
-        - Event
+        - Events
       description: |
         "First": 
-          * if owner = "self" go to “Finally”
-          * if owner != "self" return 403 error
-          
+          Check owner of event with id_user login
+          - if True -> delete
+          - if false -> return 403 error
         "Finally": return result 
       parameters:
         - $ref: '#/parameters/Id_event'
@@ -401,46 +435,11 @@ paths:
           description: Internal server error response
           schema:
             $ref: '#/definitions/ErrorDetails'
-  /api/event:
-    post:
-      summary: create event
-      tags:
-       - Event
-      description: Create event
-      parameters:
-        - $ref: '#/parameters/Title'
-        - $ref: '#/parameters/Start_date'
-        - $ref: '#/parameters/End_date'
-        - $ref: '#/parameters/Start_time'
-        - $ref: '#/parameters/End_time'
-        - $ref: '#/parameters/Location'
-        - $ref: '#/parameters/Time_notication'
-        - $ref: '#/parameters/Owner'
-        - $ref: '#/parameters/Event_content'
-        - $ref: '#/parameters/File_attack'
-        - $ref: '#/parameters/Guest_can_invite'
-        - $ref: '#/parameters/View_all_guest'
-        - $ref: '#/parameters/Item_preparing'
-        - $ref: '#/parameters/Time_create'
-        - $ref: '#/parameters/Last_edit'
-        - $ref: '#/parameters/User_edit'
-        - $ref: '#/parameters/Status'
-      responses:
-        '200':
-          description: Successful response
-        '400':
-          description: Bad request error response
-          schema:
-            $ref: '#/definitions/ErrorDetails'
-        '500':
-          description: Internal server error response
-          schema:
-            $ref: '#/definitions/ErrorDetails'
   /api/users/:
     get:
       summary: Return list users.
       tags:
-        - User
+        - Users
       description: returns list of information about "users". filtering if parameter setted
       parameters:
         - $ref: '#/parameters/ResultLimit'
@@ -490,9 +489,9 @@ paths:
           description: Internal server error response
           schema:
             $ref: '#/definitions/ErrorDetails'
-  /api/invite/event/{id_event}:
+  /api/invites/{id_event}/:
     post:
-      summary: create invitation to join event
+      summary: create invitation user to join event
       tags:
         - Invitation
       description: Create invite event
@@ -545,4 +544,3 @@ paths:
           description: Internal server error response
           schema:
             $ref: '#/definitions/ErrorDetails' 
-  
