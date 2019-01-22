@@ -11,12 +11,12 @@ def index(request):
 
 
 @csrf_exempt
-def event_detail(request, pk):
+def event_detail(request, id_event):
     """
     Get detail event by id
     """
     try:
-        event = Event.objects.get(pk=pk)
+        event = Event.objects.get(pk=id_event)
     except:
         return JsonResponse({
             "message": "Id does not exist",
