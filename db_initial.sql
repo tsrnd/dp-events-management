@@ -173,3 +173,93 @@ COMMENT ON COLUMN tbl_notifications.notify_status IS 'Trạng thái của thông
 COMMENT ON COLUMN tbl_notifications.user_id IS 'Member nhận được thông báo.';
 -- Indices -------------------------------------------------------
 CREATE UNIQUE INDEX IF NOT EXISTS tbl_notifications_pkey ON tbl_notifications(id int4_ops);
+
+-- Table Definition ----------------------------------------------
+CREATE TABLE IF NOT EXISTS tbl_event_register (
+    id SERIAL PRIMARY KEY,
+    event_id integer NOT NULL REFERENCES tbl_events(id),
+    is_user boolean DEFAULT true,
+    user_id integer REFERENCES auth_user(id),
+    full_name character varying(100),
+    email character varying(100),
+    identify character varying(20),
+    address character varying(200),
+    contact character varying(20),
+    time_create timestamp with time zone,
+    is_confirm boolean NOT NULL DEFAULT false
+);
+COMMENT ON COLUMN tbl_event_register.is_user IS 'Cờ đánh dấu người đăng ký có phải là user hay không?';
+COMMENT ON COLUMN tbl_event_register.user_id IS 'Trường hợp là user hệ thống(is_user == TRUE) thì sẽ set giá trị mapping với table user. Trường hợp không phải là user hệ thống(is_user == FALSE) thì sẽ nhận giá trị là NULL.';
+COMMENT ON COLUMN tbl_event_register.full_name IS 'Họ tên đầy đủ. Trong trường hợp không phải là người dùng hệ thống thì thông tin này là bắt buộc.';
+COMMENT ON COLUMN tbl_event_register.email IS 'Email liên lạc. Trong trường hợp không phải là người dùng hệ thống thì thông tin này là bắt buộc.';
+COMMENT ON COLUMN tbl_event_register.identify IS 'Số chứng minh nhân dân.';
+COMMENT ON COLUMN tbl_event_register.address IS 'Địa chỉ cụ thể.';
+COMMENT ON COLUMN tbl_event_register.contact IS 'Số điện thoại liên hệ.';
+COMMENT ON COLUMN tbl_event_register.is_confirm IS 'Xác nhận tình trạng duyệt đăng ký. Nếu như được confirm thì coi như người này sẽ được tham gia vào trong sự kiện.';
+-- Indices -------------------------------------------------------
+CREATE UNIQUE INDEX IF NOT EXISTS tbl_event_register_pkey ON tbl_event_register(id int4_ops);
+
+
+------------------------ BEGIN INSERT DATA. ---------------------------------
+INSERT INTO "auth_user" ("password", "last_login", "is_superuser", "username", "first_name", "last_name", "email", "is_staff", "is_active", "date_joined") 
+    VALUES ('pbkdf2_sha256$120000$iSIDgw5GOgZ3$dHIxs2+ZwoAvLgSMm6+GeYK1WuNezAeom/yFb9cEAgE=', NULL, true, 'admin', '', '', '', true, true, '2019-01-15T01:46:39.587628+00:00'::timestamptz);
+INSERT INTO "auth_user" ("password", "last_login", "is_superuser", "username", "first_name", "last_name", "email", "is_staff", "is_active", "date_joined") 
+    VALUES ('pbkdf2_sha256$120000$iSIDgw5GOgZ3$dHIxs2+ZwoAvLgSMm6+GeYK1WuNezAeom/yFb9cEAgE=', NULL, true, 'tanhle', '', '', '', true, true, '2019-01-14T01:46:39.587628+00:00'::timestamptz);
+INSERT INTO "auth_user" ("password", "last_login", "is_superuser", "username", "first_name", "last_name", "email", "is_staff", "is_active", "date_joined") 
+    VALUES ('pbkdf2_sha256$120000$iSIDgw5GOgZ3$dHIxs2+ZwoAvLgSMm6+GeYK1WuNezAeom/yFb9cEAgE=', NULL, true, 'yeuem', '', '', '', true, true, '2019-01-13T01:46:39.587628+00:00'::timestamptz);
+
+INSERT INTO "public"."tbl_events"("title", "start_date", "start_time", "end_date", "end_time", "is_daily", "is_all_day", "location", "is_notification", "owner", 
+    "event_content", "guest_can_invite", "view_all_guest", "item_preparing", "is_public", "is_cancel", "is_delete", "time_create", "last_edit", "user_edit", "status") 
+    VALUES('Year end party', '2019-01-05', '18:00:00', '2019-01-05', '22:00:00', FALSE, FALSE, 'Son Tra - Da Nang', TRUE, 1, 'Please arrange your time to attend our event.', 
+    TRUE, TRUE, 'Ice, ice bucket, ice tongs, or scoop', TRUE, FALSE, FALSE, '2019-01-15 01:46:39.587628+00', '2019-01-15 01:46:39.587628+00', 1, 0);
+INSERT INTO "public"."tbl_events"("title", "start_date", "start_time", "end_date", "end_time", "is_daily", "is_all_day", "location", "is_notification", "owner", 
+    "event_content", "guest_can_invite", "view_all_guest", "item_preparing", "is_public", "is_cancel", "is_delete", "time_create", "last_edit", "user_edit", "status") 
+    VALUES('Monday Company Meeting Agenda', '2019-01-15', '08:00:00', '2019-01-15', '09:00:00', FALSE, FALSE, 'Asian Tech', TRUE, 1, 'Please be at the meeting on time. Seeing all you guys there.', 
+    TRUE, TRUE, 'Please come to the company before 8:00', TRUE, FALSE, FALSE, '2019-01-15 04:46:39.587628+00', '2019-01-15 05:46:39.587628+00', 1, 1);
+INSERT INTO "public"."tbl_events"("title", "start_date", "start_time", "end_date", "end_time", "is_daily", "is_all_day", "location", "is_notification", "owner", 
+    "event_content", "guest_can_invite", "view_all_guest", "item_preparing", "is_public", "is_cancel", "is_delete", "time_create", "last_edit", "user_edit", "status") 
+    VALUES('Amazing Race ', '2019-01-10', '06:00:00', '2019-01-10', '22:00:00', FALSE, FALSE, 'Hue', TRUE, 1, 'We hope you had as much fun and excitement.', TRUE, TRUE, 'Please come to the company ontime', 
+    TRUE, FALSE, FALSE, '2019-01-10 04:46:39.587628+00', '2019-01-10 05:46:39.587628+00', 2, 3);
+
+INSERT INTO "public"."tbl_events_history"("title", "start_date", "start_time", "end_date", "end_time", "is_daily", "is_all_day", "location", "is_notification", 
+    "owner", "event_content", "guest_can_invite", "view_all_guest", "item_preparing", "is_cancel", "is_delete", "time_create", "last_edit", "user_edit", "event_id") 
+    VALUES('Year end party', '2019-01-06', '18:00:00+00', '2019-01-06', '18:00:00+00', FALSE, FALSE, 'Son Tra - Da Nang', TRUE, 1, 'Please arrange your time to attend our event.', 
+    TRUE, TRUE, 'Ice, ice bucket, ice tongs, or scoop', FALSE, FALSE, '2019-01-15 01:46:39.587628+00', '2019-01-15 01:46:39.587628+00', 1, 1);
+INSERT INTO "public"."tbl_events_history"("title", "start_date", "start_time", "end_date", "end_time", "is_daily", "is_all_day", "location", "is_notification", 
+    "owner", "event_content", "guest_can_invite", "view_all_guest", "item_preparing", "is_cancel", "is_delete", "time_create", "last_edit", "user_edit", "event_id") 
+    VALUES('Monday Company Meeting Agenda', '2019-01-20', '08:00:00', '2019-01-20', '09:00:00', FALSE, FALSE, 'Asian Tech', TRUE, 1, 'Please be at the meeting on time. Seeing all you guys there.', 
+    TRUE, TRUE, 'Please come to the company before 8:00', FALSE, FALSE, '2019-01-20 04:46:39.587628+00', '2019-01-20 05:46:39.587628+00', 1, 2);
+INSERT INTO "public"."tbl_events_history"("title", "start_date", "start_time", "end_date", "end_time", "is_daily", "is_all_day", "location", "is_notification", 
+    "owner", "event_content", "guest_can_invite", "view_all_guest", "item_preparing", "is_cancel", "is_delete", "time_create", "last_edit", "user_edit", "event_id") 
+    VALUES('Amazing Race ', '2019-01-12', '06:00:00', '2019-01-12', '22:00:00', FALSE, FALSE, 'Hue', TRUE, 1, 'We hope you had as much fun and excitement.', 
+    TRUE, TRUE, 'Please come to the company ontime', FALSE, FALSE, '2019-01-12 04:46:39.587628+00', '2019-01-12 05:46:39.587628+00', 2, 3);
+
+INSERT INTO "public"."tbl_group"("group_name", "is_delete") VALUES('Goths', FALSE);
+INSERT INTO "public"."tbl_group"("group_name", "is_delete") VALUES('Yasuo', FALSE);
+INSERT INTO "public"."tbl_group"("group_name", "is_delete") VALUES('Master Yi', FALSE);
+
+INSERT INTO "public"."tbl_group_user"("user_id", "group_id", "is_delete") VALUES(1, 1, FALSE);
+INSERT INTO "public"."tbl_group_user"("user_id", "group_id", "is_delete") VALUES(2, 2, FALSE);
+INSERT INTO "public"."tbl_group_user"("user_id", "group_id", "is_delete") VALUES(3, 3, FALSE);
+
+INSERT INTO "public"."tbl_invite_member"("owner", "user_id", "invite_link", "time_create", "expire_time", "is_confirm", "invite_type", "is_delete") 
+    VALUES(1, 1, '/api/group/1/invite', '2019-01-15 01:46:39.587628+00', '2019-01-20 01:46:39.587628+00', TRUE, 1, FALSE); 
+INSERT INTO "public"."tbl_invite_member"("owner", "user_id", "invite_link", "time_create", "expire_time", "is_confirm", "invite_type", "is_delete") 
+    VALUES(2, 2, '/api/group/2/invite', '2019-01-16 01:46:39.587628+00', '2019-01-21 01:46:39.587628+00', TRUE, 2, FALSE);
+INSERT INTO "public"."tbl_invite_member"("owner", "user_id", "time_create", "expire_time", "is_confirm", "invite_type", "is_delete") 
+    VALUES(3, 3, '2019-01-17 01:46:39.587628+00', '2019-01-22 01:46:39.587628+00', TRUE, 0, FALSE);
+
+INSERT INTO "public"."tbl_notifications"("notify_status", "user_id", "is_delete") VALUES(TRUE, 1, FALSE);
+INSERT INTO "public"."tbl_notifications"("notify_status", "user_id", "is_delete") VALUES(TRUE, 2, FALSE);
+INSERT INTO "public"."tbl_notifications"("notify_status", "user_id", "is_delete") VALUES(TRUE, 3, FALSE);
+
+INSERT INTO "public"."tbl_event_members"("event_id", "user_id", "is_going", "is_delete", "invite_id") VALUES(1, 1, TRUE, FALSE, 1);
+INSERT INTO "public"."tbl_event_members"("event_id", "user_id", "is_going", "is_delete", "invite_id") VALUES(1, 2, TRUE, FALSE, 2);
+INSERT INTO "public"."tbl_event_members"("event_id", "user_id", "is_going", "is_delete", "invite_id") VALUES(1, 3, TRUE, FALSE, 3);
+INSERT INTO "public"."tbl_event_members"("event_id", "user_id", "is_going", "is_delete", "invite_id") VALUES(2, 1, TRUE, FALSE, 1);
+INSERT INTO "public"."tbl_event_members"("event_id", "user_id", "is_going", "is_delete", "invite_id") VALUES(2, 2, TRUE, FALSE, 2);
+INSERT INTO "public"."tbl_event_members"("event_id", "user_id", "is_going", "is_delete", "invite_id") VALUES(2, 3, TRUE, FALSE, 3);
+INSERT INTO "public"."tbl_event_members"("event_id", "user_id", "is_going", "is_delete", "invite_id") VALUES(3, 1, TRUE, FALSE, 1);
+INSERT INTO "public"."tbl_event_members"("event_id", "user_id", "is_going", "is_delete", "invite_id") VALUES(3, 2, TRUE, FALSE, 2);
+INSERT INTO "public"."tbl_event_members"("event_id", "user_id", "is_going", "is_delete", "invite_id") VALUES(3, 3, TRUE, FALSE, 3);
+------------------------ END INSERT DATA. ---------------------------------
