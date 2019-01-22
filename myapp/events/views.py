@@ -7,6 +7,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 RESULT_LIMIT = 6
 IS_PUBLIC = True
+
 # Create your views here.
 
 
@@ -26,13 +27,13 @@ class EventList(APIView):
         end_date = request.GET.get('end_date', False)
         status = request.GET.get('status', False)
         event_list = Event.objects.all().filter(is_public=public)
-        if owner != False:
+        if owner:
             event_list = event_list.filter(owner=owner)
-        if start_date != False:
+        if start_date:
             event_list = event_list.filter(start_date=start_date)
-        if end_date != False:
+        if end_date:
             event_list = event_list.filter(end_date=end_date)
-        if status != False:
+        if status:
             event_list = event_list.filter(status=status)
         page = request.GET.get('page', 1)
         result_limit = request.GET.get("result_limit", RESULT_LIMIT)
@@ -42,7 +43,7 @@ class EventList(APIView):
         except PageNotAnInteger:
             events = paginator.page(1)
         except EmptyPage:
-            page = paginator.num_pages
+            events = paginator.num_pages
         serializer = EventSerializer(events, many=True)
         content = {
             'result_count': event_list.count(),
