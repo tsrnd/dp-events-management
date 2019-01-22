@@ -6,5 +6,5 @@ urlpatterns = [
     path('notification/', include('myapp.notifications.urls')),
     path('event/', include('myapp.events.urls')),
     path('snippet/', include('myapp.snippets.urls')),
-    path('login', obtain_auth_token, name='login')
+    path('login', obtain_auth_token, name='login_index')
 ]
