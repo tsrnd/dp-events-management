@@ -33,17 +33,19 @@
   </section>
 </div>
 <script>
-  
+
 </script>
 {% endblock %}
 {% block script %}
 <script src="{% static 'js/modules/auth.js' %}"></script>
 <script>
-  $('#login-form').submit(function(event) {
-    var formdata = $(this).serialize();
-    var url = "{% url 'login_index' %}"
-    event.preventDefault();
-    moduleAuth.login(url, formdata);
+  $(document).ready(function () {
+    $('#login-form').submit(function (event) {
+      var formdata = $(this).serialize();
+      var url = "{% url 'login_index' %}"
+      event.preventDefault();
+      moduleAuth.login(url, formdata);
+    })
   })
 </script>
 {% endblock %}
