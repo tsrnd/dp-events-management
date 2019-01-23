@@ -3,9 +3,6 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
 class EventValidator(models.Manager):
-    def get_title(self):
-        pass
-    
     def is_exist(self, title, start_date, end_date):
         try:
             _ = Event.objects.get(title=title, start_date=start_date, end_date=end_date)
