@@ -1,4 +1,6 @@
 -i https://pypi.org/simple
+atomicwrites==1.2.1
+attrs==18.2.0
 certifi==2018.11.29
 dj-database-url==0.5.0
 django-minio-storage==0.2.2
@@ -6,8 +8,12 @@ django-redis==4.10.0
 django==2.1.5
 djangorestframework==3.9.1
 minio==4.0.10
+more-itertools==5.0.0
+pluggy==0.8.1
 psycopg2-binary==2.7.6.1
+py==1.7.0
 pygments==2.3.1
+pytest==4.1.1
 python-dateutil==2.7.5
 python-dotenv==0.10.1
 pytz==2018.9

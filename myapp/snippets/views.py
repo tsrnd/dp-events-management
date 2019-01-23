@@ -66,6 +66,8 @@ class SnipListView(ListAPIView):
         sys.stdout.write('Queryset : ' + str(queryset))
         # the serializer didn't take my RawQuerySet, so made it into a list
         serializer = CustomeSerializer(list(queryset), many=True)
+        response = Response()
+        response
         return Response(serializer.data)
 
 

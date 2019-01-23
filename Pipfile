@@ -13,6 +13,7 @@ locustio = "~=0.9.0"
 yapf = "*"
 pylint-django = "*"
 pytest-cov = "~=2.6.1"
+pytest = "*"
 
 [packages]
 django = "~=2.1.4"
@@ -23,6 +24,7 @@ django-redis = "~=4.10.0"
 djangorestframework = "~=3.9.0"
 pygments = "*"
 django-minio-storage = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.7"
