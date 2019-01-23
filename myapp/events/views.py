@@ -17,9 +17,9 @@ class PublicEventList(mixins.ListModelMixin, mixins.CreateModelMixin,
     def get_queryset(self):
         request = self.request
         public = True
-        qr = Event.objects.filter(is_public = public)
         if request.GET.get('is_public'):
             public = request.GET.get('is_public') == 'TRUE'
+        qr = Event.objects.filter(is_public = public)
         status = request.GET.get('status')
         if status is not None and status.isnumeric():
             qr = qr.filter(status = int(status))
