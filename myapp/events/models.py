@@ -34,7 +34,7 @@ class Event(models.Model):
     time_create = models.DateTimeField(auto_now_add=True)
     last_edit = models.DateTimeField(auto_now=True)
     user_edit = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='fk_user_edit_event', db_column='user_edit')
+        User, on_delete=models.CASCADE, related_name='fk_user_edit_event', db_column='user_edit', null=True)
     status = models.IntegerField(null=True)
 
     objects = models.Manager()

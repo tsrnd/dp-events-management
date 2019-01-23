@@ -8,11 +8,16 @@ class EventSerializer(serializers.ModelSerializer):
         """
         Check conditions date and time (start, end).
         """
+        if data['is_all_day'] is False:
+            if 'start_time' not in data:
+                raise serializers.ValidationError({"start_time":"start_time is required"})
+            if 'end_time' not in data:
+                raise serializers.ValidationError({"end_time":"start_time is required"})
+            if data['start_date'] == data['end_date']:
+                if data['start_time'] >= data['end_time']:
+                    raise serializers.ValidationError({"end_time":"end time should be greater than start time."})
         if data['start_date'] > data['end_date']:
             raise serializers.ValidationError({"end_date":"end date should be greater than start date."})
-        elif data['start_date'] == data['end_date']:
-            if data['start_time'] >= data['end_time']:
-                raise serializers.ValidationError({"end_time":"end time should be greater than start time."})
         today = date.today()
         if data['start_date'] < today:
             raise serializers.ValidationError({"start_date":"start date should be greater than today."})
