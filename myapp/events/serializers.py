@@ -14,7 +14,7 @@ class EventSerializer(serializers.ModelSerializer):
             if data['start_time'] >= data['end_time']:
                 raise serializers.ValidationError({"end_time":"end time should be greater than start time."})
         today = date.today()
-        if data['start_date'] > today:
+        if data['start_date'] < today:
             raise serializers.ValidationError({"start_date":"start date should be greater than today."})
 
         # check validator title, start date and end date is exist
