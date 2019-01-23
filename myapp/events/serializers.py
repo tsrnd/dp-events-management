@@ -1,16 +1,28 @@
 from rest_framework import serializers
 from myapp.events.models import Event
+from datetime import date
 
 
 class EventSerializer(serializers.ModelSerializer):
     def validate(self, data):
         """
-        Check whether start date greater end date.
+        Check conditions date and time (start, end).
         """
         if data['start_date'] > data['end_date']:
-            raise serializers.ValidationError("end date should be greater than start date.")
+            raise serializers.ValidationError({"end_date":"end date should be greater than start date."})
+        elif data['start_date'] == data['end_date']:
+            if data['start_time'] > data['end_time']:
+                raise serializers.ValidationError({"end_time":"end time should be greater than start time."})
+        today = date.today()
+        if data['end_date'] < today:
+            raise serializers.ValidationError({"end_date":"end date should be greater than or equal to today."})
+
+        # check validator title, start date and end date is exist
+        if Event.custom_objects.is_exist(data["title"], data['start_date'], data['end_date']):
+            raise serializers.ValidationError({"event":"This Event has already existed"})
+
         return data
-    
+
     class Meta:
         model = Event
         fields = (

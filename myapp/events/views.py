@@ -1,17 +1,11 @@
 from rest_framework.parsers import JSONParser
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from myapp.events.serializers import EventSerializer
 from rest_framework.decorators import api_view
 from rest_framework import status
 
-@api_view(['GET', 'POST'])
+@api_view(['POST'])
 def index(request):
-    """
-        Get Events
-    """
-    if request.method == 'GET':
-        return HttpResponse("This is GET method")
-    
     """
         Create a new Event
     """

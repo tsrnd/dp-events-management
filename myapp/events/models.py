@@ -2,9 +2,19 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
+class EventValidator(models.Manager):
+    def get_title(self):
+        pass
+    
+    def is_exist(self, title, start_date, end_date):
+        try:
+            _ = Event.objects.get(title=title, start_date=start_date, end_date=end_date)
+            return True
+        except Event.DoesNotExist:
+            return False
 
 class Event(models.Model):
-    title = models.CharField(max_length=200,unique=True)
+    title = models.CharField(max_length=200)
     start_date = models.DateField()
     start_time = models.TimeField(null=True)
     end_date = models.DateField()
@@ -30,6 +40,8 @@ class Event(models.Model):
         User, on_delete=models.CASCADE, related_name='fk_user_edit_event', db_column='user_edit')
     status = models.IntegerField(null=True)
 
+    objects = models.Manager()
+    custom_objects = EventValidator()
     class Meta:
         db_table = 'tbl_events'
 
