@@ -1,4 +1,4 @@
-from rest_framework.parsers import JSONParser
+from rest_framework.parsers import FormParser
 from django.http import JsonResponse
 from myapp.events.serializers import EventSerializer
 from rest_framework.decorators import api_view
@@ -10,7 +10,7 @@ def index(request):
         Create a new Event
     """
     if request.method == 'POST':
-        data = JSONParser().parse(request)
+        data = FormParser().parse(request)
         serializer = EventSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
