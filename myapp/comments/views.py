@@ -1,6 +1,9 @@
-from django.http import HttpResponse
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated 
 
-# Create your views here.
-
-def index(request):
-    return HttpResponse("Hello, world. You're at the comment index.")
+class CommentView(APIView):
+    permission_classes = (IsAuthenticated,) 
+    def get(self, request):
+        comment = {'comment': 'Hello, World!'}
+        return Response(comment)
