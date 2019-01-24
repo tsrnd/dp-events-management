@@ -152,8 +152,7 @@
   -ms-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
 }
 
-input,
-select {
+.sign-in-input {
   outline: none;
   appearance: unset !important;
   -moz-appearance: unset !important;
@@ -172,8 +171,7 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-input:focus,
-select:focus {
+input:focus {
   outline: none;
   box-shadow: none !important;
   -moz-box-shadow: none !important;
@@ -183,7 +181,7 @@ select:focus {
 }
 
 
-input {
+.sign-in-input {
   width: 100%;
   display: block;
   border: none;
@@ -230,7 +228,7 @@ input:focus:-moz-placeholder {
 }
 
 
-label {
+.sign-in-label {
   position: absolute;
   left: 0;
   top: 50%;
@@ -290,4 +288,12 @@ label.valid:after {
 
 .form-submit:hover {
   background: #4292dc;
+}
+
+.check-form {
+  padding-left: 0;
+}
+
+.option-style {
+  color: #9CA3AA;
 }
