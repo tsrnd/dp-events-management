@@ -174,6 +174,32 @@ COMMENT ON COLUMN tbl_notifications.user_id IS 'Member nhận được thông b�
 -- Indices -------------------------------------------------------
 CREATE UNIQUE INDEX IF NOT EXISTS tbl_notifications_pkey ON tbl_notifications(id int4_ops);
 
+-- Table Definition ----------------------------------------------
+CREATE TABLE IF NOT EXISTS tbl_event_register (
+    id SERIAL PRIMARY KEY,
+    event_id integer NOT NULL REFERENCES tbl_events(id),
+    is_user boolean DEFAULT true,
+    user_id integer REFERENCES auth_user(id),
+    full_name character varying(100),
+    email character varying(100),
+    identify character varying(20),
+    address character varying(200),
+    contact character varying(20),
+    time_create timestamp with time zone,
+    is_confirm boolean NOT NULL DEFAULT false
+);
+COMMENT ON COLUMN tbl_event_register.is_user IS 'Cờ đánh dấu người đăng ký có phải là user hay không?';
+COMMENT ON COLUMN tbl_event_register.user_id IS 'Trường hợp là user hệ thống(is_user == TRUE) thì sẽ set giá trị mapping với table user. Trường hợp không phải là user hệ thống(is_user == FALSE) thì sẽ nhận giá trị là NULL.';
+COMMENT ON COLUMN tbl_event_register.full_name IS 'Họ tên đầy đủ. Trong trường hợp không phải là người dùng hệ thống thì thông tin này là bắt buộc.';
+COMMENT ON COLUMN tbl_event_register.email IS 'Email liên lạc. Trong trường hợp không phải là người dùng hệ thống thì thông tin này là bắt buộc.';
+COMMENT ON COLUMN tbl_event_register.identify IS 'Số chứng minh nhân dân.';
+COMMENT ON COLUMN tbl_event_register.address IS 'Địa chỉ cụ thể.';
+COMMENT ON COLUMN tbl_event_register.contact IS 'Số điện thoại liên hệ.';
+COMMENT ON COLUMN tbl_event_register.is_confirm IS 'Xác nhận tình trạng duyệt đăng ký. Nếu như được confirm thì coi như người này sẽ được tham gia vào trong sự kiện.';
+-- Indices -------------------------------------------------------
+CREATE UNIQUE INDEX IF NOT EXISTS tbl_event_register_pkey ON tbl_event_register(id int4_ops);
+
+
 ------------------------ BEGIN INSERT DATA. ---------------------------------
 INSERT INTO "auth_user" ("password", "last_login", "is_superuser", "username", "first_name", "last_name", "email", "is_staff", "is_active", "date_joined") 
     VALUES ('pbkdf2_sha256$120000$iSIDgw5GOgZ3$dHIxs2+ZwoAvLgSMm6+GeYK1WuNezAeom/yFb9cEAgE=', NULL, true, 'admin', '', '', '', true, true, '2019-01-15T01:46:39.587628+00:00'::timestamptz);
