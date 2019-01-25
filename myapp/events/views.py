@@ -40,9 +40,9 @@ class EventList(APIView):
         paginator = Paginator(event_list, result_limit)
         try:
             events = paginator.page(page)
-        except PageNotAnInteger:
+        except PageNotAnInteger as pniErr:
             events = paginator.page(1)
-        except EmptyPage:
+        except EmptyPage as epErr:
             events = paginator.num_pages
         serializer = EventSerializer(events, many=True)
         content = {
