@@ -13,9 +13,9 @@ class Notification(models.Model):
 
 
 class InviteMember(models.Model):
-    owner = models.ForeignKey(
+    from_user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='fk_owner_invit_emember', db_column='owner')
-    user_id = models.ForeignKey(
+    to_user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='fk_user_id_invit_emember', db_column='user_id')
     invite_link = models.TextField(null=True)
     time_create = models.DateTimeField(null=True)
