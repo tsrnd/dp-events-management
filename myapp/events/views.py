@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-RESULT_LIMIT = 6
+RESULT_LIMIT = 5
 IS_PUBLIC = True
 
 # Create your views here.
