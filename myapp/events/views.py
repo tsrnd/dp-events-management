@@ -7,15 +7,13 @@ from myapp.events.serializers import UserSerializer
 from myapp.events.serializers import EventSerializer
 
 from django.http import JsonResponse
-from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 
 from myapp.events.models import Event
-from myapp.events.models import EventMembers
 
 
-@api_view(['POST'])
+@api_view(['POST']) # Methods Allowed
 def index(request):
     """
         Create a new Event
@@ -54,7 +52,7 @@ def event_detail(request, id_event):
         status=status.HTTP_403_FORBIDDEN)
 
 
-@api_view(['GET',])
+@api_view(['GET',]) # Methods Allowed
 def getUsers(request, id_event):
     """
         return list user invited.
