@@ -1,7 +1,6 @@
 from django.test import TestCase
-import pytest
 
 
-class SampleTest(TestCase):
+class DummyTest(TestCase):
     def test(self):
         assert True
