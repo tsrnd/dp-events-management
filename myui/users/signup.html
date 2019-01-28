@@ -1,4 +1,5 @@
 {% extends 'base/base.html' %}
+{% load staticfiles %}
 {% block title_header %}Sign Up{% endblock %}
 {% block content %}
 <div class="main">
@@ -8,20 +9,25 @@
       <div class="signup-content">
         <div class="signup-form">
           <h2 class="form-title">Sign up</h2>
+          <span id="register_error" style="color:red"></span>
           <form method="POST" class="register-form" id="register-form">
             {% csrf_token %}
+            <span id="username_error" style="color:red"></span>
             <div class="form-group">
               <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
               <input type="text" name="username" id="username" placeholder="User Name" />
             </div>
+            <span id="email_error" style="color:red"></span>
             <div class="form-group">
               <label for="email"><i class="zmdi zmdi-email"></i></label>
               <input type="email" name="email" id="email" placeholder="Email" />
             </div>
+            <span id="password_error" style="color:red"></span>
             <div class="form-group">
               <label for="pass"><i class="zmdi zmdi-lock"></i></label>
               <input type="password" name="password" id="password" placeholder="Password" />
             </div>
+            <span id="repassword_error" style="color:red"></span>
             <div class="form-group">
               <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
               <input type="password" name="repassword" id="repassword" placeholder="Repeat your password" />
@@ -40,4 +46,21 @@
   </section>
 </div>
 
+{% endblock %}
+{% block script %}
+<script src="{% static 'js/modules/auth.js' %}"></script>
+<script>
+  $(document).ready(function () {
+    $('html, body').animate({
+      scrollTop: $(".main").offset().top - 70
+    }, 500);
+    $('#register-form').submit(function (event) {
+      var formdata = $(this).serializeArray();
+      var url = "{% url 'login_index' %}"
+      event.preventDefault();
+      moduleAuth.register(url, formdata);
+    })
+  })
+
+</script>
 {% endblock %}
