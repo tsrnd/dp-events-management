@@ -1,5 +1,6 @@
 from rest_framework.parsers import FormParser
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from rest_framework.response import Response
 
@@ -14,6 +15,7 @@ from myapp.events.models import Event
 
 
 @api_view(['POST']) # Methods Allowed
+@permission_classes((IsAuthenticated, ))
 def index(request):
     """
         Create a new Event
