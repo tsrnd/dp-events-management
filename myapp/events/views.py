@@ -1,5 +1,4 @@
 from django.http import HttpResponse, JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 from .serializers import EventSerializers
 from .models import Event
 from rest_framework.response import Response
@@ -8,35 +7,56 @@ from myapp.events.serializers import UserSerializer
 from django.contrib.auth.models import User
 from myapp.events.models import EventMembers
 from rest_framework import status
+from rest_framework.parsers import JSONParser
+from django.db import connection
 
 
 def index(request):
     return HttpResponse("Hello, world. You're at the event index.")
 
 
-@csrf_exempt
+@api_view(['GET', 'DELETE'])
 def event_detail(request, id_event):
     """
-    Get detail event by id
+    GET: Get detail event by id
+    DELETE: Delete event by id 
+        Request Paramater:
+        {
+            "token" : "abcxyz"
+        }
     """
+
+    #get authorization
+    authorization = str(request.META.get('HTTP_AUTHORIZATION'))
+    try:
+        token = authorization.split(' ')[1]
+    except IndexError:
+        return Response(status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
+
+    # Get event detail
     try:
         event = Event.objects.get(pk=id_event)
-    except:
+    except Event.DoesNotExist:
         return JsonResponse({
             "message": "Id does not exist",
             "errors": ["string"]
         },
-                            status=status.HTTP_302_FOUND)
-
+                            status=status.HTTP_404_NOT_FOUND)
+                            
+    # Hander request
     if request.method == 'GET':
         serializer = EventSerializers(event)
         return JsonResponse(serializer.data, status=status.HTTP_200_OK)
-    else:
-        return JsonResponse({
-            "message": "Request Forbiden",
-            "errors": ["string"]
-        },
-                            status=status.HTTP_403_FORBIDDEN)
+    elif request.method == 'DELETE':
+        cursor = connection.cursor()
+        sql = "SELECT count(*) FROM tbl_events AS e INNER JOIN authtoken_token AS aut ON e.owner = aut.user_id WHERE e.id={} AND aut.key='{}'".format(
+            id_event, token)
+        cursor.execute(sql)
+        row = cursor.fetchone()[0]
+        if row == 1:
+            event.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 @api_view([
