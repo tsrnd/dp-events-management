@@ -3,6 +3,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from myapp.events.serializers import UserSerializer
 from myapp.events.serializers import EventSerializer
@@ -14,20 +15,20 @@ from django.contrib.auth.models import User
 from myapp.events.models import Event
 
 
-@api_view(['POST']) # Methods Allowed
-@permission_classes((IsAuthenticated, ))
-def index(request):
-    """
-        Create a new Event
-    """
-    if request.method == 'POST':
-        data = FormParser().parse(request)
-        serializer = EventSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
-        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+class EventView(APIView):
+    @api_view(['POST']) # Methods Allowed
+    @permission_classes((IsAuthenticated, ))
+    def index(self, request, format=None):
+        """
+            Create a new Event
+        """
+        if request.method == 'POST':
+            data = FormParser().parse(request)
+            serializer = EventSerializer(data=data)
+            if serializer.is_valid():
+                serializer.save()
+                return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
+            return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @csrf_exempt
 def event_detail(request, id_event):
