@@ -5,48 +5,68 @@
   <div class="container">
     <div class="row">
       <div class="col">
+        <h2 class="form-title">Create Event</h2>
         <form>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="inputEmail4">Email</label>
-              <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-            </div>
-            <div class="form-group col-md-6">
-              <label for="inputPassword4">Password</label>
-              <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
-            </div>
-          </div>
           <div class="form-group">
-            <label for="inputAddress">Address</label>
-            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-          </div>
-          <div class="form-group">
-            <label for="inputAddress2">Address 2</label>
-            <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+            <label for="inputTitle">Title Events</label>
+            <input type="text" class="form-control" id="inputTitle" placeholder="Title Events">
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label for="inputCity">City</label>
-              <input type="text" class="form-control" id="inputCity">
+              <label for="startDate">Start Date</label>
+              <input type="date" class="form-control option-style" id="startDate" placeholder="Start Date">
             </div>
-            <div class="form-group col-md-4">
-              <label for="inputState">State</label>
-              <select id="inputState" class="form-control option-style">
-                <option selected>Choose...</option>
-                <option>...</option>
-              </select>
+            <div class="form-group col-md-6">
+              <label for="startTime">Start Time</label>
+              <input type="time" class="form-control option-style" id="startTime" placeholder="Start Time">
             </div>
-            <div class="form-group col-md-2">
-              <label for="inputZip">Zip</label>
-              <input type="text" class="form-control" id="inputZip">
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="endDate">End Date</label>
+              <input type="date" class="form-control option-style" id="endDate" placeholder="End Date">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="endTime">End Time</label>
+              <input type="time" class="form-control option-style" id="endTime" placeholder="End Time">
             </div>
           </div>
           <div class="form-group">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="gridCheck">
-              <label class="form-check-label check-form" for="gridCheck">
-                Check me out
+              <input class="form-check-input" type="checkbox" id="dailycheck">
+              <label class="form-check-label check-form" for="dailycheck">
+                Daily
               </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="alldaycheck">
+              <label class="form-check-label check-form" for="alldaycheck">
+                All day
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" class="form-control" id="location" placeholder="Location">
+          </div>
+          <div class="form-group">
+            <label for="eventContent">Event content</label>
+            <textarea type="text" class="form-control" id="eventContent" placeholder="Event content"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="imageEvent">Image Event</label>
+            <input type="file" class="form-control-file" id="imageEvent">
+          </div>
+          <div class="form-group">
+            <label for="itemPre">Item Preparing</label>
+            <textarea type="text" class="form-control" id="itemPre" placeholder="Item Preparing"></textarea>
+          </div>
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="publicCheck">
+              <label class="form-check-label check-form" for="publicCheck">Public</label>
             </div>
           </div>
           <button type="submit" class="btn btn-primary">Create</button>
