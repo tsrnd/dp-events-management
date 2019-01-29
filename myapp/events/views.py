@@ -9,6 +9,7 @@ from myapp.events.serializers import UserSerializer
 from django.contrib.auth.models import User
 from myapp.events.models import EventMembers
 from rest_framework import status
+from rest_framework.parsers import FormParser
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 RESULT_LIMIT = 5
@@ -60,7 +61,7 @@ class EventList(APIView):
         return Response(content)
 
 
-@csrf_exempt
+@api_view(['GET', 'PUT'])
 def event_detail(request, id_event):
     """
     Get detail event by id
@@ -72,17 +73,29 @@ def event_detail(request, id_event):
             "message": "Id does not exist",
             "errors": ["string"]
         },
-                            status=status.HTTP_302_FOUND)
+                            status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
         serializer = EventSerializers(event)
         return JsonResponse(serializer.data, status=status.HTTP_200_OK)
-    else:
-        return JsonResponse({
-            "message": "Request Forbiden",
-            "errors": ["string"]
-        },
-                            status=status.HTTP_403_FORBIDDEN)
+    elif request.method == 'PUT':
+        if request.user.is_authenticated:
+            if request.user.id == event.owner.id:
+                data = FormParser().parse(request)
+                for key, value in data.items():
+                    setattr(event, key, value)
+                event.save()
+                return Response(status=status.HTTP_200_OK)
+            else:
+                return Response({
+                    'error': "Can not edit event"
+                },
+                                status=status.HTTP_403_FORBIDDEN)
+        else:
+            return Response({
+                'error': "Please login!"
+            },
+                            status=status.HTTP_401_UNAUTHORIZED)
 
 
 @api_view([
