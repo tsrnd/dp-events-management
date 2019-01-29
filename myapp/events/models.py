@@ -18,11 +18,10 @@ class Event(models.Model):
     end_time = models.TimeField(null=True)
     is_daily = models.BooleanField(default=False)
     is_all_day = models.BooleanField(default=False)
-    location = models.TextField(null=True)
+    location = models.TextField()
     is_notification = models.BooleanField(default=False)
     time_notification = models.CharField(max_length=20, null=True)
-    owner = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='fk_owner_event', db_column='owner')
+    owner = models.IntegerField(null=True)
     event_content = models.TextField(null=True)
     file_attack = models.TextField(null=True)
     guest_can_invite = models.BooleanField(default=True)
