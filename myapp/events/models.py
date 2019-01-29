@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.exceptions import ValidationError
 
 class EventValidator(models.Manager):
     def is_exist(self, title, start_date, end_date):
@@ -21,8 +20,7 @@ class Event(models.Model):
     location = models.TextField(default=False)
     is_notification = models.BooleanField(default=False)
     time_notification = models.CharField(max_length=20, null=True)
-    owner = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='fk_owner_event', db_column='owner', null=True)
+    owner = models.IntegerField(null=True)
     event_content = models.TextField(null=True)
     file_attack = models.TextField(null=True)
     guest_can_invite = models.BooleanField(default=True)
@@ -33,8 +31,6 @@ class Event(models.Model):
     is_delete = models.BooleanField(default=False)
     time_create = models.DateTimeField(auto_now_add=True)
     last_edit = models.DateTimeField(auto_now=True)
-    user_edit = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='fk_user_edit_event', db_column='user_edit', null=True)
     status = models.IntegerField(null=True)
 
     objects = models.Manager()
@@ -66,8 +62,6 @@ class EventHistory(models.Model):
     is_delete = models.BooleanField(default=False)
     time_create = models.DateTimeField()
     last_edit = models.DateTimeField()
-    user_edit = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='fk_user_edit_event_history', db_column='user_edit')
     eventId = models.ForeignKey(Event, on_delete=models.CASCADE)
 
     class Meta:

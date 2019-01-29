@@ -84,7 +84,6 @@ CREATE TABLE tbl_events (
     is_delete boolean NOT NULL DEFAULT false,
     time_create timestamp with time zone NOT NULL,
     last_edit timestamp with time zone NOT NULL,
-    user_edit integer NOT NULL REFERENCES auth_user(id),
     status smallint
 );
 COMMENT ON COLUMN tbl_events.title IS 'Tiêu đề giới thiệu cho sự kiện sắp diễn ra.';
@@ -107,7 +106,6 @@ COMMENT ON COLUMN tbl_events.is_public IS 'Xác nhận loại sự kiện này l
 COMMENT ON COLUMN tbl_events.is_cancel IS 'Sự kiện bị huỷ vì lý do nào đó.';
 COMMENT ON COLUMN tbl_events.is_delete IS 'Thiết lập cờ cho trường hợp xoá mềm.';
 COMMENT ON COLUMN tbl_events.last_edit IS 'Thời điểm chỉnh sửa gần nhất.';
-COMMENT ON COLUMN tbl_events.user_edit IS 'Người chỉnh sửa cuối cùng.';
 COMMENT ON COLUMN tbl_events.status IS 'Trạng thái của sự kiện. 0: Bản draft - 1: Waiting - 2: Cancel - 3: Done. Những trạng thái khác sẽ đề cập đến sau.';
 -- Indices -------------------------------------------------------
 CREATE UNIQUE INDEX IF NOT EXISTS tbl_events_pkey ON tbl_events(id int4_ops);
@@ -136,7 +134,6 @@ CREATE TABLE tbl_events_history (
     is_delete boolean NOT NULL DEFAULT false,
     time_create timestamp with time zone NOT NULL,
     last_edit timestamp with time zone NOT NULL,
-    user_edit integer NOT NULL REFERENCES auth_user(id),
     event_id integer NOT NULL REFERENCES tbl_events(id)
 );
 -- Indices -------------------------------------------------------
@@ -209,28 +206,28 @@ INSERT INTO "auth_user" ("password", "last_login", "is_superuser", "username", "
     VALUES ('pbkdf2_sha256$120000$iSIDgw5GOgZ3$dHIxs2+ZwoAvLgSMm6+GeYK1WuNezAeom/yFb9cEAgE=', NULL, true, 'yeuem', '', '', '', true, true, '2019-01-13T01:46:39.587628+00:00'::timestamptz);
 
 INSERT INTO "public"."tbl_events"("title", "start_date", "start_time", "end_date", "end_time", "is_daily", "is_all_day", "location", "is_notification", "owner", 
-    "event_content", "guest_can_invite", "view_all_guest", "item_preparing", "is_public", "is_cancel", "is_delete", "time_create", "last_edit", "user_edit", "status") 
+    "event_content", "guest_can_invite", "view_all_guest", "item_preparing", "is_public", "is_cancel", "is_delete", "time_create", "last_edit", "status") 
     VALUES('Year end party', '2019-01-05', '18:00:00', '2019-01-05', '22:00:00', FALSE, FALSE, 'Son Tra - Da Nang', TRUE, 1, 'Please arrange your time to attend our event.', 
     TRUE, TRUE, 'Ice, ice bucket, ice tongs, or scoop', TRUE, FALSE, FALSE, '2019-01-15 01:46:39.587628+00', '2019-01-15 01:46:39.587628+00', 1, 0);
 INSERT INTO "public"."tbl_events"("title", "start_date", "start_time", "end_date", "end_time", "is_daily", "is_all_day", "location", "is_notification", "owner", 
-    "event_content", "guest_can_invite", "view_all_guest", "item_preparing", "is_public", "is_cancel", "is_delete", "time_create", "last_edit", "user_edit", "status") 
+    "event_content", "guest_can_invite", "view_all_guest", "item_preparing", "is_public", "is_cancel", "is_delete", "time_create", "last_edit", "status") 
     VALUES('Monday Company Meeting Agenda', '2019-01-15', '08:00:00', '2019-01-15', '09:00:00', FALSE, FALSE, 'Asian Tech', TRUE, 1, 'Please be at the meeting on time. Seeing all you guys there.', 
     TRUE, TRUE, 'Please come to the company before 8:00', TRUE, FALSE, FALSE, '2019-01-15 04:46:39.587628+00', '2019-01-15 05:46:39.587628+00', 1, 1);
 INSERT INTO "public"."tbl_events"("title", "start_date", "start_time", "end_date", "end_time", "is_daily", "is_all_day", "location", "is_notification", "owner", 
-    "event_content", "guest_can_invite", "view_all_guest", "item_preparing", "is_public", "is_cancel", "is_delete", "time_create", "last_edit", "user_edit", "status") 
+    "event_content", "guest_can_invite", "view_all_guest", "item_preparing", "is_public", "is_cancel", "is_delete", "time_create", "last_edit", "status") 
     VALUES('Amazing Race ', '2019-01-10', '06:00:00', '2019-01-10', '22:00:00', FALSE, FALSE, 'Hue', TRUE, 1, 'We hope you had as much fun and excitement.', TRUE, TRUE, 'Please come to the company ontime', 
     TRUE, FALSE, FALSE, '2019-01-10 04:46:39.587628+00', '2019-01-10 05:46:39.587628+00', 2, 3);
 
 INSERT INTO "public"."tbl_events_history"("title", "start_date", "start_time", "end_date", "end_time", "is_daily", "is_all_day", "location", "is_notification", 
-    "owner", "event_content", "guest_can_invite", "view_all_guest", "item_preparing", "is_cancel", "is_delete", "time_create", "last_edit", "user_edit", "event_id") 
+    "owner", "event_content", "guest_can_invite", "view_all_guest", "item_preparing", "is_cancel", "is_delete", "time_create", "last_edit", "event_id") 
     VALUES('Year end party', '2019-01-06', '18:00:00+00', '2019-01-06', '18:00:00+00', FALSE, FALSE, 'Son Tra - Da Nang', TRUE, 1, 'Please arrange your time to attend our event.', 
     TRUE, TRUE, 'Ice, ice bucket, ice tongs, or scoop', FALSE, FALSE, '2019-01-15 01:46:39.587628+00', '2019-01-15 01:46:39.587628+00', 1, 1);
 INSERT INTO "public"."tbl_events_history"("title", "start_date", "start_time", "end_date", "end_time", "is_daily", "is_all_day", "location", "is_notification", 
-    "owner", "event_content", "guest_can_invite", "view_all_guest", "item_preparing", "is_cancel", "is_delete", "time_create", "last_edit", "user_edit", "event_id") 
+    "owner", "event_content", "guest_can_invite", "view_all_guest", "item_preparing", "is_cancel", "is_delete", "time_create", "last_edit", "event_id") 
     VALUES('Monday Company Meeting Agenda', '2019-01-20', '08:00:00', '2019-01-20', '09:00:00', FALSE, FALSE, 'Asian Tech', TRUE, 1, 'Please be at the meeting on time. Seeing all you guys there.', 
     TRUE, TRUE, 'Please come to the company before 8:00', FALSE, FALSE, '2019-01-20 04:46:39.587628+00', '2019-01-20 05:46:39.587628+00', 1, 2);
 INSERT INTO "public"."tbl_events_history"("title", "start_date", "start_time", "end_date", "end_time", "is_daily", "is_all_day", "location", "is_notification", 
-    "owner", "event_content", "guest_can_invite", "view_all_guest", "item_preparing", "is_cancel", "is_delete", "time_create", "last_edit", "user_edit", "event_id") 
+    "owner", "event_content", "guest_can_invite", "view_all_guest", "item_preparing", "is_cancel", "is_delete", "time_create", "last_edit", "event_id") 
     VALUES('Amazing Race ', '2019-01-12', '06:00:00', '2019-01-12', '22:00:00', FALSE, FALSE, 'Hue', TRUE, 1, 'We hope you had as much fun and excitement.', 
     TRUE, TRUE, 'Please come to the company ontime', FALSE, FALSE, '2019-01-12 04:46:39.587628+00', '2019-01-12 05:46:39.587628+00', 2, 3);
 

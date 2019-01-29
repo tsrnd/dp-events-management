@@ -1,8 +1,10 @@
-from rest_framework import serializers
-from myapp.events.models import EventMembers
-from myapp.events.models import Event
+from rest_framework import serializers, viewsets
+from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView
+from .models import Event
 from django.contrib.auth.models import User
+from myapp.events.models import EventMembers
 from datetime import date
+
 
 class EventSerializer(serializers.ModelSerializer):
     def validate(self, data):
@@ -36,32 +38,11 @@ class EventSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Event
-        fields = (
-            'id',
-            'title',
-            'start_date',
-            'start_time',
-            'end_date',
-            'end_time',
-            'is_daily',
-            'is_all_day',
-            'location',
-            'owner',
-            'is_notification',
-            'time_notification',
-            'event_content',
-            'file_attack',
-            'guest_can_invite',
-            'view_all_guest',
-            'item_preparing',
-            'is_public',
-            'is_cancel',
-            'is_delete',
-            'time_create',
-            'last_edit',
-            'user_edit',
-            'status',
-        )
+        fields = ("id", "title", "start_date", "end_date", "start_time",
+                  "end_time", "location", "time_notification", "owner",
+                  "event_content", "file_attack", "guest_can_invite",
+                  "view_all_guest", "item_preparing", "status", "time_create",
+                  "is_all_day", "last_edit", "is_cancel")
 
 
 class UserSerializer(serializers.Serializer):
