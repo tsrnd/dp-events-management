@@ -7,7 +7,6 @@ from myapp.events.serializers import UserSerializer
 from django.contrib.auth.models import User
 from myapp.events.models import EventMembers
 from rest_framework import status
-from rest_framework.parsers import JSONParser
 from django.db import connection
 
 
@@ -20,19 +19,7 @@ def event_detail(request, id_event):
     """
     GET: Get detail event by id
     DELETE: Delete event by id 
-        Request Paramater:
-        {
-            "token" : "abcxyz"
-        }
     """
-
-    #get authorization
-    authorization = str(request.META.get('HTTP_AUTHORIZATION'))
-    try:
-        token = authorization.split(' ')[1]
-    except IndexError:
-        return Response(status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
-
     # Get event detail
     try:
         event = Event.objects.get(pk=id_event)
@@ -42,21 +29,24 @@ def event_detail(request, id_event):
             "errors": ["string"]
         },
                             status=status.HTTP_404_NOT_FOUND)
-                            
+
     # Hander request
     if request.method == 'GET':
         serializer = EventSerializers(event)
         return JsonResponse(serializer.data, status=status.HTTP_200_OK)
     elif request.method == 'DELETE':
-        cursor = connection.cursor()
-        sql = "SELECT count(*) FROM tbl_events AS e INNER JOIN authtoken_token AS aut ON e.owner = aut.user_id WHERE e.id={} AND aut.key='{}'".format(
-            id_event, token)
-        cursor.execute(sql)
-        row = cursor.fetchone()[0]
-        if row == 1:
-            event.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        return Response(status=status.HTTP_404_NOT_FOUND)
+        if request.user.is_authenticated:
+            if request.user.id == event.owner.id:
+                event.delete()
+                return Response(status=status.HTTP_204_NO_CONTENT)
+            return Response({
+                'error': "Can not delete event"
+            },
+                            status=status.HTTP_403_FORBIDDEN)
+        return Response({
+            'error': "You should be login!"
+        },
+                        status=status.HTTP_401_UNAUTHORIZED)
 
 
 @api_view([
