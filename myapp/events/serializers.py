@@ -8,11 +8,11 @@ from myapp.events.models import EventMembers
 class EventSerializers(serializers.ModelSerializer):
     class Meta:
         model = Event
-        fields = ("title", "start_date", "end_date", "start_time", "end_time",
-                  "location", "time_notification", "owner", "event_content",
-                  "file_attack", "guest_can_invite", "view_all_guest",
-                  "item_preparing", "status", "time_create", "last_edit",
-                  "user_edit")
+        fields = ("id", "title", "start_date", "end_date", "start_time",
+                  "end_time", "location", "time_notification", "owner",
+                  "event_content", "file_attack", "guest_can_invite",
+                  "view_all_guest", "item_preparing", "status", "time_create",
+                  "last_edit", "user_edit")
 
 
 class UserSerializer(serializers.Serializer):
