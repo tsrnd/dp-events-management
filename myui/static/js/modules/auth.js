@@ -23,7 +23,7 @@ var moduleAuth = (function () {
     function logout(url) {
         $.ajax({
             url: url,
-            method: "DELETE",
+            method: "POST",
             headers: {
                 "Authorization": authToken
             },
