@@ -31,7 +31,7 @@ var moduleAuth = (function () {
                 // localStorage.setItem("auth_token", data['token'])
             },
             statusCode: {
-                200: function (response) {
+                204: function (response) {
                     localStorage.removeItem("auth_token")
                 },
                 401: function (response) {
