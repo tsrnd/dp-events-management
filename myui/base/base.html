@@ -47,3 +47,12 @@
 {% endblock %}
 
 </html>
+<script src="{% static 'js/modules/auth.js' %}"></script>
+<script>
+  $(document).ready(function () {
+    $('#logout').click(function (event) {
+      moduleAuth.logout("{% url 'logout' %}")
+    })
+  })
+
+</script>

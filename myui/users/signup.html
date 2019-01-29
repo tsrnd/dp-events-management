@@ -11,20 +11,21 @@
           <form method="POST" class="register-form" id="register-form">
             {% csrf_token %}
             <div class="form-group">
-              <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-              <input type="text" name="username" id="username" placeholder="User Name" />
+              <label class="sign-in-label" for="name"><i class="zmdi zmdi-account material-icons-name"></i></label
+                class="sign-in-label">
+              <input class="sign-in-input" type="text" name="username" id="username" placeholder="User Name" />
             </div>
             <div class="form-group">
-              <label for="email"><i class="zmdi zmdi-email"></i></label>
-              <input type="email" name="email" id="email" placeholder="Email" />
+              <label class="sign-in-label" for="email"><i class="zmdi zmdi-email"></i></label class="sign-in-label">
+              <input class="sign-in-input" type="email" name="email" id="email" placeholder="Email" />
             </div>
             <div class="form-group">
-              <label for="pass"><i class="zmdi zmdi-lock"></i></label>
-              <input type="password" name="password" id="password" placeholder="Password" />
+              <label class="sign-in-label" for="pass"><i class="zmdi zmdi-lock"></i></label class="sign-in-label">
+              <input class="sign-in-input" type="password" name="password" id="password" placeholder="Password" />
             </div>
             <div class="form-group">
-              <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
-              <input type="password" name="repassword" id="repassword" placeholder="Repeat your password" />
+              <label class="sign-in-label" for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label class="sign-in-label">
+              <input class="sign-in-input" type="password" name="repassword" id="repassword" placeholder="Repeat your password" />
             </div>
             <div class="form-group form-button">
               <input type="submit" name="signup" id="signup" class="form-submit" value="Register" />
