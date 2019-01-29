@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from django.http import HttpResponse, JsonResponse
-from .serializers import EventSerializers
+from .serializers import EventSerializer
 from .models import Event
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -50,7 +50,7 @@ class EventList(APIView):
             events = paginator.page(1)
         except EmptyPage as epErr:
             events = paginator.page(paginator.num_pages)
-        serializer = EventSerializers(events, many=True)
+        serializer = EventSerializer(events, many=True)
         content = {
             'result_count': event_list.count(),
             'page': events.number,
@@ -78,7 +78,7 @@ def event_detail(request, id_event):
 
     # Hander request
     if request.method == 'GET':
-        serializer = EventSerializers(event)
+        serializer = EventSerializer(event)
         return JsonResponse(serializer.data, status=status.HTTP_200_OK)
 
     elif request.method == 'DELETE':

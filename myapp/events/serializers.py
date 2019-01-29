@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from myapp.events.models import EventMembers
 
 
-class EventSerializers(serializers.ModelSerializer):
+class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
         fields = ("id", "title", "start_date", "end_date", "start_time",
