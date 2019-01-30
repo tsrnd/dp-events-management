@@ -1,30 +1,26 @@
 from rest_framework.views import APIView
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from .serializers import EventSerializer
 from .models import Event
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from myapp.events.serializers import UserSerializer
 from django.contrib.auth.models import User
-from myapp.events.models import EventMembers
 from rest_framework import status
 from rest_framework.parsers import FormParser
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 RESULT_LIMIT = 5
 IS_PUBLIC = True
 
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the event index.")
-
-
 class EventList(APIView):
-    """
-    List all events.
-    """
-
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     def get(self, request, format=None):
+        """
+            List all events.
+        """
         public = request.GET.get("is_public", IS_PUBLIC)
         owner = request.GET.get('owner', False)
         start_date = request.GET.get('start_date', False)
@@ -58,6 +54,16 @@ class EventList(APIView):
             'result': serializer.data,
         }
         return Response(content)
+    
+    def post(self, request, format=None):
+        """
+            Create a new Event
+        """
+        serializer = EventSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(owner=request.user.id)
+            return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET', 'PUT'])

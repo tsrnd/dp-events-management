@@ -110,10 +110,6 @@ definitions:
         type: string
         description: Time create
         example: "00:00:00+00"
-      user_edit:
-        type: integer
-        description: user edit event
-        example: 1
 
 parameters:
   Id_event:
@@ -212,12 +208,6 @@ parameters:
     in: formData
     required: false
     type: string
-  User_edit:
-    name: user_edit
-    description: user edit
-    in: formData
-    required: false
-    type: integer
   Status:
     name: status
     description: status event
@@ -321,7 +311,6 @@ paths:
         - $ref: '#/parameters/Item_preparing'
         - $ref: '#/parameters/Time_create'
         - $ref: '#/parameters/Last_edit'
-        - $ref: '#/parameters/User_edit'
         - $ref: '#/parameters/Status'
       responses:
         '200':
@@ -383,7 +372,6 @@ paths:
         - $ref: '#/parameters/Item_preparing'
         - $ref: '#/parameters/Time_create'
         - $ref: '#/parameters/Last_edit'
-        - $ref: '#/parameters/User_edit'
         - $ref: '#/parameters/Status'
       responses:
         '200':
