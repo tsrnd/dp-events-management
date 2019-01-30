@@ -178,7 +178,7 @@ MEDIA_URL = '/media/'
 #MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Add media folder. - Minio Storage.
-MEDIA_ROOT = './media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # DEFAULT_FILE_STORAGE = "minio_storage.storage.MinioMediaStorage"
 # STATICFILES_STORAGE = "minio_storage.storage.MinioStaticStorage"

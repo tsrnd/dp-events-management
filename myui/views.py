@@ -21,3 +21,8 @@ def signin(request):
 def signup(request):
     context = {}
     return render(request, 'users/signup.html', context)
+
+
+def create_event(request):
+    context = {}
+    return render(request, 'events/create.html', context)
