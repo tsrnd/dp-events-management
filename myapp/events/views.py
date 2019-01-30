@@ -9,14 +9,14 @@ from django.contrib.auth.models import User
 from rest_framework import status
 from rest_framework.parsers import FormParser
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 RESULT_LIMIT = 5
 IS_PUBLIC = True
 
 
 class EventList(APIView):
-    
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     def get(self, request, format=None):
         """
             List all events.
@@ -54,7 +54,7 @@ class EventList(APIView):
             'result': serializer.data,
         }
         return Response(content)
-    permission_classes = (IsAuthenticated,)
+    
     def post(self, request, format=None):
         """
             Create a new Event
