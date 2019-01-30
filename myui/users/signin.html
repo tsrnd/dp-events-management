@@ -13,12 +13,15 @@
         </div>
         <div class="signin-form">
           <h2 class="form-title">Sign in</h2>
+          <span id="login_error" style="color:red"></span>
           <form method="POST" class="login-form" id="login-form">
             {% csrf_token %}
+            <span id="username_error" style="color:red"></span>
             <div class="form-group">
               <label class="sign-in-label" for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
               <input class="sign-in-input" type="text" name="username" id="username" placeholder="User Name" />
             </div>
+            <span id="password_error" style="color:red"></span>
             <div class="form-group">
               <label class="sign-in-label" for="your_pass"><i class="zmdi zmdi-lock"></i></label>
               <input class="sign-in-input" type="password" name="password" id="password" placeholder="Password" />
@@ -44,7 +47,7 @@
       scrollTop: $(".main").offset().top - 70
     }, 500);
     $('#login-form').submit(function (event) {
-      var formdata = $(this).serialize();
+      var formdata = $(this).serializeArray();
       var url = "{% url 'login_index' %}"
       event.preventDefault();
       moduleAuth.login(url, formdata);
