@@ -7,8 +7,9 @@ from rest_framework.decorators import api_view
 from myapp.events.serializers import UserSerializer
 from django.contrib.auth.models import User
 from rest_framework import status
-from rest_framework.parsers import FormParser
+from rest_framework.parsers import FormParser, MultiPartParser
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from rest_framework.permissions import IsAuthenticated
 
 RESULT_LIMIT = 5
 IS_PUBLIC = True
@@ -53,13 +54,12 @@ class EventList(APIView):
             'result': serializer.data,
         }
         return Response(content)
-    
+    permission_classes = (IsAuthenticated,)
     def post(self, request, format=None):
         """
             Create a new Event
         """
-        data = FormParser().parse(request)
-        serializer = EventSerializer(data=data)
+        serializer = EventSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(owner=request.user.id)
             return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)

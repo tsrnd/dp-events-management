@@ -36,6 +36,7 @@ class EventSerializer(serializers.ModelSerializer):
 
         return data
 
+    file_attack = serializers.ImageField(max_length=254, use_url=True)
     class Meta:
         model = Event
         fields = ("id", "title", "start_date", "end_date", "start_time",

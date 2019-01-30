@@ -22,7 +22,7 @@ class Event(models.Model):
     time_notification = models.CharField(max_length=20, null=True)
     owner = models.IntegerField(null=True)
     event_content = models.TextField(null=True)
-    file_attack = models.TextField(null=True)
+    file_attack = models.ImageField(upload_to='pictures/%Y/%m/%d', default='pictures/default.png', max_length=254)
     guest_can_invite = models.BooleanField(default=True)
     view_all_guest = models.BooleanField(default=True)
     item_preparing = models.TextField(null=True)
@@ -37,6 +37,9 @@ class Event(models.Model):
     custom_objects = EventValidator()
     class Meta:
         db_table = 'tbl_events'
+    
+    def __str__(self):
+        return "%s" % self.title
 
 
 class EventHistory(models.Model):
@@ -67,6 +70,8 @@ class EventHistory(models.Model):
     class Meta:
         db_table = 'tbl_events_history'
 
+    def __str__(self):
+        return "%s" % self.title
 
 class EventMembers(models.Model):
     event_id = models.ForeignKey(Event, on_delete=models.CASCADE)
