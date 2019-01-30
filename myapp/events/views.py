@@ -7,7 +7,7 @@ from rest_framework.decorators import api_view
 from myapp.events.serializers import UserSerializer
 from django.contrib.auth.models import User
 from rest_framework import status
-from rest_framework.parsers import FormParser, MultiPartParser
+from rest_framework.parsers import FormParser
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from rest_framework.permissions import IsAuthenticated
 
