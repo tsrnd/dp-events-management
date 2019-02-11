@@ -94,19 +94,12 @@
                   <div class="col">
                     <div class="header_nav_content d-flex flex-row align-items-center justify-content-start">
                       <nav class="main_nav">
-                        <ul>
+                        <ul id="header-nav">
                           <li class="active"><a href="{% url 'home' %}">Home</a></li>
-                          <li><a href="#">About Us</a></li>
-                          <li><a href="#">Speakers</a></li>
-                          <li><a href="#">Events</a></li>
-                          <li><a href="#">News</a></li>
-                          <li><a href="#">Contact</a></li>
                         </ul>
                       </nav>
-                      <div class="header_extra ml-auto">
+                      <div class="header_extra ml-auto" id="header-login">
                         <div class="header_search"><i class="fa fa-search" aria-hidden="true"></i></div>
-                        <div class="button header_button"><a href="{% url 'signin' %}">Login</a></div>
-                        <div class="button header_button"><a id="logout" href="#">Logout</a></div>
                       </div>
                     </div>
                   </div>

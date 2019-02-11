@@ -1,4 +1,5 @@
 var moduleEvent = (function () {
+  var authToken = "token " + localStorage.getItem("auth_token")
   const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
   page = 1
 
@@ -9,7 +10,7 @@ var moduleEvent = (function () {
             <div class="row row-lg-eq-height">
               <div class="col-lg-6 event_col">
                 <div class="event_image_container">
-                  <div class="background_image" style="background-image:url(/static/images/event_9.jpg)"></div>
+                  <div class="background_image" style="background-image:url(` + data[i].file_attack + `)"></div>
                   <div class="date_container">
                     <a href="#">
                       <span class="date_content d-flex flex-column align-items-center justify-content-center">
@@ -84,8 +85,58 @@ var moduleEvent = (function () {
     });
   }
 
+
+  function create(url, formdata) {
+    $("#event_error").empty()
+    $("#title_error").empty()
+    $("#start_date_error").empty()
+    $("#start_time_error").empty()
+    $("#end_date_error").empty()
+    $("#end_time_error").empty()
+    $("#is_all_day_error").empty()
+    $("#is_daily_error").empty()
+    $("#location_error").empty()
+    $("#event_content_error").empty()
+    $("#file_attack_error").empty()
+    $("#item_preparing_error").empty()
+    $("#is_public_error").empty()
+    $.ajax({
+      url: url,
+      method: "POST",
+      headers: {
+        "Authorization": authToken
+      },
+      data: formdata,
+      processData: false,
+      contentType: false,
+      success: function (data) {
+        // appenddata(data.result)
+      },
+      statusCode: {
+        201: function (response) {
+          location.replace("/")
+        },
+        400: function (response) {
+          console.log(response)
+          for (i in Object.keys(response.responseJSON)) {
+            key = Object.keys(response.responseJSON)[i]
+            messages = response.responseJSON[key]
+            $("#" + key + "_error").empty().append("<i>" + messages + "</i>")
+          }
+        },
+        401: function (response) {
+          alert("401")
+        },
+        500: function (response) {
+          console.log(response)
+        },
+      }
+    })
+  }
+
   return {
     listEvent: listEvent,
     events: events,
+    create: create,
   };
 }());

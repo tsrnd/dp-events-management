@@ -50,6 +50,17 @@
 <script src="{% static 'js/modules/auth.js' %}"></script>
 <script>
   $(document).ready(function () {
+    if (localStorage.getItem("auth_token")) {
+      $('#header-login').append(`<div class="button header_button"><a id="logout" href="#">Logout</a></div>`)
+      $('#header-nav').append(
+        `<li><a href="#">My Events</a></li>
+        <li><a href="{% url 'create-event' %}">Create Events</a></li>`
+      )
+    } else {
+      $('#header-login').append(`<div class="button header_button"><a href="{% url 'signin' %}">Login</a></div>`)
+      $('#header-login').append(
+        `<div class="button header_button"><a href="{% url 'signup' %}">Register</a></div>`)
+    }
     $('#logout').click(function (event) {
       moduleAuth.logout("{% url 'logout' %}")
     })

@@ -27,7 +27,7 @@ class EventList(APIView):
         end_date = request.GET.get('end_date', False)
         status = request.GET.get('status', False)
         event_list = Event.objects.all().filter(is_public=public)
-        order = request.GET.get('order', 'id')
+        order = request.GET.get('order', '-id')
         event_list = event_list.order_by(order)
         if owner:
             event_list = event_list.filter(owner=owner)

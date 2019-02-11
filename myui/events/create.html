@@ -1,4 +1,5 @@
 {% extends 'base/base.html' %}
+{% load staticfiles %}
 {% block title_header %}Create event{% endblock %}
 {% block content %}
 <div class="events">
@@ -6,67 +7,81 @@
     <div class="row">
       <div class="col">
         <h2 class="form-title">Create Event</h2>
-        <form>
+        <span id="event_error" style="color:red"></span>
+        <form method="POST" class="create-form" id="create-form">
+          {% csrf_token %}
           <div class="form-group">
             <label for="inputTitle">Title Events</label>
-            <input type="text" class="form-control" id="inputTitle" placeholder="Title Events">
+            <input type="text" class="form-control" id="inputTitle" name="title" placeholder="Title Events">
+            <span id="title_error" style="color:red"></span>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="startDate">Start Date</label>
-              <input type="date" class="form-control option-style" id="startDate" placeholder="Start Date">
+              <input type="date" class="form-control option-style" id="startDate" name="start_date" placeholder="Start Date">
+              <span id="start_date_error" style="color:red"></span>
             </div>
             <div class="form-group col-md-6">
               <label for="startTime">Start Time</label>
-              <input type="time" class="form-control option-style" id="startTime" placeholder="Start Time">
+              <input type="time" class="form-control option-style" id="startTime" name="start_time" placeholder="Start Time">
+              <span id="start_time_error" style="color:red"></span>
             </div>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="endDate">End Date</label>
-              <input type="date" class="form-control option-style" id="endDate" placeholder="End Date">
+              <input type="date" class="form-control option-style" id="endDate" name="end_date" placeholder="End Date">
+              <span id="end_date_error" style="color:red"></span>
             </div>
             <div class="form-group col-md-6">
               <label for="endTime">End Time</label>
-              <input type="time" class="form-control option-style" id="endTime" placeholder="End Time">
+              <input type="time" class="form-control option-style" id="endTime" name="end_time" placeholder="End Time">
+              <span id="end_time_error" style="color:red"></span>
             </div>
           </div>
           <div class="form-group">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="dailycheck">
-              <label class="form-check-label check-form" for="dailycheck">
-                Daily
-              </label>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="alldaycheck">
+              <input class="form-check-input" type="checkbox" id="alldaycheck" name="is_all_day">
               <label class="form-check-label check-form" for="alldaycheck">
                 All day
               </label>
+              <span id="is_all_day_error" style="color:red"></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="dailycheck" name="is_daily">
+              <label class="form-check-label check-form" for="dailycheck">
+                Daily
+              </label>
+              <span id="is_daily_error" style="color:red"></span>
             </div>
           </div>
           <div class="form-group">
             <label for="location">Location</label>
-            <input type="text" class="form-control" id="location" placeholder="Location">
+            <input type="text" class="form-control" id="location" placeholder="Location" name="location">
+            <span id="location_error" style="color:red"></span>
           </div>
           <div class="form-group">
             <label for="eventContent">Event content</label>
-            <textarea type="text" class="form-control" id="eventContent" placeholder="Event content"></textarea>
+            <textarea type="text" class="form-control" id="eventContent" placeholder="Event content" name="event_content"></textarea>
+            <span id="event_content_error" style="color:red"></span>
           </div>
           <div class="form-group">
             <label for="imageEvent">Image Event</label>
-            <input type="file" class="form-control-file" id="imageEvent">
+            <input type="file" class="form-control-file" id="imageEvent" name="file_attack">
+            <span id="file_attack_error" style="color:red"></span>
           </div>
           <div class="form-group">
             <label for="itemPre">Item Preparing</label>
-            <textarea type="text" class="form-control" id="itemPre" placeholder="Item Preparing"></textarea>
+            <textarea type="text" class="form-control" id="itemPre" placeholder="Item Preparing" name="item_preparing"></textarea>
+            <span id="item_preparing_error" style="color:red"></span>
           </div>
           <div class="form-group">
             <div class="form-check">
               <input class="form-check-input" type="checkbox" id="publicCheck">
-              <label class="form-check-label check-form" for="publicCheck">Public</label>
+              <label class="form-check-label check-form" for="publicCheck" name="is_public">Public</label>
+              <span id="is_public_error" style="color:red"></span>
             </div>
           </div>
           <button type="submit" class="btn btn-primary">Create</button>
@@ -76,4 +91,45 @@
     </div>
   </div>
 </div>
+{% endblock %}
+{% block script %}
+<script src="{% static 'js/modules/event.js' %}"></script>
+<script>
+  $(document).ready(function () {
+    $('html, body').animate({
+      scrollTop: $(".events").offset().top - 70
+    }, 500)
+    $('#create-form').submit(function (event) {
+      var formdata = new FormData(this)
+      var url = "{% url 'list_events' %}"
+      event.preventDefault()
+      moduleEvent.create(url, formdata)
+    })
+    $('#alldaycheck').click(function (event) {
+      if ($('#alldaycheck').is(':checked')) {
+        $('#startTime').attr("disabled", true)
+        $('#endTime').attr("disabled", true)
+      } else {
+        $("#startTime").removeAttr("disabled")
+        $("#endTime").removeAttr("disabled")
+      }
+    })
+    d = new Date()
+    date = d.getDate()
+    month = d.getMonth() + 1
+    year = d.getFullYear()
+    month = month < 10 ? '0' + month : month
+    date = date < 10 ? '0' + date : date
+    mindate = year + "-" + month + "-" + date
+    document.getElementById("startDate").setAttribute("min", mindate)
+    document.getElementById("endDate").setAttribute("min", mindate)
+    $("#startDate").change(function (e) {
+      document.getElementById("endDate").setAttribute("min", $("#startDate").val())
+    })
+    $("#endDate").change(function (e) {
+      document.getElementById("startDate").setAttribute("max", $("#endDate").val())
+    })
+  })
+
+</script>
 {% endblock %}
