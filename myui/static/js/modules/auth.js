@@ -13,7 +13,7 @@ var moduleAuth = (function () {
                 },
                 statusCode: {
                     200: function (response) {
-                        alert(response)
+                        location.replace("/")
                     },
                     400: function (response) {
                         $("#login_error").empty().append("<i>Username or password not correct</i>")
@@ -36,7 +36,7 @@ var moduleAuth = (function () {
             method: "POST",
             data: formdata,
             success: function (data) {
-                // login("/api/login", formdata)
+                login("/api/login", formdata)
             },
             statusCode: {
                 200: function (response) {
@@ -89,6 +89,7 @@ var moduleAuth = (function () {
             statusCode: {
                 204: function (response) {
                     localStorage.removeItem("auth_token")
+                    location.replace("/")
                 },
                 401: function (response) {
                     alert("401")
