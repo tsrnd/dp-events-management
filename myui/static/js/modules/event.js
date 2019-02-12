@@ -134,9 +134,32 @@ var moduleEvent = (function () {
     })
   }
 
+  function detailEvent(url) {
+    id = url.substring(url.lastIndexOf('/') + 1);
+    $.ajax({
+      url: url,
+      method: "GET",
+      data: {
+        "id_event": id,
+      },
+      success: function (data) {
+        console.log(data)
+      },
+      statusCode: {
+        200: function (response) {
+          alert("200");
+        },
+        401: function (response) {
+          alert("401");
+        },
+      }
+    });
+  }
+
   return {
     listEvent: listEvent,
     events: events,
     create: create,
+    detailEvent: detailEvent,
   };
 }());
