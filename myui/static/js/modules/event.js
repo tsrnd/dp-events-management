@@ -139,33 +139,80 @@ var moduleEvent = (function () {
       url: url,
       method: "GET",
       success: function (data) {
-        console.log(data)
         if (data.start_time == null) {
           var startDate = new Date(data.start_date)
           var endDate = new Date(data.end_date)
-          $("#start-time").append(startDate.getDate() + "/" + startDate.getMonth() + "/" + startDate.getFullYear())
-          $("#end-time").append(endDate.getDate() + "/" + endDate.getMonth() + "/" + endDate.getFullYear())
+          startTime = startDate.getDate() + "/" + startDate.getMonth() + "/" + startDate.getFullYear()
+          endTime = endDate.getDate() + "/" + endDate.getMonth() + "/" + endDate.getFullYear()
         } else {
           var startDate = new Date(data.start_date + " " + data.start_time)
           var endDate = new Date(data.end_date + " " + data.end_time)
-          $("#start-time").append(startDate.getDate() + "/" + startDate.getMonth() + "/" + startDate.getFullYear() + " @ " + startDate.getHours() + ":" + startDate.getMinutes())
-          $("#end-time").append(endDate.getDate() + "/" + endDate.getMonth() + "/" + endDate.getFullYear() + " @ " + endDate.getHours() + ":" + endDate.getMinutes())
+          startTime = startDate.getDate() + "/" + startDate.getMonth() + "/" + startDate.getFullYear() + " @ " + startDate.getHours() + ":" + startDate.getMinutes()
+          endTime = endDate.getDate() + "/" + endDate.getMonth() + "/" + endDate.getFullYear() + " @ " + endDate.getHours() + ":" + endDate.getMinutes()
         }
-        var startDate = new Date(data.start_date + " " + data.start_time)
-        var endDate = new Date(data.end_date + " " + data.end_time)
-        $("#image-event").append(`<img src="` + data.file_attack + `" alt="IMG-ABOUT">`)
-        $("#title-event").append(data.title)
-
-        $("#location").append(data.location)
-        $("#content").append(data.event_content)
-        $("#item-preparing").append(data.item_preparing)
+        $("#content-detail-event").append(`<div class="row">
+        <div class="col-md-5 p-b-30">
+          <div class="hov-img-zoom" id="image-event">
+          <img src="` + data.file_attack + `" alt="IMG-ABOUT">
+          </div>
+        </div>
+  
+        <div class="col-md-7 p-b-30">
+          <div class="p-t-30 respon5">
+            <h4 class="product-detail-name m-text17 p-b-13" id="title-event">` + data.title + `</h4>
+  
+            <p class="m-text10">Start time:
+              <span>` + startTime + `</span>
+            </p>
+            <p class="m-text10 p-b-15">End time:
+              <sp>` + endTime + `</span>
+            </p>
+            <div class="p-b-30">
+              <p class="m-text10">Location:
+                <span class="m-text10 m-r-35">` + data.location + `</span>
+              </p>
+            </div>
+  
+            <div class="wrap-dropdown-content bo6 p-t-15 p-b-14 active-dropdown-content">
+              <h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
+                Description
+                <i class="down-mark fs-12 color1 fa fa-minus dis-none" aria-hidden="true"></i>
+                <i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
+              </h5>
+  
+              <div class="dropdown-content dis-none p-t-15 p-b-23">
+                <p class="m-text10">` + data.event_content + `</p>
+              </div>
+            </div>
+  
+            <div class="wrap-dropdown-content bo7 p-t-15 p-b-14">
+              <h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
+                Item preparing
+                <i class="down-mark fs-12 color1 fa fa-minus dis-none" aria-hidden="true"></i>
+                <i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
+              </h5>
+  
+              <div class="dropdown-content dis-none p-t-15 p-b-23">
+                <p class="m-text10">` + data.item_preparing + `</p>
+              </div>
+            </div>
+          </div>
+          <div class="event_buttons" id="btn-detail-event"></div>
+        </div>
+      </div>`)
+        if (localStorage.getItem("auth_token")) {
+          $('#btn-detail-event').append(
+            `<div class="button event_button event_button_1" id="btn-edit-event"><a href="#">Edit</a></div>
+              <div class="button event_button event_button_1" id="btn-delete-event"><a href="#">Delete</a></div>`
+          )
+        } else {
+          $('#btn-detail-event').append(
+            `<div class="button event_button event_button_1" id="btn-edit-event"><a href="#">Join</a></div>`)
+        }
       },
       statusCode: {
-        200: function (response) {
-          // alert("200");
-        },
-        401: function (response) {
-          alert("401");
+        404: function (response) {
+          $("#image-notfound").removeAttr("hidden")
         },
       }
     });

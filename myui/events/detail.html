@@ -3,62 +3,9 @@
 {% block title_header %}Detail event{% endblock %}
 {% block content %}
 <div class="events">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-5 p-b-30">
-        <div class="hov-img-zoom" id="image-event">
-        </div>
-      </div>
-
-      <div class="col-md-7 p-b-30">
-        <div class="p-t-30 respon5">
-          <h4 class="product-detail-name m-text17 p-b-13" id="title-event"></h4>
-
-          <p class="m-text10">Start time:
-            <span id="start-time"></span>
-          </p>
-          <p class="m-text10 p-b-15">End time:
-            <span id="end-time"></span>
-          </p>
-          <div class="p-b-30">
-            <p class="m-text10">Location:
-              <span class="m-text10 m-r-35" id="location"></span>
-            </p>
-          </div>
-
-          <!--  -->
-          <div class="wrap-dropdown-content bo6 p-t-15 p-b-14 active-dropdown-content">
-            <h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
-              Description
-              <i class="down-mark fs-12 color1 fa fa-minus dis-none" aria-hidden="true"></i>
-              <i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
-            </h5>
-
-            <div class="dropdown-content dis-none p-t-15 p-b-23">
-              <p class="m-text10" id="content"></p>
-            </div>
-          </div>
-
-          <div class="wrap-dropdown-content bo7 p-t-15 p-b-14">
-            <h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
-              Item preparing
-              <i class="down-mark fs-12 color1 fa fa-minus dis-none" aria-hidden="true"></i>
-              <i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
-            </h5>
-
-            <div class="dropdown-content dis-none p-t-15 p-b-23">
-              <p class="m-text10" id="item-preparing">
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="event_buttons">
-          <div class="button event_button event_button_1" id="btn-join-event"><a href="#">Join</a></div>
-          <div class="button event_button event_button_1" id="btn-edit-event"><a href="#">Edit</a></div>
-          <div class="button event_button event_button_1" id="btn-delete-event"><a href="#">Delete</a></div>
-        </div>
-      </div>
-    </div>
+  <div class="container" id="content-detail-event">
+    <img id="image-notfound" src="/static/images/error-404.png" style="display: block; margin-left: auto; margin-right: auto;"
+      hidden>
   </div>
 </div>
 {% endblock %}
