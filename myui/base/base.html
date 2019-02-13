@@ -22,7 +22,6 @@
     <link rel="stylesheet" type="text/css" href="{% static 'styles/events.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'styles/events_responsive.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'styles/login.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/main.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'styles/util.css' %}">
 
     <!-- Font Icon -->
@@ -58,10 +57,16 @@
         `<li><a href="#">My Events</a></li>
         <li><a href="{% url 'create-event' %}">Create Events</a></li>`
       )
+      $('#btn-join-event').hide()
+      $('#btn-edit-event').show()
+      $('#btn-delete-event').show()
     } else {
       $('#header-login').append(`<div class="button header_button"><a href="{% url 'signin' %}">Login</a></div>`)
       $('#header-login').append(
         `<div class="button header_button"><a href="{% url 'signup' %}">Register</a></div>`)
+      $('#btn-join-event').show()
+      $('#btn-edit-event').hide()
+      $('#btn-delete-event').hide()
     }
     $('#logout').click(function (event) {
       moduleAuth.logout("{% url 'logout' %}")

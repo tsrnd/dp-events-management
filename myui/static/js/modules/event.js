@@ -23,7 +23,7 @@ var moduleEvent = (function () {
               </div>
               <div class="col-lg-6 event_col">
                 <div class="event_content" id="event_content">
-                  <div class="event_title"> ` + data[i].title + `</div>
+                  <div class="event_title"><a href="/events/` + data[i].id + `">` + data[i].title + `</a></div>
                   <div class="event_location">` + data[i].location + `</div>
                   <div class="event_text">
                     <p>` + data[i].event_content + `</p>
@@ -51,8 +51,8 @@ var moduleEvent = (function () {
                     </div>
                   </div>
                   <div class="event_buttons">
-                    <div class="button event_button event_button_1"><a href="#">Buy Tickets Now!</a></div>
-                    <div class="button_2 event_button event_button_2"><a href="#">Read more</a></div>
+                    <div class="button event_button event_button_1"><a href="#">Join</a></div>
+                    <div class="button_2 event_button event_button_2"><a href="/events/` + data[i].id + `">Read more</a></div>
                   </div>
                 </div>
               </div>
@@ -135,19 +135,34 @@ var moduleEvent = (function () {
   }
 
   function detailEvent(url) {
-    id = url.substring(url.lastIndexOf('/') + 1);
     $.ajax({
       url: url,
       method: "GET",
-      data: {
-        "id_event": id,
-      },
       success: function (data) {
         console.log(data)
+        if (data.start_time == null) {
+          var startDate = new Date(data.start_date)
+          var endDate = new Date(data.end_date)
+          $("#start-time").append(startDate.getDate() + "/" + startDate.getMonth() + "/" + startDate.getFullYear())
+          $("#end-time").append(endDate.getDate() + "/" + endDate.getMonth() + "/" + endDate.getFullYear())
+        } else {
+          var startDate = new Date(data.start_date + " " + data.start_time)
+          var endDate = new Date(data.end_date + " " + data.end_time)
+          $("#start-time").append(startDate.getDate() + "/" + startDate.getMonth() + "/" + startDate.getFullYear() + " @ " + startDate.getHours() + ":" + startDate.getMinutes())
+          $("#end-time").append(endDate.getDate() + "/" + endDate.getMonth() + "/" + endDate.getFullYear() + " @ " + endDate.getHours() + ":" + endDate.getMinutes())
+        }
+        var startDate = new Date(data.start_date + " " + data.start_time)
+        var endDate = new Date(data.end_date + " " + data.end_time)
+        $("#image-event").append(`<img src="` + data.file_attack + `" alt="IMG-ABOUT">`)
+        $("#title-event").append(data.title)
+
+        $("#location").append(data.location)
+        $("#content").append(data.event_content)
+        $("#item-preparing").append(data.item_preparing)
       },
       statusCode: {
         200: function (response) {
-          alert("200");
+          // alert("200");
         },
         401: function (response) {
           alert("401");

@@ -25,9 +25,9 @@
 <script src="{% static 'js/modules/event.js' %}"></script>
 <script>
   $(document).ready(function () {
-    moduleEvent.listEvent("{% url 'list_events' %}");
+    moduleEvent.listEvent("{% url 'events:list_events' %}");
     $("#loadMore").on('click', function (e) {
-      moduleEvent.listEvent("{% url 'list_events' %}")
+      moduleEvent.listEvent("{% url 'events:list_events' %}")
     });
   })
 
