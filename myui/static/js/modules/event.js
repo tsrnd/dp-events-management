@@ -200,7 +200,7 @@ var moduleEvent = (function () {
           <div class="event_buttons" id="btn-detail-event"></div>
         </div>
       </div>`)
-        if (localStorage.getItem("auth_token")) {
+        if (localStorage.getItem("auth_token") && localStorage.getItem("id") == data.owner) {
           $('#btn-detail-event').append(
             `<div class="button event_button event_button_1" id="btn-edit-event"><a href="#">Edit</a></div>
               <div class="button event_button event_button_1" id="btn-delete-event"><a href="#">Delete</a></div>`
