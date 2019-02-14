@@ -101,7 +101,7 @@
     }, 500)
     $('#create-form').submit(function (event) {
       var formdata = new FormData(this)
-      var url = "{% url 'list_events' %}"
+      var url = "{% url 'events:list_events' %}"
       event.preventDefault()
       moduleEvent.create(url, formdata)
     })

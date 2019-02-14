@@ -1,0 +1,40 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+{% block title_header %}Update event{% endblock %}
+{% block content %}
+<div class="events">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2 class="form-title">Update Event</h2>
+                <form action="" method="post" class="update-form" id="update-form">
+
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+<script src="{% static 'js/modules/event.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        id = parseInt(location.href.split("/").pop())
+        console.log(id)
+        url = "{% url 'events:detail' '000000' %}"
+        url = url.replace('000000', id)
+        moduleEvent.getDetail(url);
+        // var event, arr_events
+        // $(".event_button_3").click(function () {
+        //     event = $(this).attr("data-event");
+        //     arr_events = JSON.parse(event);
+        //     console.log(arr_events)
+        //     $("#title-event" + id).val(arr_events['name']);
+        // });
+    })
+</script>
+
+
+{% endblock %}

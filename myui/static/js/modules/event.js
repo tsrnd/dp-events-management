@@ -53,6 +53,7 @@ var moduleEvent = (function () {
                   <div class="event_buttons">
                     <div class="button event_button event_button_1"><a href="#">Buy Tickets Now!</a></div>
                     <div class="button_2 event_button event_button_2"><a href="#">Read more</a></div>
+                    <div class="edit-event button_2 event_button event_button_3" data-event="`+ data + `"><a href="/events/update/` + data[i].id + `">Edit</a></div>
                   </div>
                 </div>
               </div>
@@ -133,10 +134,134 @@ var moduleEvent = (function () {
       }
     })
   }
+  function getDetail(url) {
+    $.ajax({
+      url: url,
+      method: "GET",
+      success: function (data) {
+        console.log(data)
+        if (data.start_time == null) {
+          var startDate = new Date(data.start_date)
+          var endDate = new Date(data.end_date)
+          startTime = startDate.getDate() + "/" + startDate.getMonth() + "/" + startDate.getFullYear()
+          endTime = endDate.getDate() + "/" + endDate.getMonth() + "/" + endDate.getFullYear()
+        } else {
+          var startDate = new Date(data.start_date + " " + data.start_time)
+          var endDate = new Date(data.end_date + " " + data.end_time)
+          startTime = startDate.getDate() + "/" + startDate.getMonth() + "/" + startDate.getFullYear() + " @ " + startDate.getHours() + ":" + startDate.getMinutes()
+          endTime = endDate.getDate() + "/" + endDate.getMonth() + "/" + endDate.getFullYear() + " @ " + endDate.getHours() + ":" + endDate.getMinutes()
+        }
+        $("#update-form").append(`<div class="form-group">
+        <label for="inputTitle">Title Events</label>
+        <input type="text" class="form-control" id="inputTitle" name="title" value="`+ data.title + `">
+        <span id="title_error" style="color:red"></span>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="startDate">Start Date</label>
+          <input type="date" class="form-control option-style" id="startDate" name="start_date" value = "`+ data.start_date + `">
+          <span id="start_date_error" style="color:red"></span>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="startTime">Start Time</label>
+          <input type="time" class="form-control option-style" id="startTime" name="start_time" value = "`+ data.start_time + `">
+          <span id="start_time_error" style="color:red"></span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="endDate">End Date</label>
+          <input type="date" class="form-control option-style" id="endDate" name="end_date" value = "`+ data.end_date + `">
+          <span id="end_date_error" style="color:red"></span>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="endTime">End Time</label>
+          <input type="time" class="form-control option-style" id="endTime" name="end_time" value = "`+ data.end_time + `">
+          <span id="end_time_error" style="color:red"></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-check">
+          <input class="form-check-input" {%ifequal {{data.is_all_day}} is false %}checked="checked"{{% endifequal %}  type="checkbox" id="alldaycheck" name="is_all_day" >
+          <label class="form-check-label check-form" for="alldaycheck">
+            All day
+          </label>
+          <span id="is_all_day_error" style="color:red"></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-check">
+          <input class="form-check-input" {% ifequal `+ data.is_daily + ` 'true' %}checked{% endifequal %} type="checkbox" id="dailycheck" name="is_daily" >
+          <label class="form-check-label check-form" for="dailycheck">
+            Daily
+          </label>
+          <span id="is_daily_error" style="color:red"></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="location">Location</label>
+        <input type="text" class="form-control" id="location" value="`+ data.location + `" name="location">
+        <span id="location_error" style="color:red"></span>
+      </div>
+      <div class="form-group">
+        <label for="eventContent">Event content</label>
+        <textarea type="text" class="form-control" id="eventContent"  name="event_content">`+ data.event_content + `</textarea>
+        <span id="event_content_error" style="color:red"></span>
+      </div>
+      <div class="form-group">
+        <span id="close" data-id="" data-token="{{ csrf_token() }}" class="close">&times;</span>
+        <label>Image Event</label>
+        <img src="`+ data.file_attack + `" alt=""> <br><br>    
+        <input type="file"  value="`+ data.file_attack + `">
+      </div>
+      <div class="form-group">
+        <label for="itemPre">Item Preparing</label>
+        <textarea type="text" class="form-control" id="itemPre" name="item_preparing">`+ data.item_preparing + `</textarea>
+        <span id="item_preparing_error" style="color:red"></span>
+      </div>
+      <div class="form-group">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="publicCheck">
+          <label class="form-check-label check-form" for="publicCheck" name="is_public">Public</label>
+          <span id="is_public_error" style="color:red"></span>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" name="update-event">Update</button>`)
+
+
+      },
+
+    });
+  }
+
+
+
 
   return {
     listEvent: listEvent,
     events: events,
     create: create,
+    getDetail: getDetail,
   };
 }());
+// $('#edit-event').submit(function (event) {
+//   event.preventDefault();
+//   var id = $(this).attr('id')
+//   console.log(id)
+  // form_data = new FormData($('#update-form')[0]);
+
+  // $.ajax({
+  //   type: 'POST',
+  //   url: 'http://localhost:8000/api/events/' + id,
+  //   headers: {
+  //     "Authorization": authToken
+  //   },
+  //   processData: false,
+  //   contentType: false,
+  //   data: form_data,
+  //   success: function (data) {
+  //     alert("Success")
+  //   },
+
+  // })
+// })

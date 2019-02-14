@@ -26,3 +26,8 @@ def signup(request):
 def create_event(request):
     context = {}
     return render(request, 'events/create.html', context)
+
+
+def update_event(request, id_event):
+    context = {}
+    return render(request, 'events/edit.html', context)
