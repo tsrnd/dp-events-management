@@ -2,49 +2,50 @@
 {% load staticfiles %}
 <html lang="en">
 
-<head>
-  <title>Events</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-  <meta name="generator" content="Jekyll v3.8.5">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>{% block title_header %}{% endblock %} --Django</title>
+  <head>
+    <title>Events</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title_header %}{% endblock %} --Django</title>
 
-  <!-- Main css -->
-  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'styles/events.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'styles/events_responsive.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'styles/login.css' %}">
+    <!-- Main css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/events.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/events_responsive.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/login.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/util.css' %}">
 
-  <!-- Font Icon -->
-  <link rel="stylesheet" href="{% static 'plugins/material-icon/css/material-design-iconic-font.min.css' %}">
-</head>
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{% static 'plugins/material-icon/css/material-design-iconic-font.min.css' %}">
+  </head>
 
-<body>
-  {% include 'base/header.html' %}
+  <body>
+    {% include 'base/header.html' %}
 
-  {% block content %}
+    {% block content %}
+    {% endblock %}
+
+    {% include 'base/footer.html' %}
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'styles/bootstrap4/popper.js' %}"></script>
+    <script src="{% static 'styles/bootstrap4/bootstrap.min.js' %}"></script>
+    <script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+    <script src="{% static 'plugins/easing/easing.js' %}"></script>
+    <script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
+    <script src="{% static 'js/events.js' %}"></script>
+  </body>
+  {% block script %}
   {% endblock %}
-
-  {% include 'base/footer.html' %}
-  <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
-  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static 'styles/bootstrap4/popper.js' %}"></script>
-  <script src="{% static 'styles/bootstrap4/bootstrap.min.js' %}"></script>
-  <script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
-  <script src="{% static 'plugins/easing/easing.js' %}"></script>
-  <script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
-  <script src="{% static 'js/events.js' %}"></script>
-</body>
-{% block script %}
-{% endblock %}
 
 </html>
 <script src="{% static 'js/modules/auth.js' %}"></script>

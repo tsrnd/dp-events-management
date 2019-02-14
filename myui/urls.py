@@ -7,4 +7,5 @@ urlpatterns = [
     path('signin/', views.signin, name='signin'),
     path('signup/', views.signup, name='signup'),
     path('events/create', views.create_event, name='create-event'),
+    path('events/<int:id_event>', views.detail_event, name='detail-event'),
 ]

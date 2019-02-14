@@ -10,6 +10,7 @@ var moduleAuth = (function () {
                 data: formdata,
                 success: function (data) {
                     localStorage.setItem("auth_token", data['token'])
+                    localStorage.setItem("id", data['id'])
                 },
                 statusCode: {
                     200: function (response) {
@@ -89,6 +90,7 @@ var moduleAuth = (function () {
             statusCode: {
                 204: function (response) {
                     localStorage.removeItem("auth_token")
+                    localStorage.removeItem("id")
                     location.replace("/")
                 },
                 401: function (response) {
