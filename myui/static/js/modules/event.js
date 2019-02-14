@@ -150,6 +150,14 @@ var moduleEvent = (function () {
           startTime = startDate.getDate() + "/" + startDate.getMonth() + "/" + startDate.getFullYear() + " @ " + startDate.getHours() + ":" + startDate.getMinutes()
           endTime = endDate.getDate() + "/" + endDate.getMonth() + "/" + endDate.getFullYear() + " @ " + endDate.getHours() + ":" + endDate.getMinutes()
         }
+        event_content = data.event_content
+        if (event_content == null) {
+          event_content = "Do not have description for this event"
+        }
+        item_preparing = data.item_preparing
+        if (item_preparing == null) {
+          item_preparing = "Do not have item preparing for this event"
+        }
         $("#content-detail-event").append(`<div class="row">
         <div class="col-md-5 p-b-30">
           <div class="hov-img-zoom" id="image-event">
@@ -181,7 +189,7 @@ var moduleEvent = (function () {
               </h5>
   
               <div class="dropdown-content dis-none p-t-15 p-b-23">
-                <p class="m-text10">` + data.event_content + `</p>
+                <p class="m-text10">` + event_content + `</p>
               </div>
             </div>
   
@@ -193,7 +201,7 @@ var moduleEvent = (function () {
               </h5>
   
               <div class="dropdown-content dis-none p-t-15 p-b-23">
-                <p class="m-text10">` + data.item_preparing + `</p>
+                <p class="m-text10">` + item_preparing + `</p>
               </div>
             </div>
           </div>
@@ -209,6 +217,14 @@ var moduleEvent = (function () {
           $('#btn-detail-event').append(
             `<div class="button event_button event_button_1" id="btn-edit-event"><a href="#">Join</a></div>`)
         }
+        // dropdown description and item preparing
+        $('.active-dropdown-content .js-toggle-dropdown-content').toggleClass('show-dropdown-content');
+        $('.active-dropdown-content .dropdown-content').slideToggle('fast');
+
+        $('.js-toggle-dropdown-content').on('click', function () {
+          $(this).toggleClass('show-dropdown-content');
+          $(this).parent().find('.dropdown-content').slideToggle('fast');
+        });
       },
       statusCode: {
         404: function (response) {
