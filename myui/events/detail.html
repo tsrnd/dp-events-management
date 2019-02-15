@@ -1,0 +1,23 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+{% block title_header %}Detail event{% endblock %}
+{% block content %}
+<div class="events">
+  <div class="container" id="content-detail-event">
+    <img id="image-notfound" src="/static/images/error-404.png" style="display: block; margin-left: auto; margin-right: auto;"
+      hidden>
+  </div>
+</div>
+{% endblock %}
+{% block script %}
+<script src="{% static 'js/modules/event.js' %}"></script>
+<script>
+  $(document).ready(function () {
+    id = parseInt(location.href.split("/").pop())
+    url = "{% url 'events:detail' '000000' %}"
+    url = url.replace('000000', id)
+    moduleEvent.detailEvent(url);
+  })
+
+</script>
+{% endblock %}

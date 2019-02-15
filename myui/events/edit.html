@@ -8,7 +8,7 @@
             <div class="col">
                 <h2 class="form-title">Update Event</h2>
                 <form action="" method="post" class="update-form" id="update-form">
-
+                    {% csrf_token %}
 
 
                 </form>
@@ -22,17 +22,25 @@
 <script>
     $(document).ready(function () {
         id = parseInt(location.href.split("/").pop())
-        console.log(id)
         url = "{% url 'events:detail' '000000' %}"
         url = url.replace('000000', id)
         moduleEvent.getDetail(url);
-        // var event, arr_events
-        // $(".event_button_3").click(function () {
-        //     event = $(this).attr("data-event");
-        //     arr_events = JSON.parse(event);
-        //     console.log(arr_events)
-        //     $("#title-event" + id).val(arr_events['name']);
-        // });
+        $('#alldaycheck').click(function (event) {
+            if ($('#alldaycheck').is(':checked')) {
+                $('#startTime').attr("disabled", true)
+                $('#endTime').attr("disabled", true)
+            } else {
+                $("#startTime").removeAttr("disabled")
+                $("#endTime").removeAttr("disabled")
+            }
+        })
+        $('#update-form').submit(function (event) {
+            var formdata = new FormData(this)
+
+            event.preventDefault()
+            moduleEvent.updateEvent(url, formdata)
+        })
+
     })
 </script>
 

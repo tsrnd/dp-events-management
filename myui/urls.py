@@ -1,6 +1,5 @@
 from django.urls import path, include
 from . import views
-
 urlpatterns = [
     path('', views.home, name='home'),
     path('comments/', views.comments, name='comments'),
@@ -11,4 +10,5 @@ urlpatterns = [
         'events/update/<int:id_event>',
         views.update_event,
         name='update-event'),
+    path('events/<int:id_event>', views.detail_event, name='detail-event'),
 ]

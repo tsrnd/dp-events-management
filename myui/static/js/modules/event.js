@@ -23,7 +23,7 @@ var moduleEvent = (function () {
               </div>
               <div class="col-lg-6 event_col">
                 <div class="event_content" id="event_content">
-                  <div class="event_title"> ` + data[i].title + `</div>
+                  <div class="event_title"><a href="/events/` + data[i].id + `">` + data[i].title + `</a></div>
                   <div class="event_location">` + data[i].location + `</div>
                   <div class="event_text">
                     <p>` + data[i].event_content + `</p>
@@ -51,9 +51,8 @@ var moduleEvent = (function () {
                     </div>
                   </div>
                   <div class="event_buttons">
-                    <div class="button event_button event_button_1"><a href="#">Buy Tickets Now!</a></div>
-                    <div class="button_2 event_button event_button_2"><a href="#">Read more</a></div>
-                    <div class="edit-event button_2 event_button event_button_3" data-event="`+ data + `"><a href="/events/update/` + data[i].id + `">Edit</a></div>
+                    <div class="button event_button event_button_1"><a href="#">Join</a></div>
+                    <div class="button_2 event_button event_button_2"><a href="/events/` + data[i].id + `">Read more</a></div>
                   </div>
                 </div>
               </div>
@@ -139,7 +138,6 @@ var moduleEvent = (function () {
       url: url,
       method: "GET",
       success: function (data) {
-        console.log(data)
         if (data.start_time == null) {
           var startDate = new Date(data.start_date)
           var endDate = new Date(data.end_date)
@@ -182,7 +180,7 @@ var moduleEvent = (function () {
       </div>
       <div class="form-group">
         <div class="form-check">
-          <input class="form-check-input" {%ifequal {{data.is_all_day}} is false %}checked="checked"{{% endifequal %}  type="checkbox" id="alldaycheck" name="is_all_day" >
+          <input class="form-check-input" type="checkbox" id="alldaycheck" name="is_all_day" >
           <label class="form-check-label check-form" for="alldaycheck">
             All day
           </label>
@@ -191,7 +189,7 @@ var moduleEvent = (function () {
       </div>
       <div class="form-group">
         <div class="form-check">
-          <input class="form-check-input" {% ifequal `+ data.is_daily + ` 'true' %}checked{% endifequal %} type="checkbox" id="dailycheck" name="is_daily" >
+          <input class="form-check-input" type="checkbox" id="dailycheck" name="is_daily" >
           <label class="form-check-label check-form" for="dailycheck">
             Daily
           </label>
@@ -211,7 +209,6 @@ var moduleEvent = (function () {
       <div class="form-group">
         <span id="close" data-id="" data-token="{{ csrf_token() }}" class="close">&times;</span>
         <label>Image Event</label>
-        <img src="`+ data.file_attack + `" alt=""> <br><br>    
         <input type="file"  value="`+ data.file_attack + `">
       </div>
       <div class="form-group">
@@ -226,42 +223,160 @@ var moduleEvent = (function () {
           <span id="is_public_error" style="color:red"></span>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary" name="update-event">Update</button>`)
-
-
+      <div class="button_2 event_button event_button_2"><a href="/events/` + data.id + `">Update</a></div>`)
       },
 
     });
   }
 
+  function updateEvent(url, formdata) {
+    $.ajax({
+      url: url,
+      method: "PUT",
+      headers: {
+        "Authorization": authToken
+      },
+      data: formdata,
+      processData: false,
+      contentType: false,
+      success: function (data) {
+
+        alert("Success")
+      },
+      statusCode: {
+        200: function (response) {
+          console.log(response)
+        },
+        400: function (response) {
+          console.log(response)
+          for (i in Object.keys(response.responseJSON)) {
+            key = Object.keys(response.responseJSON)[i]
+            messages = response.responseJSON[key]
+            $("#" + key + "_error").empty().append("<i>" + messages + "</i>")
+          }
+        },
+        401: function (response) {
+          alert("401")
+        },
+        500: function (response) {
+          console.log(response)
+        },
+      }
+    })
 
 
+  }
+
+
+
+
+  function detailEvent(url) {
+    $.ajax({
+      url: url,
+      method: "GET",
+      success: function (data) {
+        if (data.start_time == null) {
+          var startDate = new Date(data.start_date)
+          var endDate = new Date(data.end_date)
+          startTime = startDate.getDate() + "/" + startDate.getMonth() + "/" + startDate.getFullYear()
+          endTime = endDate.getDate() + "/" + endDate.getMonth() + "/" + endDate.getFullYear()
+        } else {
+          var startDate = new Date(data.start_date + " " + data.start_time)
+          var endDate = new Date(data.end_date + " " + data.end_time)
+          startTime = startDate.getDate() + "/" + startDate.getMonth() + "/" + startDate.getFullYear() + " @ " + startDate.getHours() + ":" + startDate.getMinutes()
+          endTime = endDate.getDate() + "/" + endDate.getMonth() + "/" + endDate.getFullYear() + " @ " + endDate.getHours() + ":" + endDate.getMinutes()
+        }
+        event_content = data.event_content
+        if (event_content == null) {
+          event_content = "Do not have description for this event"
+        }
+        item_preparing = data.item_preparing
+        if (item_preparing == null) {
+          item_preparing = "Do not have item preparing for this event"
+        }
+        $("#content-detail-event").append(`<div class="row">
+        <div class="col-md-5 p-b-30">
+          <div class="hov-img-zoom" id="image-event">
+          <img src="` + data.file_attack + `" alt="IMG-ABOUT">
+          </div>
+        </div>
+  
+        <div class="col-md-7 p-b-30">
+          <div class="p-t-30 respon5">
+            <h4 class="product-detail-name m-text17 p-b-13" id="title-event">` + data.title + `</h4>
+  
+            <p class="m-text10">Start time:
+              <span>` + startTime + `</span>
+            </p>
+            <p class="m-text10 p-b-15">End time:
+              <sp>` + endTime + `</span>
+            </p>
+            <div class="p-b-30">
+              <p class="m-text10">Location:
+                <span class="m-text10 m-r-35">` + data.location + `</span>
+              </p>
+            </div>
+  
+            <div class="wrap-dropdown-content bo6 p-t-15 p-b-14 active-dropdown-content">
+              <h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
+                Description
+                <i class="down-mark fs-12 color1 fa fa-minus dis-none" aria-hidden="true"></i>
+                <i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
+              </h5>
+  
+              <div class="dropdown-content dis-none p-t-15 p-b-23">
+                <p class="m-text10">` + event_content + `</p>
+              </div>
+            </div>
+  
+            <div class="wrap-dropdown-content bo7 p-t-15 p-b-14">
+              <h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
+                Item preparing
+                <i class="down-mark fs-12 color1 fa fa-minus dis-none" aria-hidden="true"></i>
+                <i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>
+              </h5>
+  
+              <div class="dropdown-content dis-none p-t-15 p-b-23">
+                <p class="m-text10">` + item_preparing + `</p>
+              </div>
+            </div>
+          </div>
+          <div class="event_buttons" id="btn-detail-event"></div>
+        </div>
+      </div>`)
+        if (localStorage.getItem("auth_token") && localStorage.getItem("id") == data.owner) {
+          $('#btn-detail-event').append(
+            `<div class="button event_button event_button_1" id="btn-edit-event"><a href="/events/update/` + data.id + `">Edit</a></div>
+              <div class="button event_button event_button_1" id="btn-delete-event"><a href="#">Delete</a></div>`
+          )
+        } else {
+          $('#btn-detail-event').append(
+            `<div class="button event_button event_button_1" id="btn-edit-event"><a href="#">Join</a></div>`)
+        }
+        // dropdown description and item preparing
+        $('.active-dropdown-content .js-toggle-dropdown-content').toggleClass('show-dropdown-content');
+        $('.active-dropdown-content .dropdown-content').slideToggle('fast');
+
+        $('.js-toggle-dropdown-content').on('click', function () {
+          $(this).toggleClass('show-dropdown-content');
+          $(this).parent().find('.dropdown-content').slideToggle('fast');
+        });
+      },
+      statusCode: {
+        404: function (response) {
+          $("#image-notfound").removeAttr("hidden")
+        },
+      }
+    });
+  }
 
   return {
     listEvent: listEvent,
     events: events,
     create: create,
     getDetail: getDetail,
+    detailEvent: detailEvent,
+    updateEvent: updateEvent,
   };
 }());
-// $('#edit-event').submit(function (event) {
-//   event.preventDefault();
-//   var id = $(this).attr('id')
-//   console.log(id)
-  // form_data = new FormData($('#update-form')[0]);
 
-  // $.ajax({
-  //   type: 'POST',
-  //   url: 'http://localhost:8000/api/events/' + id,
-  //   headers: {
-  //     "Authorization": authToken
-  //   },
-  //   processData: false,
-  //   contentType: false,
-  //   data: form_data,
-  //   success: function (data) {
-  //     alert("Success")
-  //   },
-
-  // })
-// })

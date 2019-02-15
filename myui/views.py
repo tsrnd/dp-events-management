@@ -31,3 +31,8 @@ def create_event(request):
 def update_event(request, id_event):
     context = {}
     return render(request, 'events/edit.html', context)
+
+
+def detail_event(request, id_event):
+    context = {}
+    return render(request, 'events/detail.html', context)
