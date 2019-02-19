@@ -15,21 +15,21 @@ class EventSerializer(serializers.ModelSerializer):
             if 'start_time' not in data:
                 raise serializers.ValidationError({"start_time":"start_time is required"})
             if 'end_time' not in data:
-                raise serializers.ValidationError({"end_time":"start_time is required"})
+                raise serializers.ValidationError({"end_time":"end_time is required"})
             if data['start_date'] == data['end_date']:
                 if data['start_time'] >= data['end_time']:
                     raise serializers.ValidationError({"end_time":"end time should be greater than start time."})
-        
+
         if data['start_date'] > data['end_date']:
             raise serializers.ValidationError({"end_date":"end date should be greater than start date."})
-        
+
         today = date.today()
         if data['start_date'] < today:
             raise serializers.ValidationError({"start_date":"start date should be greater than today."})
 
         if data['is_cancel'] is True:
             raise serializers.ValidationError({"is_cancel":"Can't Set value for is_cancel"})
-        
+
         # check validator title, start date and end date is exist
         if Event.custom_objects.is_exist(data["title"], data['start_date'], data['end_date']):
             raise serializers.ValidationError({"event":"This Event has already existed"})
@@ -37,13 +37,14 @@ class EventSerializer(serializers.ModelSerializer):
         return data
 
     file_attack = serializers.ImageField(max_length=254, use_url=True)
+
     class Meta:
         model = Event
         fields = ("id", "title", "start_date", "end_date", "start_time",
                   "end_time", "location", "time_notification", "owner",
                   "event_content", "file_attack", "guest_can_invite",
                   "view_all_guest", "item_preparing", "status", "time_create",
-                  "is_all_day", "last_edit", "is_cancel")
+                  "is_daily", "is_all_day", "last_edit", "is_cancel")
 
 
 class UserSerializer(serializers.Serializer):

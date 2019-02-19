@@ -1,26 +1,31 @@
 from rest_framework.views import APIView
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from .serializers import EventSerializer
 from .models import Event
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from myapp.events.serializers import UserSerializer
 from django.contrib.auth.models import User
+from myapp.events.models import EventMembers
 from rest_framework import status
 from rest_framework.parsers import FormParser
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from django.core.files.storage import FileSystemStorage
 
 RESULT_LIMIT = 5
 IS_PUBLIC = True
 
 
+def index(request):
+    return HttpResponse("Hello, world. You're at the event index.")
+
+
 class EventList(APIView):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    """
+    List all events.
+    """
+
     def get(self, request, format=None):
-        """
-            List all events.
-        """
         public = request.GET.get("is_public", IS_PUBLIC)
         owner = request.GET.get('owner', False)
         start_date = request.GET.get('start_date', False)
@@ -54,7 +59,7 @@ class EventList(APIView):
             'result': serializer.data,
         }
         return Response(content)
-    
+
     def post(self, request, format=None):
         """
             Create a new Event
@@ -64,7 +69,6 @@ class EventList(APIView):
             serializer.save(owner=request.user.id)
             return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 @api_view(['GET', 'PUT'])
 def event_detail(request, id_event):
@@ -102,9 +106,18 @@ def event_detail(request, id_event):
                         status=status.HTTP_401_UNAUTHORIZED)
     elif request.method == 'PUT':
         if request.user.is_authenticated:
-            if request.user.id == event.owner.id:
-                data = FormParser().parse(request)
-                for key, value in data.items():
+            if request.user.id == event.owner:
+                request_data = {
+                    k: v
+                    for k, v in request.data.items() if v != ''
+                }
+                for key, value in request_data.items():
+                    if (key == 'is_all_day' or key == 'is_daily'
+                            or key == 'is_public'):
+                        if (value == 'on'):
+                            value = True
+                        else:
+                            value = False
                     setattr(event, key, value)
                 event.save()
                 return Response(status=status.HTTP_200_OK)

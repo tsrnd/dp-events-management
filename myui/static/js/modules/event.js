@@ -133,6 +133,167 @@ var moduleEvent = (function () {
       }
     })
   }
+  function getDetail(url) {
+    $.ajax({
+      url: url,
+      method: "GET",
+      success: function (data) {
+        if (data.start_time == null) {
+          var startDate = new Date(data.start_date)
+          var endDate = new Date(data.end_date)
+          startTime = startDate.getDate() + "/" + startDate.getMonth() + "/" + startDate.getFullYear()
+          endTime = endDate.getDate() + "/" + endDate.getMonth() + "/" + endDate.getFullYear()
+        } else {
+          var startDate = new Date(data.start_date + " " + data.start_time)
+          var endDate = new Date(data.end_date + " " + data.end_time)
+          startTime = startDate.getDate() + "/" + startDate.getMonth() + "/" + startDate.getFullYear() + " @ " + startDate.getHours() + ":" + startDate.getMinutes()
+          endTime = endDate.getDate() + "/" + endDate.getMonth() + "/" + endDate.getFullYear() + " @ " + endDate.getHours() + ":" + endDate.getMinutes()
+        }
+        $("#update-form").append(`<div class="form-group">
+        <label for="inputTitle">Title Events</label>
+        <input type="text" class="form-control" id="inputTitle" name="title" value="`+ data.title + `">
+        <span id="title_error" style="color:red"></span>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="startDate">Start Date</label>
+          <input type="date" class="form-control option-style" id="startDate" name="start_date" value = "`+ data.start_date + `">
+          <span id="start_date_error" style="color:red"></span>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="startTime">Start Time</label>
+          <input type="time" class="form-control option-style" id="startTime" name="start_time" value = "`+ data.start_time + `">
+          <span id="start_time_error" style="color:red"></span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="endDate">End Date</label>
+          <input type="date" class="form-control option-style" id="endDate" name="end_date" value = "`+ data.end_date + `">
+          <span id="end_date_error" style="color:red"></span>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="endTime">End Time</label>
+          <input type="time" class="form-control option-style" id="endTime" name="end_time" value = "`+ data.end_time + `">
+          <span id="end_time_error" style="color:red"></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="alldaycheck" name="is_all_day" >
+          <label class="form-check-label check-form" for="alldaycheck">
+            All day
+          </label>
+          <span id="is_all_day_error" style="color:red"></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="dailycheck" name="is_daily" >
+          <label class="form-check-label check-form" for="dailycheck">
+            Daily
+          </label>
+          <span id="is_daily_error" style="color:red"></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="location">Location</label>
+        <input type="text" class="form-control" id="location" value="`+ data.location + `" name="location">
+        <span id="location_error" style="color:red"></span>
+      </div>
+      <div class="form-group">
+        <label for="eventContent">Event content</label>
+        <textarea type="text" class="form-control" id="eventContent"  name="event_content">`+ data.event_content + `</textarea>
+        <span id="event_content_error" style="color:red"></span>
+      </div>
+      <div class="form-group" id= "image">
+        <label> Image Event</label >
+        <input type="file"  name="file_attack">
+      </div>
+          <div class="form-group">
+            <label for="itemPre">Item Preparing</label>
+            <textarea type="text" class="form-control" id="itemPre" name="item_preparing">`+ data.item_preparing + `</textarea>
+            <span id="item_preparing_error" style="color:red"></span>
+          </div>
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="publicCheck" name="is_public">
+                <label class="form-check-label check-form" for="publicCheck">Public</label>
+                <span id="is_public_error" style="color:red"></span>
+        </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>`)
+        $('#alldaycheck').click(function (event) {
+          if ($('#alldaycheck').is(':checked')) {
+            $('#startTime').attr("disabled", true)
+            $('#endTime').attr("disabled", true)
+          } else {
+            $("#startTime").removeAttr("disabled")
+            $("#endTime").removeAttr("disabled")
+          }
+        })
+        d = new Date()
+        date = d.getDate()
+        month = d.getMonth() + 1
+        year = d.getFullYear()
+        month = month < 10 ? '0' + month : month
+        date = date < 10 ? '0' + date : date
+        mindate = year + "-" + month + "-" + date
+        document.getElementById("startDate").setAttribute("min", mindate)
+        document.getElementById("endDate").setAttribute("min", mindate)
+        $("#startDate").change(function (e) {
+            document.getElementById("endDate").setAttribute("min", $("#startDate").val())
+        })
+        $("#endDate").change(function (e) {
+            document.getElementById("startDate").setAttribute("max", $("#endDate").val())
+        })
+      },
+
+    });
+  }
+
+  function updateEvent(url, formdata) {
+    $.ajax({
+      url: url,
+      method: "PUT",
+      headers: {
+        "Authorization": authToken
+      },
+      data: formdata,
+      processData: false,
+      contentType: false,
+      success: function (data) {
+        arr = url.split("/")
+        id = arr[arr.length - 2]
+        alert("Success")
+        location.href = "/events/" + id
+
+      },
+      statusCode: {
+        200: function (response) {
+        },
+        400: function (response) {
+          console.log(response)
+          for (i in Object.keys(response.responseJSON)) {
+            key = Object.keys(response.responseJSON)[i]
+            messages = response.responseJSON[key]
+            $("#" + key + "_error").empty().append("<i>" + messages + "</i>")
+          }
+        },
+        401: function (response) {
+          alert("401")
+        },
+        500: function (response) {
+          console.log(response)
+        },
+      }
+    })
+
+
+  }
+
+
+
 
   function detailEvent(url) {
     $.ajax({
@@ -210,7 +371,7 @@ var moduleEvent = (function () {
       </div>`)
         if (localStorage.getItem("auth_token") && localStorage.getItem("id") == data.owner) {
           $('#btn-detail-event').append(
-            `<div class="button event_button event_button_1" id="btn-edit-event"><a href="#">Edit</a></div>
+            `<div class="button event_button event_button_1" id="btn-edit-event"><a href="/events/update/` + data.id + `">Edit</a></div>
               <div class="button event_button event_button_1" id="btn-delete-event"><a href="#">Delete</a></div>`
           )
         } else {
@@ -238,6 +399,9 @@ var moduleEvent = (function () {
     listEvent: listEvent,
     events: events,
     create: create,
+    getDetail: getDetail,
     detailEvent: detailEvent,
+    updateEvent: updateEvent,
   };
 }());
+
