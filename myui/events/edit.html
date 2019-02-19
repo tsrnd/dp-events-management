@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col">
                 <h2 class="form-title">Update Event</h2>
-                <form action="" method="post" class="update-form" id="update-form">
+                <form action="" method="post" id="update-form">
                     {% csrf_token %}
 
 
@@ -25,22 +25,11 @@
         url = "{% url 'events:detail' '000000' %}"
         url = url.replace('000000', id)
         moduleEvent.getDetail(url);
-        $('#alldaycheck').click(function (event) {
-            if ($('#alldaycheck').is(':checked')) {
-                $('#startTime').attr("disabled", true)
-                $('#endTime').attr("disabled", true)
-            } else {
-                $("#startTime").removeAttr("disabled")
-                $("#endTime").removeAttr("disabled")
-            }
-        })
         $('#update-form').submit(function (event) {
             var formdata = new FormData(this)
-
             event.preventDefault()
             moduleEvent.updateEvent(url, formdata)
         })
-
     })
 </script>
 

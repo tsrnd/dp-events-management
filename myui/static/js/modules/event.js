@@ -206,24 +206,47 @@ var moduleEvent = (function () {
         <textarea type="text" class="form-control" id="eventContent"  name="event_content">`+ data.event_content + `</textarea>
         <span id="event_content_error" style="color:red"></span>
       </div>
-      <div class="form-group">
-        <span id="close" data-id="" data-token="{{ csrf_token() }}" class="close">&times;</span>
-        <label>Image Event</label>
-        <input type="file"  value="`+ data.file_attack + `">
+      <div class="form-group" id= "image">
+        <label> Image Event</label >
+        <input type="file"  name="file_attack">
       </div>
-      <div class="form-group">
-        <label for="itemPre">Item Preparing</label>
-        <textarea type="text" class="form-control" id="itemPre" name="item_preparing">`+ data.item_preparing + `</textarea>
-        <span id="item_preparing_error" style="color:red"></span>
-      </div>
-      <div class="form-group">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="publicCheck">
-          <label class="form-check-label check-form" for="publicCheck" name="is_public">Public</label>
-          <span id="is_public_error" style="color:red"></span>
+          <div class="form-group">
+            <label for="itemPre">Item Preparing</label>
+            <textarea type="text" class="form-control" id="itemPre" name="item_preparing">`+ data.item_preparing + `</textarea>
+            <span id="item_preparing_error" style="color:red"></span>
+          </div>
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="publicCheck" name="is_public">
+                <label class="form-check-label check-form" for="publicCheck">Public</label>
+                <span id="is_public_error" style="color:red"></span>
         </div>
-      </div>
-      <div class="button_2 event_button event_button_2"><a href="/events/` + data.id + `">Update</a></div>`)
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>`)
+        $('#alldaycheck').click(function (event) {
+          if ($('#alldaycheck').is(':checked')) {
+            $('#startTime').attr("disabled", true)
+            $('#endTime').attr("disabled", true)
+          } else {
+            $("#startTime").removeAttr("disabled")
+            $("#endTime").removeAttr("disabled")
+          }
+        })
+        d = new Date()
+        date = d.getDate()
+        month = d.getMonth() + 1
+        year = d.getFullYear()
+        month = month < 10 ? '0' + month : month
+        date = date < 10 ? '0' + date : date
+        mindate = year + "-" + month + "-" + date
+        document.getElementById("startDate").setAttribute("min", mindate)
+        document.getElementById("endDate").setAttribute("min", mindate)
+        $("#startDate").change(function (e) {
+            document.getElementById("endDate").setAttribute("min", $("#startDate").val())
+        })
+        $("#endDate").change(function (e) {
+            document.getElementById("startDate").setAttribute("max", $("#endDate").val())
+        })
       },
 
     });
@@ -240,12 +263,14 @@ var moduleEvent = (function () {
       processData: false,
       contentType: false,
       success: function (data) {
-
+        arr = url.split("/")
+        id = arr[arr.length - 2]
         alert("Success")
+        location.href = "/events/" + id
+
       },
       statusCode: {
         200: function (response) {
-          console.log(response)
         },
         400: function (response) {
           console.log(response)

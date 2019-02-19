@@ -13,48 +13,26 @@ class EventSerializer(serializers.ModelSerializer):
         """
         if data['is_all_day'] is False:
             if 'start_time' not in data:
-                raise serializers.ValidationError({
-                    "start_time":
-                    "start_time is required"
-                })
+                raise serializers.ValidationError({"start_time":"start_time is required"})
             if 'end_time' not in data:
-                raise serializers.ValidationError({
-                    "end_time":
-                    "start_time is required"
-                })
+                raise serializers.ValidationError({"end_time":"end_time is required"})
             if data['start_date'] == data['end_date']:
                 if data['start_time'] >= data['end_time']:
-                    raise serializers.ValidationError({
-                        "end_time":
-                        "end time should be greater than start time."
-                    })
+                    raise serializers.ValidationError({"end_time":"end time should be greater than start time."})
 
         if data['start_date'] > data['end_date']:
-            raise serializers.ValidationError({
-                "end_date":
-                "end date should be greater than start date."
-            })
+            raise serializers.ValidationError({"end_date":"end date should be greater than start date."})
 
         today = date.today()
         if data['start_date'] < today:
-            raise serializers.ValidationError({
-                "start_date":
-                "start date should be greater than today."
-            })
+            raise serializers.ValidationError({"start_date":"start date should be greater than today."})
 
         if data['is_cancel'] is True:
-            raise serializers.ValidationError({
-                "is_cancel":
-                "Can't Set value for is_cancel"
-            })
+            raise serializers.ValidationError({"is_cancel":"Can't Set value for is_cancel"})
 
         # check validator title, start date and end date is exist
-        if Event.custom_objects.is_exist(data["title"], data['start_date'],
-                                         data['end_date']):
-            raise serializers.ValidationError({
-                "event":
-                "This Event has already existed"
-            })
+        if Event.custom_objects.is_exist(data["title"], data['start_date'], data['end_date']):
+            raise serializers.ValidationError({"event":"This Event has already existed"})
 
         return data
 

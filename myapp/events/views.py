@@ -10,6 +10,7 @@ from myapp.events.models import EventMembers
 from rest_framework import status
 from rest_framework.parsers import FormParser
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.files.storage import FileSystemStorage
 
 RESULT_LIMIT = 5
 IS_PUBLIC = True
@@ -31,7 +32,7 @@ class EventList(APIView):
         end_date = request.GET.get('end_date', False)
         status = request.GET.get('status', False)
         event_list = Event.objects.all().filter(is_public=public)
-        order = request.GET.get('order', 'id')
+        order = request.GET.get('order', '-id')
         event_list = event_list.order_by(order)
         if owner:
             event_list = event_list.filter(owner=owner)
@@ -59,6 +60,15 @@ class EventList(APIView):
         }
         return Response(content)
 
+    def post(self, request, format=None):
+        """
+            Create a new Event
+        """
+        serializer = EventSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(owner=request.user.id)
+            return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'PUT'])
 def event_detail(request, id_event):
@@ -97,7 +107,17 @@ def event_detail(request, id_event):
     elif request.method == 'PUT':
         if request.user.is_authenticated:
             if request.user.id == event.owner:
-                for key, value in request.data.items():
+                request_data = {
+                    k: v
+                    for k, v in request.data.items() if v != ''
+                }
+                for key, value in request_data.items():
+                    if (key == 'is_all_day' or key == 'is_daily'
+                            or key == 'is_public'):
+                        if (value == 'on'):
+                            value = True
+                        else:
+                            value = False
                     setattr(event, key, value)
                 event.save()
                 return Response(status=status.HTTP_200_OK)
